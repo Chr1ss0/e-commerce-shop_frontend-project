@@ -1,5 +1,5 @@
 import React from "react"
-import styles from "./SplashScreen.module.scss"
+import styles from "../OnboardingScreen/SplashScreen.module.scss"
 import splashScreenIcon from "../../../assets/images/splash-screen-icon.svg"
 import eShopIcon from "../../../assets/images/e-shop-icon.svg"
 

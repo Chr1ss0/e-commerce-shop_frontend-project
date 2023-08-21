@@ -1,5 +1,5 @@
-import styles from "./OnboardingScreen.module.scss"
-import SplashScreen from "./Splashscreen"
+import styles from "../OnboardingScreen/OnboardingScreen.module.scss"
+import SplashScreen from "../OnboardingScreen/SplashScreen"
 import splashScreenIllustration from "../../../assets/images/splashScreenIllustration.svg"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
