@@ -1,40 +1,44 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
 @font-face {
   font-family: poppins-bold;
   src: url('../src/assets/fonts/Poppins/Poppins-Bold.ttf');
 }
 @font-face {
   font-family: poppins-medium;
-  src: url('../src/assets/fonts/Poppins/Poppins-Medium.ttf');
+  src: url("../src/assets/fonts/Poppins/Poppins-Medium.ttf");
 }
 @font-face {
   font-family: poppins-regular;
-  src: url('../src/assets/fonts/Poppins/Poppins-Regular.ttf');
+  src: url("../src/assets/fonts/Poppins/Poppins-Regular.ttf");
 }
 @font-face {
   font-family: poppins-semibold;
-  src: url('../src/assets/fonts/Poppins/Poppins-SemiBold.ttf');
+  src: url("../src/assets/fonts/Poppins/Poppins-SemiBold.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fff;
 }
 
 //Font-Families
-$main-font-bold: poppins-bold;
-$main-font-medium: poppins-medium;
-$main-font-regular: poppins-regular;
-$main-font-semibold: poppins-semibold;
+$main-font-bold: poppins-bold; //700
+$main-font-medium: poppins-medium; //500
+$main-font-regular: poppins-regular; //400
+$main-font-semibold: poppins-semibold; //600
 
 // Color
-$color-main_catch: #364FD4;
-$color-background_contrast: #F0F3F8;
+$color-main_catch: #364fd4;
+$color-background_contrast: #f0f3f8;
 
 //Font-Colors
-$font-color_main: #1E2126;
-$font-color_sec:  #B9C1CC;
+$font-color_main: #1e2126;
+$font-color_sec: #b9c1cc;
+$font-color_onboard: #828b9a;
 
 
 //Font-Sizes

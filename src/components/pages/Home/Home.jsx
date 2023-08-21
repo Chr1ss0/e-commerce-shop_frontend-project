@@ -1,3 +1,4 @@
+import Navbar from "../../layout/Navbar/Navbar"
 import styles from "./Home.module.scss"
 import { Searchbar } from "../../shared/Searchbar/Searchbar.jsx"
 import { CategoryMenu } from "../../layout/CategoryMenu/CategoryMenu.jsx"
