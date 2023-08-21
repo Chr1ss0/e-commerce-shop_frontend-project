@@ -1,11 +1,11 @@
-module.exports = {
-    semi: true,
-    printWidth: 100,
-    tabWidth: 4,
-    singleQuote: true,
-    bracketSpacing: true,
-    useTabs: false,
-    arrowParens: 'avoid',
-    jsxSingleQuote: true,
-    trailingComma: 'all',
-};
+{
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "bracketSameLine": true,
+    "endOfLine": "lf",
+    "semi": false,
+    "singleAttributePerLine": true,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "tabWidth": 2
+}

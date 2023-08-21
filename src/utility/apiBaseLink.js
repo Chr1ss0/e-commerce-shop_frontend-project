@@ -1,1 +1,1 @@
-export const apiBaseKey = 'baseLink';
+export const apiBaseLink = 'https://dummyjson.com/products';
