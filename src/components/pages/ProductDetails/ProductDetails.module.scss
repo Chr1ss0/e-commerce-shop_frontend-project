@@ -1,0 +1,45 @@
+@use '../../../App.scss' as *;
+
+.fullpage {
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header {
+    padding-top: 15px;
+    display: flex;
+
+    button {
+        margin-right: auto;
+    }
+
+    h2 {
+        font-family: $main-font-regular;
+        color: #1E2126;
+        margin-right: auto;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+    }
+}
+
+.middle {
+    background-color: blue;
+
+    img {
+            width: 100%;
+        }
+}
+
+.select {
+    display: flex;
+    padding-bottom: 30px;
+
+    .counter {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        align-items: center;
+    }
+}
