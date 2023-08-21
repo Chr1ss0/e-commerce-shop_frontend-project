@@ -1,5 +1,5 @@
 import Navbar from "../../layout/Navbar/Navbar"
-import styles from "./Home.module.scss"
+import styles from "../Home/Home.module.scss"
 import { Searchbar } from "../../shared/Searchbar/Searchbar.jsx"
 import { CategoryMenu } from "../../layout/CategoryMenu/CategoryMenu.jsx"
 import { ListMenuHome } from "../../layout/ListMenuHome/ListMenuHome.jsx"
