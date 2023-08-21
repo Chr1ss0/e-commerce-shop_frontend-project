@@ -1,3 +1,25 @@
+@font-face {
+  font-family: poppins-bold;
+  src: url('./assets/fonts/Poppins/Poppins-Bold.ttf');
+}
+@font-face {
+  font-family: poppins-medium;
+  src: url('./assets/fonts/Poppins/Poppins-Medium.ttf');
+}
+@font-face {
+  font-family: poppins-regular;
+  src: url('./assets/fonts/Poppins/Poppins-Regular.ttf');
+}
+@font-face {
+  font-family: poppins-semibold;
+  src: url('./assets/fonts/Poppins/Poppins-SemiBold.ttf');
+}
+
+//Font-Families
+$main-font-bold: poppins-bold;
+$main-font-medium: poppins-medium;
+$main-font-regular: poppins-regular;
+$main-font-semibold: poppins-semibold;
 
 // Color
 $color-main_catch: #364FD4;
