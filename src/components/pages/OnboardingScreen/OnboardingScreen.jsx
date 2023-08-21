@@ -1,4 +1,3 @@
-import { ProductDetails } from '../ProductDetails/ProductDetails'
 import styles from './OnboardingScreen.module.scss'
 export const OnboardingScreen = () => {
     return (
