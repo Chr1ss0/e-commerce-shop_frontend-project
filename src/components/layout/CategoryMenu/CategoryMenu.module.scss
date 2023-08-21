@@ -1,0 +1,9 @@
+@use '../../../App.scss' as *;
+
+.flexbox_wrapper {
+  padding-left: 23px;
+  display: flex;
+  column-gap: 18px;
+  overflow: scroll;
+  padding-bottom: 25px;
+}
