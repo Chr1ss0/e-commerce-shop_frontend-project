@@ -1,3 +1,5 @@
+import Navbar from "../../layout/Navbar/Navbar"
+
 export const ProductDetails = () => {
   return (
     <>
