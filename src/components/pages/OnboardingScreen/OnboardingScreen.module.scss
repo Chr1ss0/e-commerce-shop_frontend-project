@@ -1,1 +1,55 @@
-@use '../../../App.scss' as *;
+@use "../../../App.scss" as *;
+
+.onboarding {
+  .illustration {
+    img {
+      width: 375px;
+      height: 375px;
+    }
+    padding-top: 93px;
+    padding-bottom: 45px;
+  }
+
+  h1 {
+    text-align: center;
+    color: $font-color_main;
+    font-family: $main-font-semibold;
+    line-height: 30px;
+    font-size: 20px;
+    width: 202px;
+    margin: 0 auto;
+    padding-bottom: 13px;
+  }
+
+  p {
+    text-align: center;
+    width: 312px;
+    margin: 0 auto;
+    font-family: $main-font-regular;
+    font-size: 16px;
+    line-height: 24px;
+    color: $font-color_onboard;
+    padding-bottom: 86px;
+  }
+
+  a {
+    text-decoration: none;
+
+    .buttonwrapper {
+      display: flex;
+      justify-content: center;
+
+      button {
+        width: 167px;
+        height: 36px;
+        border-radius: 9px;
+        background-color: $color-main_catch;
+        color: #fff;
+        font-family: $main-font-semibold;
+        line-height: 24px;
+        font-size: 16px;
+        border: solid #fff;
+      }
+    }
+  }
+}

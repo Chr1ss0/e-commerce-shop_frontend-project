@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from './ProductDetails.module.scss';
 import  { apiBaseLink } from '../../../utility/apiBaseLink';
 
+
 export const ProductDetails = () => {
 
   const [product, setProduct] = useState([]);
