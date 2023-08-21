@@ -1,18 +1,25 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 @font-face {
   font-family: poppins-bold;
-  src: url('./assets/fonts/Poppins/Poppins-Bold.ttf');
+  src: url('../src/assets/fonts/Poppins/Poppins-Bold.ttf');
 }
 @font-face {
   font-family: poppins-medium;
-  src: url('./assets/fonts/Poppins/Poppins-Medium.ttf');
+  src: url('../src/assets/fonts/Poppins/Poppins-Medium.ttf');
 }
 @font-face {
   font-family: poppins-regular;
-  src: url('./assets/fonts/Poppins/Poppins-Regular.ttf');
+  src: url('../src/assets/fonts/Poppins/Poppins-Regular.ttf');
 }
 @font-face {
   font-family: poppins-semibold;
-  src: url('./assets/fonts/Poppins/Poppins-SemiBold.ttf');
+  src: url('../src/assets/fonts/Poppins/Poppins-SemiBold.ttf');
 }
 
 //Font-Families
@@ -28,6 +35,7 @@ $color-background_contrast: #F0F3F8;
 //Font-Colors
 $font-color_main: #1E2126;
 $font-color_sec:  #B9C1CC;
+
 
 //Font-Sizes
 $font-size_xs: 0.75rem;
