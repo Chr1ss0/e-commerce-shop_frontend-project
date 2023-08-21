@@ -1,0 +1,9 @@
+@use '../../../App.scss' as *;
+
+.flex_container{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  justify-content: space-around;
+  row-gap: 1rem;
+}

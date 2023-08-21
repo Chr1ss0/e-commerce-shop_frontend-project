@@ -1,0 +1,9 @@
+@use '../../../App.scss' as *;
+
+.header{
+  padding: 50px 0 22px 23px;
+}
+
+.headline{
+  font: $font-size_xl $main-font-bold;
+}

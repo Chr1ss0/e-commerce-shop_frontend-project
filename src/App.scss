@@ -1,7 +1,6 @@
 @font-face {
   font-family: poppins-bold;
-
-  src: url("../src/assets/fonts/Poppins/Poppins-Bold.ttf");
+  src: url('../src/assets/fonts/Poppins/Poppins-Bold.ttf');
 }
 @font-face {
   font-family: poppins-medium;
@@ -40,6 +39,7 @@ $color-background_contrast: #f0f3f8;
 $font-color_main: #1e2126;
 $font-color_sec: #b9c1cc;
 $font-color_onboard: #828b9a;
+
 
 //Font-Sizes
 $font-size_xs: 0.75rem;
