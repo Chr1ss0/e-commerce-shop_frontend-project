@@ -4,7 +4,7 @@ import homeIcon from "../../../assets/images/home.svg"
 import searchIcon from "../../../assets/images/search.svg"
 import { Link } from "react-router-dom"
 
-const Navbar = () => {
+const Navbar = ({ handleSearchClick }) => {
   return (
     <nav className={styles.navbar}>
       <ul>
@@ -19,7 +19,8 @@ const Navbar = () => {
         <li>
           <img
             src={searchIcon}
-            alt=""
+            alt="Search Icon"
+            onClick={handleSearchClick}
           />
         </li>
       </ul>
