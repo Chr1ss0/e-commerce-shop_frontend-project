@@ -4,39 +4,37 @@ import { Searchbar } from "../../shared/Searchbar/Searchbar.jsx"
 import { CategoryMenu } from "../../layout/CategoryMenu/CategoryMenu.jsx"
 import { ListMenuHome } from "../../layout/ListMenuHome/ListMenuHome.jsx"
 import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
-import { ProductTile } from "../../shared/ProductTile/ProductTile.jsx"
 import { useEffect, useState } from "react"
 import { apiBaseLink } from "../../../utility/apiBaseLink.js"
-import { fetchProductList } from "../../../functions/ProductFetch.js"
+import { fetchList } from "../../../functions/fetchList.js"
+import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
+import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
 
 export const Home = () => {
   const [productList, setProductList] = useState([])
   const [fetchDone, setFetchDone] = useState(false)
+  const [filterMenu, setFilterMenu] = useState(false)
 
   useEffect(() => {
-    fetchProductList(apiBaseLink, setProductList, setFetchDone)
+    fetchList(apiBaseLink, setProductList, setFetchDone)
   }, [])
 
   return (
     <>
-      <header className={styles.header}>
-        <h1 className={styles.headline}>Find your favourite Product</h1>
-      </header>
-      <Searchbar />
-      <CategoryMenu />
-      <main>
-        <ListMenuHome currentSearch={"Popular"} />
-        {fetchDone && (
-          <AutoFlex>
-            {productList.map((product) => (
-              <ProductTile
-                product={product}
-                key={product.id}
-              />
-            ))}
-          </AutoFlex>
-        )}
-      </main>
+      {filterMenu ? (
+        <FilterMenu onClickP={() => setFilterMenu(false)} />
+      ) : (
+        <>
+          <header className={styles.header}>
+            <h1 className={styles.headline}>Find your favourite Product</h1>
+          </header>
+          <Searchbar onClickP={() => setFilterMenu((prevState) => true)} />
+          <CategoryMenu />
+          <main>
+            <ListMenuHome currentSearch={"Popular"} />
+          </main>
+        </>
+      )}
     </>
   )
 }
