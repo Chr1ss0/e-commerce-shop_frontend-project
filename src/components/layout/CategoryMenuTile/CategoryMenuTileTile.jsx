@@ -1,17 +1,16 @@
 import styles from "./CategoryMenuTile.module.scss"
-export const CategoryMenuTileTile = ({ img, catName, onClickP }) => {
+import { Link } from "react-router-dom"
+export const CategoryMenuTileTile = ({ emoji, catDisplay, catLink }) => {
   return (
-    <article
-      onClick={onClickP}
-      className={styles.container}>
-      <div className={styles.bg_wrapper}>
-        <img
-          className={styles.image}
-          src={img}
-          alt={catName}
-        />
-      </div>
-      <h3 className={styles.cat_name}>{catName}</h3>
-    </article>
+    <Link
+      className={styles.link}
+      to={`products/${catLink}`}>
+      <article className={styles.container}>
+        <div className={styles.bg_wrapper}>
+          <div className={styles.emoji}>{emoji}</div>
+        </div>
+        <h3 className={styles.cat_name}>{catDisplay}</h3>
+      </article>
+    </Link>
   )
 }

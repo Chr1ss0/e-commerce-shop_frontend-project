@@ -1,34 +1,45 @@
-import dressSvg from "../../../assets/images/dress.svg"
-import sofaSvg from "../../../assets/images/sofa .svg"
-import smartWatchSvg from "../../../assets/images/smartwatch.svg"
-import foodSvg from "../../../assets/images/food .svg"
-import cosmeticsSvg from "../../../assets/images/cosmetics.svg"
 import { CategoryMenuTileTile } from "../CategoryMenuTile/CategoryMenuTileTile.jsx"
 import styles from "./CategoryMenu.module.scss"
+import { useEffect, useState } from "react"
+import { fetchList } from "../../../functions/fetchList.js"
+import { apiCategoryLink } from "../../../utility/apiBaseLink.js"
+import { categoryIcons } from "../../../utility/categoryIcons.js"
+import { v4 as uuidv4 } from "uuid"
 
 export const CategoryMenu = () => {
+  const [categorys, setCategorys] = useState([])
+  const [fetchDone, setFetchDone] = useState(false)
+
+  useEffect(() => {
+    fetchList(apiCategoryLink, setCategorys, setFetchDone)
+  }, [])
+
+  useEffect(() => {
+    if (fetchDone) {
+      setCategorys((prevData) =>
+        prevData.map((entry, index) => ({
+          name: entry, // Assuming your category object has a property called "category"
+          emoji: categoryIcons[index],
+        })),
+      )
+    }
+  }, [fetchDone, categoryIcons])
+
+  console.log(categorys)
   return (
     <section className={styles.flexbox_wrapper}>
-      <CategoryMenuTileTile
-        img={dressSvg}
-        catName={"Category 1"}
-      />{" "}
-      <CategoryMenuTileTile
-        img={sofaSvg}
-        catName={"Category 2"}
-      />{" "}
-      <CategoryMenuTileTile
-        img={smartWatchSvg}
-        catName={"Category 3"}
-      />{" "}
-      <CategoryMenuTileTile
-        img={cosmeticsSvg}
-        catName={"Category 4"}
-      />{" "}
-      <CategoryMenuTileTile
-        img={foodSvg}
-        catName={"Category 5"}
-      />
+      {fetchDone ? (
+        categorys.map((category) => (
+          <CategoryMenuTileTile
+            key={uuidv4()}
+            catLink={category.name}
+            catDisplay={category.name}
+            emoji={category.emoji}
+          />
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </section>
   )
 }

@@ -8,6 +8,15 @@
   align-items: center;
 }
 
+.emoji{
+
+}
+
+.link {
+  text-decoration: none;
+  color: $font-color_main;
+}
+
 // Box-Shaddow HardCut
 .bg_wrapper{
   background-color: white;
@@ -20,7 +29,8 @@
 .cat_name{
   font: $font-size_xs $main-font-medium;
   display: inline-block;
-  white-space: nowrap;
+  text-align: center;
+  //white-space: nowrap;
 }
 
 .images {

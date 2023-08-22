@@ -2,7 +2,8 @@ import styles from "./Searchbar.module.scss"
 import { Link } from "react-router-dom"
 import searchSvg from "../../../assets/images/search.svg"
 import filterSvg from "../../../assets/images/filter.svg"
-export const Searchbar = () => {
+export const Searchbar = ({ onClickP }) => {
+  //In Css packen
   const inputStyle = {
     paddingLeft: "40px", // Adjust this value to control the space for the SVG
     backgroundImage: `url(${searchSvg})`, // Use the imported SVG as the background image
@@ -20,16 +21,15 @@ export const Searchbar = () => {
         style={inputStyle}
         placeholder={"Search"}
       />
-      <Link
-        di
+      <div
         className={styles.button}
-        to={"/filter"}>
+        onClick={onClickP}>
         <img
           className={styles.button_image}
           src={filterSvg}
-          alt=""
+          alt="filter"
         />
-      </Link>
+      </div>
     </div>
   )
 }
