@@ -1,4 +1,4 @@
-import { CategoryMenuTileTile } from "../CategoryMenuTile/CategoryMenuTileTile.jsx"
+import { CategoryMenuTile } from "../CategoryMenuTile/CategoryMenuTile.jsx"
 import styles from "./CategoryMenu.module.scss"
 import { useEffect, useState } from "react"
 import { fetchList } from "../../../functions/fetchList.js"
@@ -25,12 +25,11 @@ export const CategoryMenu = () => {
     }
   }, [fetchDone, categoryIcons])
 
-  console.log(categorys)
   return (
     <section className={styles.flexbox_wrapper}>
       {fetchDone ? (
         categorys.map((category) => (
-          <CategoryMenuTileTile
+          <CategoryMenuTile
             key={uuidv4()}
             catLink={category.name}
             catDisplay={category.name}
