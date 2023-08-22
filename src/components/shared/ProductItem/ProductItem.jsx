@@ -1,22 +1,42 @@
 import React from "react"
 import styles from "./ProductItem.module.scss"
+import ratingIcon from "../../../assets/images/rating.svg"
+import addItemIcon from "../../../assets/images/addItem.svg"
 
 const ProductItem = ({ product }) => {
+  console.log(product)
+
+  const imageLink = product.images[2] ? product.images[2] : product.images[0]
+
+  const imageStyle = {
+    backgroundImage: `url(${imageLink})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    mixBlendMode: "multiply",
+  }
+
   return (
     <article className={styles.product}>
-      <div>
+      <div
+        className={styles.image}
+        style={imageStyle}></div>
+      <div className={styles.rating}>
         <img
-          src={product.thumbnail}
-          alt={product.title}
+          src={ratingIcon}
+          alt="Star-icon"
         />
-      </div>
-      <div>
         <p>{product.rating}</p>
       </div>
-      <h3>{product.title}</h3>
-      <p>{product.price}</p>
-      <div>
-        <button>+</button>
+      <div className={styles.title}>
+        <h3>{product.title}</h3>
+      </div>
+      <div className={styles.add}>
+        <p>${product.price}</p>
+        <img
+          src={addItemIcon}
+          alt="Plus Icon"
+        />
       </div>
     </article>
   )
