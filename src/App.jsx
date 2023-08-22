@@ -4,8 +4,9 @@ import { OnboardingScreen } from "./components/pages/OnboardingScreen/Onboarding
 import { Home } from "./components/pages/Home/Home.jsx"
 import { ProductList } from "./components/pages/ProductList/ProductList.jsx"
 import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails.jsx"
-import { createContext, useState } from "react"
+import { useState } from "react"
 import { FilterContext } from "./context/filterContext.js"
+import { ProductsContext } from "./context/productsContext.js"
 
 function App() {
   const [gadgetFilter, setGadgetFilter] = useState(false)
@@ -34,6 +35,9 @@ function App() {
   const [braunFilter, setBraunFilter] = useState(false)
   const [lorealFilter, setLorealFilter] = useState(false)
   const [zaraFilter, setZaraFilter] = useState(false)
+
+  const [productList, setProductList] = useState([])
+  const [displayedProducts, setDisplayedProducts] = useState([])
 
   return (
     <>
@@ -92,24 +96,32 @@ function App() {
           zaraFilter,
           setZaraFilter,
         }}>
-        <Routes>
-          <Route
-            path={"/"}
-            element={<OnboardingScreen />}
-          />
-          <Route
-            path={"/home"}
-            element={<Home />}
-          />
-          <Route
-            path={"/products"}
-            element={<ProductList />}
-          />
-          <Route
-            path={"/products/:id"}
-            element={<ProductDetails />}
-          />
-        </Routes>
+        <ProductsContext.Provider
+          value={{
+            productList,
+            setProductList,
+            displayedProducts,
+            setDisplayedProducts,
+          }}>
+          <Routes>
+            <Route
+              path={"/"}
+              element={<OnboardingScreen />}
+            />
+            <Route
+              path={"/home"}
+              element={<Home />}
+            />
+            <Route
+              path={"/products"}
+              element={<ProductList />}
+            />
+            <Route
+              path={"/products/:id"}
+              element={<ProductDetails />}
+            />
+          </Routes>
+        </ProductsContext.Provider>
       </FilterContext.Provider>
     </>
   )
