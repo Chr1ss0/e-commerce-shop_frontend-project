@@ -1,165 +1,176 @@
-@use '../../../App.scss' as *;
+@use "../../../App.scss" as *;
 
 .fullpage {
-    padding-top: 40px;
-    padding-left: 30px;
-    padding-right: 30px;
-
+  padding-top: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .header {
-    padding-top: 15px;
-    display: flex;
-    padding-bottom: 50px;
+  padding-top: 15px;
+  display: flex;
+  padding-bottom: 50px;
 
-    button {
-        margin-right: auto;
-        background-color: #fff;
-        border-style: none;
-    }
+  button {
+    margin-right: auto;
+    background-color: #fff;
+    border-style: none;
+  }
 
-    h2 {
-        font-family: $main-font-regular;
-        color: #1E2126;
-        margin-right: auto;
-        font-size: 20px;
-        font-weight: 500;
-        letter-spacing: 0.2px;
-    }
+  h2 {
+    font-family: $main-font-medium;
+    font-feature-settings:
+      "clig" off,
+      "liga" off;
+    color: #1e2126;
+    margin-right: auto;
+    font-size: 20px;
+    letter-spacing: 0.2px;
+    line-height: 22px;
+  }
 }
 
 .middle {
-    background-color: blue;
-    border-radius: 12px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.05);
 
-    img {
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            width: 100%;
-            padding-bottom: 30px;
-        }
+  img {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    width: 100%;
+    padding-bottom: 30px;
+  }
 }
 
 .select {
-    display: flex;
-    padding-left: 15px;
-    padding-right: 15px;
+  display: flex;
+  padding-left: 15px;
+  padding-right: 15px;
 
-    h3 {
-        font-family: $main-font-regular;
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 30px;
-        letter-spacing: 0.2px;
-        color: #1E2126;
-    }
+  h3 {
+    font-family: $main-font-semibold;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0.2px;
+    color: #1e2126;
+  }
 }
 
-    .counter {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        font-family: $main-font-regular;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 24px;
-        letter-spacing: 0.1px;
-        color: #1E2126;
+.counter {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  font-family: $main-font-semibold;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+  color: #1e2126;
 
-        p {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-    }
+  p {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
 
-.couter_button {
+.counter_button_minus {
+  button {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 3px;
-    background-color: #CAD1D9;
+    background-color: #cad1d9;
+    border-style: none;
+  }
 }
 
+.counter_button_plus {
+  button {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    background-color: #828b9a;
+    border-style: none;
+  }
+}
 .rating {
-    padding-left: 15px;
-    font-family: $main-font-regular;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 18px;
-    color: #828B9A;
+  padding-left: 15px;
+  font-family: $main-font-semibold;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  color: #828b9a;
 }
 
 .stock {
-    display: flex;
-    padding-top: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+  display: flex;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 
-    h4 {
-        margin-left: auto;
-        font-family: $main-font-regular;
-        font-size: 28px;
-        font-weight: 700;
-        line-height: 38px;
-        letter-spacing: 0.2px;
-        color: #364FD4;
-        text-align: right;
-        padding-bottom: 15px;
-    }
+  h4 {
+    margin-left: auto;
+    font-family: $main-font-bold;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0.2px;
+    color: #364fd4;
+    text-align: right;
+    padding-bottom: 15px;
+  }
 
-    p {
-        font-family: $main-font-regular;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        color: #B9C1CC;
-        padding-bottom: 20px;
-        margin-top: auto;
-
-
-    }
+  p {
+    font-family: $main-font-regular;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #b9c1cc;
+    padding-bottom: 20px;
+    margin-top: auto;
+  }
 }
 
-
 .description {
-    padding-top: 30px;
-    display: flex;
-    flex-direction: column;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
 
-    h4 {
-        font-family: $main-font-regular;
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 22px;
-        letter-spacing: 0.2px;
-        text-align: left;
-        color: #1E2126;
-        margin-right: auto;
-        padding-bottom: 15px;
-    }
+  h4 {
+    font-family: $main-font-medium;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.2px;
+    text-align: left;
+    color: #1e2126;
+    margin-right: auto;
+    padding-bottom: 15px;
+  }
 
-    p {
-        font-family: $main-font-regular;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        text-align: justify;
-        color: #B9C1CC;
-    }
+  p {
+    font-family: $main-font-regular;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: justify;
+    color: #b9c1cc;
+  }
 
-
-    button {
-        margin-top: 25px;
-        width: 315px;
-        height: 56px;
-        border-radius: 9px;
-        background-color: $color-main_catch;
-        color: #fff;
-        font-family: $main-font-semibold;
-        line-height: 24px;
-        font-size: 16px;
-        border: solid #fff;
-        
-      }
+  button {
+    margin-top: 25px;
+    width: 315px;
+    height: 56px;
+    border-radius: 12px;
+    background-color: $color-main_catch;
+    color: #fff;
+    font-family: $main-font-regular;
+    line-height: 24px;
+    font-size: 16px;
+    border: solid #fff;
+  }
 }
