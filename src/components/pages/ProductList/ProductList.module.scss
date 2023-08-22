@@ -1,0 +1,17 @@
+@use "../../../App.scss" as *;
+
+.wrapper {
+  padding: 46px 0px 100px 0px;
+
+  .sort {
+    color: $font-color_sec;
+    font-family: $main-font-medium;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 16px 24px 16px 24px;
+
+    span {
+      color: $color-main_catch;
+    }
+  }
+}

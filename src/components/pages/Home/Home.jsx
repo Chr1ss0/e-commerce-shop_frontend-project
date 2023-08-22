@@ -33,6 +33,7 @@ export const Home = () => {
           <main>
             <ListMenuHome currentSearch={"Popular"} />
           </main>
+          <Navbar />
         </>
       )}
     </>

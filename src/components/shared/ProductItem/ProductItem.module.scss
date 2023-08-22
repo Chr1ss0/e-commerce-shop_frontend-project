@@ -1,11 +1,54 @@
-.product {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+@use "../../../App.scss" as *;
 
-  img {
+.product {
+  width: 154px;
+  min-height: fit-content;
+  border-radius: 12px;
+  padding: 15px 8px;
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.1);
+
+  .image {
     width: 138px;
     height: 110px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+    filter: drop-shadow(0px 4px 40px rgba(0, 0, 0, 0.05));
+    background-color: $image-color-background;
+  }
+
+  .rating {
+    display: flex;
+    gap: 5px;
+
+    p {
+      font-size: 9px;
+      font-family: $main-font-regular;
+      color: $font-color_onboard;
+      line-height: 20px;
+    }
+  }
+
+  .title {
+    padding-bottom: 3px;
+    h3 {
+      font-family: $main-font-semibold;
+      font-size: 12px;
+      line-height: 12px;
+      height: 30px;
+    }
+  }
+
+  .add {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    p {
+      font-family: $main-font-medium;
+      color: $color-main_catch;
+      font-size: 12px;
+      line-height: 18px;
+      margin-top: auto;
+    }
   }
 }

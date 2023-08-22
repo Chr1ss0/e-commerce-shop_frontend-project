@@ -1,6 +1,6 @@
 import styles from "./CategoryMenuTile.module.scss"
 import { Link } from "react-router-dom"
-export const CategoryMenuTileTile = ({ emoji, catDisplay, catLink }) => {
+export const CategoryMenuTile = ({ emoji, catDisplay, catLink }) => {
   return (
     <Link
       className={styles.link}

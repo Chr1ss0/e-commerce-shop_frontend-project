@@ -26,6 +26,7 @@ export const ProductDetails = () => {
   }, [])
   console.log(fetchDone)
 
+
   if (!fetchDone) {
     return <p>...loading</p>
   }
