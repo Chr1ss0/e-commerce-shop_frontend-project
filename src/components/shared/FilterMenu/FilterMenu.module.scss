@@ -2,4 +2,57 @@
 
 .container{
   height: 100vh;
+  padding: 40px 15px 0 15px;
+}
+
+.header {
+  display: flex;
+  padding-right: 24px;
+
+  & .back{
+    width: 24px;
+    display: inline-block;
+  }
+
+  & .headline{
+    text-align: center;
+    flex-grow: 1;
+    padding: 13px 0 16px 0;
+    font: $font-size_l $main-font-medium;
+    color: $font-color_main;
+  }
+}
+
+.options_card{
+  padding-top: 55px;
+
+
+}
+
+.selected{
+  background-color: $color-main_catch;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 12px;
+}
+
+.not_selected{
+  color: $font-color_filters;
+  padding: 8px 15px;
+  border-radius: 12px;
+}
+
+.options_headline{
+  font: $font-size_m $main-font-semibold;
+  color: $font-color_main;
+  padding-bottom: 38px;
+}
+
+.card_flex_wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 5px;
+  font: $font-size_xs $main-font-medium;
+  color: $font-color_filters;
 }
