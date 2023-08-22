@@ -21,6 +21,7 @@ export const Searchbar = ({ onClickP }) => {
         style={inputStyle}
         placeholder={"Search"}
       />
+
       <div
         className={styles.button}
         onClick={onClickP}>
