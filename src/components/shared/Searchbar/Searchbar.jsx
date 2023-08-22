@@ -21,7 +21,6 @@ export const Searchbar = () => {
         placeholder={"Search"}
       />
       <Link
-        di
         className={styles.button}
         to={"/filter"}>
         <img

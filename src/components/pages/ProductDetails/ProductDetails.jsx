@@ -18,7 +18,6 @@ export const ProductDetails = () => {
   }, [])
 
   console.log(product)
-
   let [productCounter, setProductCounter] = useState(1)
 
   return (
