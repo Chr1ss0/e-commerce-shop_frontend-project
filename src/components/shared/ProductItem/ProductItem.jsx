@@ -26,7 +26,7 @@ const ProductItem = ({ product }) => {
           src={ratingIcon}
           alt="Star-icon"
         />
-        <p>{product.rating}</p>
+        <p>{product.rating.toFixed(1)}</p>
       </div>
       <div className={styles.title}>
         <h3>{product.title}</h3>
