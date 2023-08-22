@@ -6,12 +6,11 @@ import { LeftArrow } from "../../../assets/svg/LeftArrow"
 import { Minus } from "../../../assets/svg/Minus"
 import { Plus } from "../../../assets/svg/Plus"
 
-
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
 
   useEffect(() => {
-    fetch(`${apiBaseLink}/54`)
+    fetch(`${apiBaseLink}/52`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("ProductDetails fetch went wrong")
@@ -24,20 +23,21 @@ export const ProductDetails = () => {
 
   console.log(product)
 
-  let [productCounter, setProductCounter] = useState(1);
+  let [productCounter, setProductCounter] = useState(1)
 
   if (productCounter < 1) {
-    setProductCounter((prevProductCounter) => prevProductCounter +1);
-  }
-  else if(productCounter > product.stock ) {
-    setProductCounter((prevProductCounter) => prevProductCounter -1);
+    setProductCounter((prevProductCounter) => prevProductCounter + 1)
+  } else if (productCounter > product.stock) {
+    setProductCounter((prevProductCounter) => prevProductCounter - 1)
   }
 
   return (
     <>
       <section className={styles.fullpage}>
         <div className={styles.header}>
-          <button type="button"><LeftArrow/></button>
+          <button type="button">
+            <LeftArrow />
+          </button>
           <h2 key={product.id}> {product.title}</h2>
         </div>
         <article className={styles.middle}>
@@ -53,15 +53,15 @@ export const ProductDetails = () => {
             </div>
             <div className={styles.counter}>
               <div className={styles.counter_button}>
-                <button className={styles.test}
-                  onClick={
-                    () =>
-                      setProductCounter(
-                        (prevProductCounter) => prevProductCounter - 1,
-                        )
-                      }
+                <button
+                  className={styles.test}
+                  onClick={() =>
+                    setProductCounter(
+                      (prevProductCounter) => prevProductCounter - 1,
+                    )
+                  }
                   type="button">
-                  <Minus/>
+                  <Minus />
                 </button>
               </div>
               <p>{productCounter}</p>
@@ -73,14 +73,17 @@ export const ProductDetails = () => {
                     )
                   }
                   type="button">
-                  <Plus/>
+                  <Plus />
                 </button>
               </div>
             </div>
           </div>
           <div>
-            <p className={styles.rating}> <Rating/> {product.rating}</p>
-            <div className={styles.stock} >
+            <p className={styles.rating}>
+              {" "}
+              <Rating /> {product.rating}
+            </p>
+            <div className={styles.stock}>
               <p>{product.stock} pieces in Stock</p>
               <h4>${product.price}</h4>
             </div>
