@@ -113,6 +113,23 @@
   color: #828b9a;
 }
 
+.discount {
+  display: flex;
+
+  h4 {
+    margin-left: auto;
+    font-family: $main-font-bold;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0.2px;
+    color: red;
+    text-align: right;
+    padding-right: 15px;
+    padding-top: 30px;
+  }
+}
+
 .stock {
   display: flex;
   padding-top: 10px;
@@ -122,13 +139,14 @@
   h4 {
     margin-left: auto;
     font-family: $main-font-bold;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 38px;
     letter-spacing: 0.2px;
     color: #364fd4;
     text-align: right;
     padding-bottom: 15px;
+    text-decoration: line-through;
   }
 
   p {
