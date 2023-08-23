@@ -9,13 +9,13 @@ import { apiBaseLink } from "../../../utility/apiBaseLink.js"
 
 export const OnboardingScreen = () => {
   const [loading, setLoading] = useState(true)
-  const [fetchDone, setFetchDone] = useState(false)
-  const {
-    productList,
-    setProductList,
-    displayedProducts,
-    setDisplayedProducts,
-  } = useContext(ProductsContext)
+  // const [fetchDone, setFetchDone] = useState(false)
+  // const {
+  //   productList,
+  //   setProductList,
+  //   displayedProducts,
+  //   setDisplayedProducts,
+  // } = useContext(ProductsContext)
 
   useEffect(() => {
     setLoading(true)
@@ -24,11 +24,11 @@ export const OnboardingScreen = () => {
     }, 3500)
   }, [])
 
-  useEffect(() => {
-    fetchList(`${apiBaseLink}?limit=100`, setProductList, setFetchDone)
-  }, [])
-
-  console.log(productList)
+  // useEffect(() => {
+  //   fetchList(`${apiBaseLink}?limit=100`, setProductList, setFetchDone)
+  // }, [])
+  //
+  // console.log(productList)
 
   return (
     <>

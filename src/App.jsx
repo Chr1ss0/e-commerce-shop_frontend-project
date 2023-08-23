@@ -113,6 +113,10 @@ function App() {
               element={<Home />}
             />
             <Route
+              path={"/home/:category"}
+              element={<Home />}
+            />
+            <Route
               path={"/products"}
               element={<ProductList />}
             />
