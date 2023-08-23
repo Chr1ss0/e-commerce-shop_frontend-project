@@ -6,8 +6,7 @@ import { Rating } from "../../../assets/svg/Rating"
 import { LeftArrow } from "../../../assets/svg/LeftArrow"
 import { Minus } from "../../../assets/svg/Minus"
 import { Plus } from "../../../assets/svg/Plus"
-import { useNavigate } from "react-router-dom"
-
+import Navbar from "../../layout/Navbar/Navbar.jsx"
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
@@ -35,10 +34,9 @@ export const ProductDetails = () => {
       })
       .catch((error) => console.log(error.message))
   }, [])
-  
+
   if (isLoading) {
     return <p>Loading...</p>
-
   }
 
   if (productCounter < 1) {
