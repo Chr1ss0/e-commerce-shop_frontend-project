@@ -7,6 +7,9 @@ import { LeftArrow } from "../../../assets/svg/LeftArrow"
 import { Minus } from "../../../assets/svg/Minus"
 import { Plus } from "../../../assets/svg/Plus"
 import Navbar from "../../layout/Navbar/Navbar.jsx"
+import CircularProgress from "@mui/material/CircularProgress"
+import Box from "@mui/material/Box"
+import { superCode } from "../../../utility/superCodeArray"
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
@@ -25,23 +28,24 @@ export const ProductDetails = () => {
   }
 
   useEffect(() => {
-    fetch(`${apiBaseLink}/${productId}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("ProductDetails fetch went wrong")
-        }
-        return response.json()
-      })
-      .then((product) => {
-        setProduct(product)
-        setIsLoading(false)
-      })
-      .catch((error) => console.log(error.message))
+    if (productId <= 100) {
+      fetch(`${apiBaseLink}/${productId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("ProductDetails fetch went wrong")
+          }
+          return response.json()
+        })
+        .then((product) => {
+          setProduct(product)
+          setIsLoading(false)
+        })
+        .catch((error) => console.log(error.message))
+    } else {
+      setProduct(...superCode)
+      setIsLoading(false)
+    }
   }, [])
-
-  if (isLoading) {
-    return <p>Loading...</p>
-  }
 
   if (productCounter < 1) {
     setProductCounter((prevProductCounter) => prevProductCounter + 1)
@@ -51,49 +55,65 @@ export const ProductDetails = () => {
 
   return (
     <>
-      <section className={styles.fullpage}>
-        <div className={styles.header}>
-          <button onClick={() => navigator(-1)}>
-            <LeftArrow />
-          </button>
-          <h2>{product.title}</h2>
-        </div>
-        <article className={styles.middle}>
-          <div>
-            <img
-              className={styles.image}
-              src={product.images[0]}
-              alt="Product image"
-            />
-          </div>
-          <div className={styles.select}>
-            <div>
-              <h3>{product.title}</h3>
+      {isLoading ? (
+        <section>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}>
+            <CircularProgress />
+          </Box>
+        </section>
+      ) : (
+        <>
+          <section className={styles.fullpage}>
+            <div className={styles.header}>
+              <button onClick={() => navigator(-1)}>
+                <LeftArrow />
+              </button>
+              <h2>{product.title}</h2>
             </div>
-            <div className={styles.counter}>
-              <div className={styles.counter_button_minus}>
-                <button
-                  className={styles.test}
-                  onClick={() =>
-                    setProductCounter(
-                      (prevProductCounter) => prevProductCounter - 1,
-                    )
-                  }
-                  type="button">
-                  <Minus />
-                </button>
+            <article className={styles.middle}>
+              <div>
+                <img
+                  className={styles.image}
+                  src={product.thumbnail}
+                  alt="Product image"
+                />
               </div>
-              <p>{productCounter}</p>
-              <div className={styles.counter_button_plus}>
-                <button
-                  onClick={() =>
-                    setProductCounter(
-                      (prevProductCounter) => prevProductCounter + 1,
-                    )
-                  }
-                  type="button">
-                  <Plus />
-                </button>
+              <div className={styles.select}>
+                <div>
+                  <h3>{product.title}</h3>
+                </div>
+                <div className={styles.counter}>
+                  <div className={styles.counter_button_minus}>
+                    <button
+                      className={styles.test}
+                      onClick={() =>
+                        setProductCounter(
+                          (prevProductCounter) => prevProductCounter - 1,
+                        )
+                      }
+                      type="button">
+                      <Minus />
+                    </button>
+                  </div>
+                  <p>{productCounter}</p>
+                  <div className={styles.counter_button_plus}>
+                    <button
+                      onClick={() =>
+                        setProductCounter(
+                          (prevProductCounter) => prevProductCounter + 1,
+                        )
+                      }
+                      type="button">
+                      <Plus />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

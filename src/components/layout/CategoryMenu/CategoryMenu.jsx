@@ -5,6 +5,8 @@ import { fetchList } from "../../../functions/fetchList.js"
 import { apiCategoriesLink } from "../../../utility/apiBaseLink.js"
 import { categoryIcons } from "../../../utility/categoryIcons.js"
 import { v4 as uuidv4 } from "uuid"
+import CircularProgress from "@mui/material/CircularProgress"
+import Box from "@mui/material/Box"
 import { Link } from "react-router-dom"
 
 export const CategoryMenu = () => {
@@ -50,7 +52,19 @@ export const CategoryMenu = () => {
           ))}
         </>
       ) : (
-        <p>Loading...</p>
+        <section>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh",
+              width: "100%",
+              marginLeft: "100px",
+            }}>
+            <CircularProgress />
+          </Box>
+        </section>
       )}
     </section>
   )
