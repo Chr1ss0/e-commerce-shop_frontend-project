@@ -21,8 +21,6 @@ export const ProductDetails = () => {
 
   const discountedPrice = product.price * (1 - product.discountPercentage / 100)
 
-  console.log(discountedPrice.toFixed(0))
-
   const handleSearchClick = () => {
     navigator("/products")
   }
@@ -53,6 +51,8 @@ export const ProductDetails = () => {
     setProductCounter((prevProductCounter) => prevProductCounter - 1)
   }
 
+  // const navigator = useNavigate()
+
   return (
     <>
       {isLoading ? (
@@ -80,7 +80,7 @@ export const ProductDetails = () => {
               <div>
                 <img
                   className={styles.image}
-                  src={product.thumbnail}
+                  src={product.images[0]}
                   alt="Product image"
                 />
               </div>
@@ -115,30 +115,30 @@ export const ProductDetails = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div>
-            <div className={styles.discount}>
-              <p className={styles.rating}>
-                <Rating /> {product.rating.toFixed(1)}
-              </p>
-              <h4>${discountedPrice.toFixed(2)}</h4>
-            </div>
-            <div className={styles.stock}>
-              <p>{product.stock} pieces in Stock</p>
-              <h4>${product.price.toFixed(2)}</h4>
-            </div>
-          </div>
-        </article>
-        <article className={styles.description}>
-          <div>
-            <h4>Desciption</h4>
-            <p>{product.description}.</p>
-          </div>
-          <button type="submit">Add to Cart</button>
-        </article>
-      </section>
-      <Navbar handleSearchClick={handleSearchClick} />
+              <div>
+                <div className={styles.discount}>
+                  <p className={styles.rating}>
+                    <Rating /> {product.rating.toFixed(1)}
+                  </p>
+                  <h4>${discountedPrice.toFixed(2)}</h4>
+                </div>
+                <div className={styles.stock}>
+                  <p>{product.stock} pieces in Stock</p>
+                  <h4>${product.price}</h4>
+                </div>
+              </div>
+            </article>
+            <article className={styles.description}>
+              <div>
+                <h4>Desciption</h4>
+                <p>{product.description}.</p>
+              </div>
+              <button type="submit">Add to Cart</button>
+            </article>
+          </section>
+          <Navbar handleSearchClick={handleSearchClick} />
+        </>
+      )}
     </>
   )
 }
