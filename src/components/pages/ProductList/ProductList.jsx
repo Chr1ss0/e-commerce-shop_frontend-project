@@ -11,6 +11,8 @@ import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
+import CircularProgress from "@mui/material/CircularProgress"
+import Box from "@mui/material/Box"
 
 export const ProductList = () => {
   const [products, setProducts] = useState([])
@@ -73,51 +75,63 @@ export const ProductList = () => {
       .catch((error) => console.log(error.message))
   }, [])
 
-  if (isLoading) {
-    return <p>Loading...</p>
-  }
-
   return (
-    <section className={styles.wrapper}>
-      {filterMenu ? (
-        <FilterMenu onClickP={() => setFilterMenu(false)} />
+    <>
+      {isLoading ? (
+        <section>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}>
+            <CircularProgress />
+          </Box>
+        </section>
       ) : (
-        <>
-          <Searchbar
-            onClickP={() => setFilterMenu((prevState) => true)}
-            inputRefProductList={inputRefProductList}
-          />
-          <div>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
-              <InputLabel id="demo-simple-select-autowidth-label">
-                Sort:
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-autowidth-label"
-                id="demo-simple-select-autowidth"
-                value={selectedOption}
-                onChange={handleChange}
-                autoWidth
-                label="Sort:">
-                <MenuItem value={"lowest"}>Lowest Price</MenuItem>
-                <MenuItem value={"highest"}>Highest Price</MenuItem>
-                <MenuItem value={"discount"}>Biggest Discount</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <section>
-            <AutoFlex>
-              {products.map((product) => (
-                <ProductItem
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </AutoFlex>
-          </section>
-          <Navbar handleSearchClick={handleSearchClick} />
-        </>
+        <section className={styles.wrapper}>
+          {filterMenu ? (
+            <FilterMenu onClickP={() => setFilterMenu(false)} />
+          ) : (
+            <>
+              <Searchbar
+                onClickP={() => setFilterMenu((prevState) => true)}
+                inputRefProductList={inputRefProductList}
+              />
+              <div>
+                <FormControl sx={{ m: 1, minWidth: 80 }}>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Sort:
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={selectedOption}
+                    onChange={handleChange}
+                    autoWidth
+                    label="Sort:">
+                    <MenuItem value={"lowest"}>Lowest Price</MenuItem>
+                    <MenuItem value={"highest"}>Highest Price</MenuItem>
+                    <MenuItem value={"discount"}>Biggest Discount</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              <section>
+                <AutoFlex>
+                  {products.map((product) => (
+                    <ProductItem
+                      key={product.id}
+                      product={product}
+                    />
+                  ))}
+                </AutoFlex>
+              </section>
+              <Navbar handleSearchClick={handleSearchClick} />
+            </>
+          )}
+        </section>
       )}
-    </section>
+    </>
   )
 }
