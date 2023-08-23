@@ -4,23 +4,37 @@ import { Searchbar } from "../../shared/Searchbar/Searchbar.jsx"
 import { CategoryMenu } from "../../layout/CategoryMenu/CategoryMenu.jsx"
 import { ListMenuHome } from "../../layout/ListMenuHome/ListMenuHome.jsx"
 import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
-import { useContext, useEffect, useState } from "react"
+
+import { useContext, useEffect, useState, useRef } from "react"
 import {
   apiBaseLink,
   apiCategoriesLink,
   apiCategoryLink,
 } from "../../../utility/apiBaseLink.js"
+
 import { fetchList } from "../../../functions/fetchList.js"
 import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
 import { ProductsContext } from "../../../context/productsContext.js"
+import { searchInputContext } from "../../../context/searchInputContext"
 import { superCode } from "../../../utility/superCodeArray.js"
 import { useLocation, useParams } from "react-router-dom"
+
 
 export const Home = () => {
   const [fetchDone, setFetchDone] = useState(false)
   const [filterMenu, setFilterMenu] = useState(false)
   const { productList, setProductList } = useContext(ProductsContext)
+
+
+  //State für Inputfeld Fokus
+  const { inputFocus, setInputFocus } = useContext(searchInputContext)
+  const inputRefHome = useRef(null)
+
+  const handleSearchClick = () => {
+    setInputFocus(true)
+    inputRefHome.current.focus()
+  }
 
   const currentLocation = useLocation().pathname
   const category = useParams().category
@@ -32,7 +46,6 @@ export const Home = () => {
         setProductList,
         setFetchDone,
       )
-      console.log("works")
     }
   }, [currentLocation])
 
@@ -46,7 +59,11 @@ export const Home = () => {
           <header className={styles.header}>
             <h1 className={styles.headline}>Find your favorite Product</h1>
           </header>
-          <Searchbar onClickP={() => setFilterMenu((prevState) => true)} />
+          <Searchbar
+            onClickP={() => setFilterMenu((prevState) => true)}
+            inputRefHome={inputRefHome}
+            setInputFocus={setInputFocus}
+          />
           <CategoryMenu />
           <main>
             <ListMenuHome
@@ -81,7 +98,7 @@ export const Home = () => {
               </AutoFlex>
             )}
           </main>
-          <Navbar />
+          <Navbar handleSearchClick={handleSearchClick} />
         </>
       )}
     </>

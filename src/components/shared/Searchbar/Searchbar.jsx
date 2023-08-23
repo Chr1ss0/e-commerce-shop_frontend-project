@@ -2,11 +2,20 @@ import styles from "./Searchbar.module.scss"
 import { Link } from "react-router-dom"
 import searchSvg from "../../../assets/images/search.svg"
 import filterSvg from "../../../assets/images/filter.svg"
+import { searchInputContext } from "../../../context/searchInputContext"
 import { useContext, useEffect, useState } from "react"
 import { ProductsContext } from "../../../context/productsContext.js"
 
-export const Searchbar = ({ onClickP }) => {
+
+  export const Searchbar = ({ onClickP }) => {
   //In Css packen Label for Input
+
+
+  export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
+  const { inputFocus, setInputFocus } = useContext(searchInputContext)
+
+  const inputRefLinks = inputRefHome ? inputRefHome : inputRefProductList
+  
   const inputStyle = {
     paddingLeft: "40px", // Adjust this value to control the space for the SVG
     backgroundImage: `url(${searchSvg})`, // Use the imported SVG as the background image
@@ -31,6 +40,8 @@ export const Searchbar = ({ onClickP }) => {
         id="searchbar"
         style={inputStyle}
         placeholder={"Search"}
+        ref={inputRefLinks}
+        onFocus={() => setInputFocus(true)}
       />
 
       <div
