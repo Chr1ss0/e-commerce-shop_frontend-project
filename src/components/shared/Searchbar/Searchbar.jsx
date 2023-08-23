@@ -7,35 +7,37 @@ import { useContext, useEffect, useState } from "react"
 import { ProductsContext } from "../../../context/productsContext.js"
 
 export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
+  const [inputSearch, setInputSearch] = useState("")
   const { inputFocus, setInputFocus } = useContext(searchInputContext)
-
+  const { productList, setDisplayedProducts, displayedProducts } =
+    useContext(ProductsContext)
   const inputRefLinks = inputRefHome ? inputRefHome : inputRefProductList
 
-  const inputStyle = {
-    paddingLeft: "40px", // Adjust this value to control the space for the SVG
-    backgroundImage: `url(${searchSvg})`, // Use the imported SVG as the background image
-    backgroundSize: "20px 20px", // Adjust the size of the SVG
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "10px center", // Adjust the position of the SVG
-  }
-  //In Css packen Label for Input
+  // useEffect(() => {
+  //   if (productList.length > 0) {
+  //     const getDisplayedProducts = productList.products.filter((product) =>
+  //       product.title.toLowerCase().includes(inputSearch.toLowerCase().trim()),
+  //     )
+  //     setDisplayedProducts(getDisplayedProducts)
+  //   }
+  // }, [inputSearch, productList])
 
-  const { productList, setDisplayedProductList } = useContext(ProductsContext)
-  const [inputSearch, setInputSearch] = useState("")
-
-  useEffect(() => {
-    const getDisplayedProductList = productList.filter
-  }, [])
+  console.log(productList.length)
+  console.log(productList)
 
   return (
     <div className={styles.flex_wrapper}>
+      <label
+        className={styles.label}
+        htmlFor={"searchbar"}>
+        Product search
+      </label>
       <input
         className={styles.input}
         value={inputSearch}
         onChange={(event) => setInputSearch(event.target.value)}
         type="text"
         id="searchbar"
-        style={inputStyle}
         placeholder={"Search"}
         ref={inputRefLinks}
         onFocus={() => setInputFocus(true)}

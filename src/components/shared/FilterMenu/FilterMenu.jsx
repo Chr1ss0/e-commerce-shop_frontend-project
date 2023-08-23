@@ -3,6 +3,7 @@ import backArrowSvg from "../../../assets/images/leftarrow.svg"
 import { FilterContext } from "../../../context/filterContext.js"
 import { useContext } from "react"
 import { FilterMenuTile } from "../FilterMenuTile/FilterMenuTile.jsx"
+import { ButtonBlue } from "../ButtonBlue/ButtonBlue.jsx"
 
 export const FilterMenu = ({ onClickP }) => {
   const {
@@ -72,66 +73,66 @@ export const FilterMenu = ({ onClickP }) => {
         />
         <h2 className={styles.headline}>Filters</h2>
       </header>
-      <article className={styles.options_card}>
-        <h2 className={styles.options_headline}>Categories</h2>
-        <div className={styles.card_flex_wrapper}>
-          <FilterMenuTile
-            content={"Gadget"}
-            classNameTeneray={gadgetFilter}
-            onClickP={() => setGadgetFilter((prevState) => !prevState)}
-          />
-          <FilterMenuTile
-            content={"Electronics"}
-            classNameTeneray={electronicsFilter}
-            onClickP={() => setElectronicsFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Mobile"}
-            classNameTeneray={mobileFilter}
-            onClickP={() => setMobileFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Cloth"}
-            classNameTeneray={clothFilter}
-            onClickP={() => setClothFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Computer"}
-            classNameTeneray={computerFilter}
-            onClickP={() => setComputerFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Food"}
-            classNameTeneray={foodFilter}
-            onClickP={() => setFoodFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Drag"}
-            classNameTeneray={dragFilter}
-            onClickP={() => setDragFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Furniture"}
-            classNameTeneray={furnitureFilter}
-            onClickP={() => setFurnitureFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Baby & Kids"}
-            classNameTeneray={babyFilter}
-            onClickP={() => setBabyFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Cosmetics"}
-            classNameTeneray={cosmeticsFilter}
-            onClickP={() => setCosmeticsFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Gym & Sports"}
-            classNameTeneray={gymFilter}
-            onClickP={() => setGymFilter((prevState) => !prevState)}
-          />
-        </div>
-      </article>
+      {/*<article className={styles.options_card}>*/}
+      {/*  <h2 className={styles.options_headline}>Categories</h2>*/}
+      {/*  <div className={styles.card_flex_wrapper}>*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Gadget"}*/}
+      {/*      classNameTeneray={gadgetFilter}*/}
+      {/*      onClickP={() => setGadgetFilter((prevState) => !prevState)}*/}
+      {/*    />*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Electronics"}*/}
+      {/*      classNameTeneray={electronicsFilter}*/}
+      {/*      onClickP={() => setElectronicsFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Mobile"}*/}
+      {/*      classNameTeneray={mobileFilter}*/}
+      {/*      onClickP={() => setMobileFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Cloth"}*/}
+      {/*      classNameTeneray={clothFilter}*/}
+      {/*      onClickP={() => setClothFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Computer"}*/}
+      {/*      classNameTeneray={computerFilter}*/}
+      {/*      onClickP={() => setComputerFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Food"}*/}
+      {/*      classNameTeneray={foodFilter}*/}
+      {/*      onClickP={() => setFoodFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Drag"}*/}
+      {/*      classNameTeneray={dragFilter}*/}
+      {/*      onClickP={() => setDragFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Furniture"}*/}
+      {/*      classNameTeneray={furnitureFilter}*/}
+      {/*      onClickP={() => setFurnitureFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Baby & Kids"}*/}
+      {/*      classNameTeneray={babyFilter}*/}
+      {/*      onClickP={() => setBabyFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Cosmetics"}*/}
+      {/*      classNameTeneray={cosmeticsFilter}*/}
+      {/*      onClickP={() => setCosmeticsFilter((prevState) => !prevState)}*/}
+      {/*    />{" "}*/}
+      {/*    <FilterMenuTile*/}
+      {/*      content={"Gym & Sports"}*/}
+      {/*      classNameTeneray={gymFilter}*/}
+      {/*      onClickP={() => setGymFilter((prevState) => !prevState)}*/}
+      {/*    />*/}
+      {/*  </div>*/}
+      {/*</article>*/}
       <article className={styles.options_card}>
         <h2 className={styles.options_headline}>Price</h2>
         <div className={styles.card_flex_wrapper}>
@@ -218,6 +219,7 @@ export const FilterMenu = ({ onClickP }) => {
           />
         </div>
       </article>
+      <ButtonBlue text={"Apply Filter"} />
     </aside>
   )
 }

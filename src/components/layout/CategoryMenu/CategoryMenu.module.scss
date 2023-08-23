@@ -1,10 +1,17 @@
 @use '../../../App.scss' as *;
 
 .flexbox_wrapper {
-  padding-left: 23px;
   display: flex;
-  column-gap: 18px;
+  align-items: baseline;
+  column-gap: 20px;
   overflow: scroll;
-  padding-bottom: 25px;
-position: relative;
+  padding: 15px 0 25px 23px;
 }
+.pending{
+
+}
+
+.active{
+  color: $color-main_catch;
+}
+

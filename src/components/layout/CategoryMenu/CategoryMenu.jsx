@@ -5,14 +5,16 @@ import { fetchList } from "../../../functions/fetchList.js"
 import { apiCategoriesLink } from "../../../utility/apiBaseLink.js"
 import { categoryIcons } from "../../../utility/categoryIcons.js"
 import { v4 as uuidv4 } from "uuid"
+import { Link, useLocation } from "react-router-dom"
 import CircularProgress from "@mui/material/CircularProgress"
 import Box from "@mui/material/Box"
-import { Link } from "react-router-dom"
+
 
 export const CategoryMenu = () => {
   const [categorys, setCategorys] = useState([])
   const [fetchDone, setFetchDone] = useState(false)
   const [mergeDone, setMergeDone] = useState(false)
+  const navLinkLocation = useLocation().pathname
 
   useEffect(() => {
     fetchList(apiCategoriesLink, setCategorys, setFetchDone)
@@ -35,12 +37,18 @@ export const CategoryMenu = () => {
       {mergeDone ? (
         <>
           <CategoryMenuTile
+            classNameP={
+              navLinkLocation === "/home" ? styles.active : styles.pending
+            }
             emoji={"👻"}
             catDisplay={"SuperCode"}
             catLink={"/home"}
           />
           {categorys.map((category) => (
             <CategoryMenuTile
+              classNameP={({ isActive, isPending }) =>
+                isPending ? styles.pending : isActive ? styles.active : ""
+              }
               key={uuidv4()}
               catLink={`/home/${category.name}`}
               catDisplay={category.name

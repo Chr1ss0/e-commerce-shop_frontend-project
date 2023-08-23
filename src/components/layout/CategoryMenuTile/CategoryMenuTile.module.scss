@@ -3,34 +3,39 @@
 .container{
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  row-gap: 10px;
   width: 64px;
   align-items: center;
+  justify-content: center;
+  height: 100px;
 }
 
 .emoji{
-
+text-align: center;
+  font-size: 1.75rem;
 }
+
 
 .link {
   text-decoration: none;
   color: $font-color_main;
 }
 
-// Box-Shaddow HardCut
+
 .bg_wrapper{
   background-color: white;
-  padding: 14px;
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.10);
+  padding: 15px;
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.10);
   border-radius: 12px;
-  width: 60px ;
+  //width: 60px ;
+  //height: 60px;
 }
 
 .cat_name{
   font: $font-size_xs $main-font-medium;
   display: inline-block;
   text-align: center;
-  //white-space: nowrap;
+
 }
 
 .images {
