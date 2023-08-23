@@ -1,5 +1,10 @@
 @use "../../../App.scss" as *;
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .product {
   width: 154px;
   min-height: fit-content;
@@ -38,6 +43,12 @@
     }
   }
 
+  .discount {
+    font-family: $main-font-medium;
+    color: red;
+    font-size: 18px;
+  }
+
   .add {
     display: flex;
     justify-content: space-between;
@@ -46,6 +57,7 @@
     p {
       font-family: $main-font-medium;
       color: $color-main_catch;
+      text-decoration: line-through;
       font-size: 12px;
       line-height: 18px;
       margin-top: auto;

@@ -7,6 +7,7 @@ import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails
 import { useState } from "react"
 import { FilterContext } from "./context/filterContext.js"
 import { ProductsContext } from "./context/productsContext.js"
+import { searchInputContext } from "./context/searchInputContext"
 
 function App() {
   const [gadgetFilter, setGadgetFilter] = useState(false)
@@ -38,6 +39,8 @@ function App() {
 
   const [productList, setProductList] = useState([])
   const [displayedProducts, setDisplayedProducts] = useState([])
+
+  const [inputFocus, setInputFocus] = useState(false)
 
   return (
     <>
@@ -103,24 +106,34 @@ function App() {
             displayedProducts,
             setDisplayedProducts,
           }}>
-          <Routes>
-            <Route
-              path={"/"}
-              element={<OnboardingScreen />}
+          <searchInputContext.Provider
+            value={{
+              inputFocus,
+              setInputFocus,
+            }}>
+            <Routes>
+              <Route
+                path={"/"}
+                element={<OnboardingScreen />}
+              />
+              <Route
+                path={"/home"}
+                element={<Home />}
+              />
+              <Route
+                path={"/home/:category"}
+                element={<Home />}
             />
-            <Route
-              path={"/home"}
-              element={<Home />}
-            />
-            <Route
-              path={"/products"}
-              element={<ProductList />}
-            />
-            <Route
-              path={"/products/:id"}
-              element={<ProductDetails />}
-            />
-          </Routes>
+              <Route
+                path={"/products"}
+                element={<ProductList />}
+              />
+              <Route
+                path={"/products/:id"}
+                element={<ProductDetails />}
+              />
+            </Routes>
+          </searchInputContext.Provider>
         </ProductsContext.Provider>
       </FilterContext.Provider>
     </>

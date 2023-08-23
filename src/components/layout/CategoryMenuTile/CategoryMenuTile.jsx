@@ -1,16 +1,17 @@
 import styles from "./CategoryMenuTile.module.scss"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 export const CategoryMenuTile = ({ emoji, catDisplay, catLink }) => {
+  //Implement NavLink
   return (
-    <Link
+    <NavLink
       className={styles.link}
-      to={`products/${catLink}`}>
+      to={`${catLink}`}>
       <article className={styles.container}>
         <div className={styles.bg_wrapper}>
           <div className={styles.emoji}>{emoji}</div>
         </div>
         <h3 className={styles.cat_name}>{catDisplay}</h3>
       </article>
-    </Link>
+    </NavLink>
   )
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import styles from "../ProductDetails/ProductDetails.module.scss"
 import { apiBaseLink } from "../../../utility/apiBaseLink"
 import { Rating } from "../../../assets/svg/Rating"
@@ -7,33 +8,38 @@ import { Minus } from "../../../assets/svg/Minus"
 import { Plus } from "../../../assets/svg/Plus"
 import { useNavigate } from "react-router-dom"
 
+
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
   const [productCounter, setProductCounter] = useState(1)
 
-  const [fetchDone, setFetchDone] = useState(false)
+  const navigator = useNavigate()
+  const productId = useParams().id
+
+  const handleSearchClick = () => {
+    navigator("/products")
+  }
 
   useEffect(() => {
-    fetch(`${apiBaseLink}/1`)
+    fetch(`${apiBaseLink}/${productId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("ProductDetails fetch went wrong")
         }
         return response.json()
       })
-      .then((productData) => {
-        setFetchDone(true)
-        setProduct(productData)
+      .then((product) => {
+        setProduct(product)
+        setIsLoading(false)
       })
       .catch((error) => console.log(error.message))
   }, [])
-  console.log(fetchDone)
+  
+  if (isLoading) {
+    return <p>Loading...</p>
 
-  if (!fetchDone) {
-    return <p>...loading</p>
   }
-
-  console.log(product)
 
   if (productCounter < 1) {
     setProductCounter((prevProductCounter) => prevProductCounter + 1)
@@ -45,71 +51,71 @@ export const ProductDetails = () => {
 
   return (
     <>
-      {fetchDone && (
-        <section className={styles.fullpage}>
-          <div className={styles.header}>
-            <button onClick={() => navigator(-1)}>
-              <LeftArrow />
-            </button>
-            <h2 key={product.id}> {product.title}</h2>
+      <section className={styles.fullpage}>
+        <div className={styles.header}>
+          <button onClick={() => navigator(-1)}>
+            <LeftArrow />
+          </button>
+          <h2>{product.title}</h2>
+        </div>
+        <article className={styles.middle}>
+          <div>
+            <img
+              className={styles.image}
+              src={product.images[0]}
+              alt="Product image"
+            />
           </div>
-          <article className={styles.middle}>
+          <div className={styles.select}>
             <div>
-              <img
-                src={product.thumbnail}
-                alt="product image"
-              />
+              <h3>{product.title}</h3>
             </div>
-            <div className={styles.select}>
-              <div>
-                <h3>{product.title}</h3>
+            <div className={styles.counter}>
+              <div className={styles.counter_button_minus}>
+                <button
+                  className={styles.test}
+                  onClick={() =>
+                    setProductCounter(
+                      (prevProductCounter) => prevProductCounter - 1,
+                    )
+                  }
+                  type="button">
+                  <Minus />
+                </button>
               </div>
-              <div className={styles.counter}>
-                <div className={styles.counter_button_minus}>
-                  <button
-                    className={styles.test}
-                    onClick={() =>
-                      setProductCounter(
-                        (prevProductCounter) => prevProductCounter - 1,
-                      )
-                    }
-                    type="button">
-                    <Minus />
-                  </button>
-                </div>
-                <p>{productCounter}</p>
-                <div className={styles.counter_button_plus}>
-                  <button
-                    onClick={() =>
-                      setProductCounter(
-                        (prevProductCounter) => prevProductCounter + 1,
-                      )
-                    }
-                    type="button">
-                    <Plus />
-                  </button>
-                </div>
+              <p>{productCounter}</p>
+              <div className={styles.counter_button_plus}>
+                <button
+                  onClick={() =>
+                    setProductCounter(
+                      (prevProductCounter) => prevProductCounter + 1,
+                    )
+                  }
+                  type="button">
+                  <Plus />
+                </button>
               </div>
             </div>
-            <div>
-              <p className={styles.rating}>
-                <Rating /> {product.rating}
-              </p>
-              <div className={styles.stock}>
-                <p>{product.stock} pieces in Stock</p>
-                <h4>${product.price}</h4>
-              </div>
+          </div>
+          <div>
+            <p className={styles.rating}>
+              <Rating /> {product.rating.toFixed(1)}
+            </p>
+            <div className={styles.stock}>
+              <p>{product.stock} pieces in Stock</p>
+              <h4>${product.price}</h4>
             </div>
-          </article>
-          <article className={styles.description}>
-            <div>
-              <h4>Desciption</h4>
-              <p>{product.description}.</p>
-            </div>
-            <button type="submit">Add to Cart</button>
-          </article>
-        </section>
-      )}
+          </div>
+        </article>
+        <article className={styles.description}>
+          <div>
+            <h4>Desciption</h4>
+            <p>{product.description}.</p>
+          </div>
+          <button type="submit">Add to Cart</button>
+        </article>
+      </section>
+      <Navbar handleSearchClick={handleSearchClick} />
     </>
   )
 }

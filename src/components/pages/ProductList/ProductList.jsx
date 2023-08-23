@@ -1,16 +1,62 @@
 import styles from "./ProductList.module.scss"
 import { apiBaseLink } from "../../../utility/apiBaseLink.js"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef, useContext } from "react"
 import ProductItem from "../../shared/ProductItem/ProductItem"
 import Navbar from "../../layout/Navbar/Navbar"
 import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
 import { Searchbar } from "../../shared/Searchbar/Searchbar"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu"
+import { searchInputContext } from "../../../context/searchInputContext"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
 
 export const ProductList = () => {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [filterMenu, setFilterMenu] = useState(false)
+  const [selectedOption, setSelectedOption] = useState("")
+
+  const inputRefProductList = useRef(null)
+  const { inputFocus, setInputFocus } = useContext(searchInputContext)
+
+  const handleSearchClick = () => {
+    setInputFocus(true)
+    inputRefProductList.current.focus()
+  }
+
+  const handleSortLowestPrice = () => {
+    setProducts((prevProducts) =>
+      [...prevProducts].sort((a, b) => a.price - b.price),
+    )
+  }
+
+  const handleSortHighestPrice = () => {
+    setProducts((prevProducts) =>
+      [...prevProducts].sort((a, b) => b.price - a.price),
+    )
+  }
+
+  const handleSortHighestDiscount = () => {
+    setProducts((prevProducts) =>
+      [...prevProducts].sort(
+        (a, b) => b.discountPercentage - a.discountPercentage,
+      ),
+    )
+  }
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value)
+
+    if (event.target.value === "lowest") {
+      handleSortLowestPrice()
+    } else if (event.target.value === "highest") {
+      handleSortHighestPrice()
+    } else if (event.target.value === "discount") {
+      handleSortHighestDiscount()
+    }
+  }
 
   useEffect(() => {
     fetch(`${apiBaseLink}?limit=100`)
@@ -37,10 +83,28 @@ export const ProductList = () => {
         <FilterMenu onClickP={() => setFilterMenu(false)} />
       ) : (
         <>
-          <Searchbar onClickP={() => setFilterMenu((prevState) => true)} />
-          <p className={styles.sort}>
-            Sort by: <span>Lowest Price</span>
-          </p>
+          <Searchbar
+            onClickP={() => setFilterMenu((prevState) => true)}
+            inputRefProductList={inputRefProductList}
+          />
+          <div>
+            <FormControl sx={{ m: 1, minWidth: 80 }}>
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Sort:
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                value={selectedOption}
+                onChange={handleChange}
+                autoWidth
+                label="Sort:">
+                <MenuItem value={"lowest"}>Lowest Price</MenuItem>
+                <MenuItem value={"highest"}>Highest Price</MenuItem>
+                <MenuItem value={"discount"}>Biggest Discount</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <section>
             <AutoFlex>
               {products.map((product) => (
@@ -51,7 +115,7 @@ export const ProductList = () => {
               ))}
             </AutoFlex>
           </section>
-          <Navbar />
+          <Navbar handleSearchClick={handleSearchClick} />
         </>
       )}
     </section>
