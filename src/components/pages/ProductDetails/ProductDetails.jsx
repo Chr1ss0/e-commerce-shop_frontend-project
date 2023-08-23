@@ -5,6 +5,7 @@ import { Rating } from "../../../assets/svg/Rating"
 import { LeftArrow } from "../../../assets/svg/LeftArrow"
 import { Minus } from "../../../assets/svg/Minus"
 import { Plus } from "../../../assets/svg/Plus"
+import { useNavigate } from "react-router-dom"
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
@@ -20,12 +21,13 @@ export const ProductDetails = () => {
         }
         return response.json()
       })
-      .then((productData) => setProduct(productData), setFetchDone(true))
+      .then((productData) => {
+        setFetchDone(true)
+        setProduct(productData)
+      })
       .catch((error) => console.log(error.message))
-    console.log(fetchDone)
   }, [])
   console.log(fetchDone)
-
 
   if (!fetchDone) {
     return <p>...loading</p>
@@ -39,12 +41,14 @@ export const ProductDetails = () => {
     setProductCounter((prevProductCounter) => prevProductCounter - 1)
   }
 
+  // const navigator = useNavigate()
+
   return (
     <>
       {fetchDone && (
         <section className={styles.fullpage}>
           <div className={styles.header}>
-            <button type="button">
+            <button onClick={() => navigator(-1)}>
               <LeftArrow />
             </button>
             <h2 key={product.id}> {product.title}</h2>
