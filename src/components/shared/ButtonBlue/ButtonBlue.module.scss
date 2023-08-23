@@ -1,0 +1,13 @@
+@use '../../../App.scss' as *;
+
+.button {
+  padding: 1em 7.5em;
+  border-radius: 12px;
+  background-color: $color-main_catch;
+  font-family: $main-font-regular;
+  font-size: $font-size_m;
+  color: #fff;
+  text-wrap: normal;
+  margin-top: auto;
+  border: none;
+}

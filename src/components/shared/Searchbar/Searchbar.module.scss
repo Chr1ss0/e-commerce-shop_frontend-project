@@ -27,3 +27,15 @@
     width: 24px;
   }
 }
+
+.input{
+  padding-left: 40px;
+  background-image: url('../../../assets/images/search.svg');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+
+.label{
+  display: none;
+}

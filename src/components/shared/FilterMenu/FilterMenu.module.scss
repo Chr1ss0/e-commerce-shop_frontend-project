@@ -2,12 +2,16 @@
 
 .container{
   height: 100vh;
-  padding: 40px 15px 0 15px;
+  padding: 40px 15px 26px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header {
   display: flex;
   padding-right: 24px;
+  width: 100%;
 
   & .back{
     width: 24px;
@@ -24,9 +28,7 @@
 }
 
 .options_card{
-  padding-top: 55px;
-
-
+  padding-top: 30px;
 }
 
 .selected{
@@ -45,7 +47,7 @@
 .options_headline{
   font: $font-size_m $main-font-semibold;
   color: $font-color_main;
-  padding-bottom: 38px;
+  padding-bottom: 20px;
 }
 
 .card_flex_wrapper{

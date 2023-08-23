@@ -18,20 +18,19 @@ import { useLocation, useParams } from "react-router-dom"
 
 export const Home = () => {
   const [fetchDone, setFetchDone] = useState(false)
-  const [filterMenu, setFilterMenu] = useState(false)
+  const [filterMenu, setFilterMenu] = useState(false) // context
+  const inputRefHome = useRef(null)
   const { productList, setProductList } = useContext(ProductsContext)
+  const { inputFocus, setInputFocus } = useContext(searchInputContext)
+  const currentLocation = useLocation().pathname
+  const category = useParams().category
 
   //State für Inputfeld Fokus
-  const { inputFocus, setInputFocus } = useContext(searchInputContext)
-  const inputRefHome = useRef(null)
 
   const handleSearchClick = () => {
     setInputFocus(true)
     inputRefHome.current.focus()
   }
-
-  const currentLocation = useLocation().pathname
-  const category = useParams().category
 
   useEffect(() => {
     if (currentLocation !== "/home/") {
@@ -43,7 +42,6 @@ export const Home = () => {
     }
   }, [currentLocation])
 
-  console.log(productList)
   return (
     <>
       {filterMenu ? (
