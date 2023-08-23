@@ -42,6 +42,10 @@ export const Home = () => {
     }
   }, [currentLocation])
 
+
+  console.log(productList)
+
+
   return (
     <>
       {filterMenu ? (

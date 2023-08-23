@@ -6,6 +6,9 @@ import { apiCategoriesLink } from "../../../utility/apiBaseLink.js"
 import { categoryIcons } from "../../../utility/categoryIcons.js"
 import { v4 as uuidv4 } from "uuid"
 import { Link, useLocation } from "react-router-dom"
+import CircularProgress from "@mui/material/CircularProgress"
+import Box from "@mui/material/Box"
+
 
 export const CategoryMenu = () => {
   const [categorys, setCategorys] = useState([])
@@ -57,7 +60,19 @@ export const CategoryMenu = () => {
           ))}
         </>
       ) : (
-        <p>Loading...</p>
+        <section>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh",
+              width: "100%",
+              marginLeft: "100px",
+            }}>
+            <CircularProgress />
+          </Box>
+        </section>
       )}
     </section>
   )

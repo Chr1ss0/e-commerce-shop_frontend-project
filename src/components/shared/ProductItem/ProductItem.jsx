@@ -37,9 +37,9 @@ const ProductItem = ({ product }) => {
         <div className={styles.title}>
           <h3>{product.title}</h3>
         </div>
-        <p className={styles.discount}>${discountedPrice.toFixed(0)}</p>
+        <p className={styles.discount}>${discountedPrice.toFixed(2)}</p>
         <div className={styles.add}>
-          <p>${product.price}</p>
+          <p>${product.price.toFixed(2)}</p>
           <img
             src={addItemIcon}
             alt="Plus Icon"
