@@ -6,16 +6,11 @@ import { searchInputContext } from "../../../context/searchInputContext"
 import { useContext, useEffect, useState } from "react"
 import { ProductsContext } from "../../../context/productsContext.js"
 
-
-  export const Searchbar = ({ onClickP }) => {
-  //In Css packen Label for Input
-
-
-  export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
+export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
   const { inputFocus, setInputFocus } = useContext(searchInputContext)
 
   const inputRefLinks = inputRefHome ? inputRefHome : inputRefProductList
-  
+
   const inputStyle = {
     paddingLeft: "40px", // Adjust this value to control the space for the SVG
     backgroundImage: `url(${searchSvg})`, // Use the imported SVG as the background image
@@ -23,6 +18,8 @@ import { ProductsContext } from "../../../context/productsContext.js"
     backgroundRepeat: "no-repeat",
     backgroundPosition: "10px center", // Adjust the position of the SVG
   }
+  //In Css packen Label for Input
+
   const { productList, setDisplayedProductList } = useContext(ProductsContext)
   const [inputSearch, setInputSearch] = useState("")
 

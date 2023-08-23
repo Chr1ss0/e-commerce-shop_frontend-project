@@ -6,11 +6,7 @@ import { ListMenuHome } from "../../layout/ListMenuHome/ListMenuHome.jsx"
 import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
 
 import { useContext, useEffect, useState, useRef } from "react"
-import {
-  apiBaseLink,
-  apiCategoriesLink,
-  apiCategoryLink,
-} from "../../../utility/apiBaseLink.js"
+import { apiCategoryLink } from "../../../utility/apiBaseLink.js"
 
 import { fetchList } from "../../../functions/fetchList.js"
 import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
@@ -20,12 +16,10 @@ import { searchInputContext } from "../../../context/searchInputContext"
 import { superCode } from "../../../utility/superCodeArray.js"
 import { useLocation, useParams } from "react-router-dom"
 
-
 export const Home = () => {
   const [fetchDone, setFetchDone] = useState(false)
   const [filterMenu, setFilterMenu] = useState(false)
   const { productList, setProductList } = useContext(ProductsContext)
-
 
   //State für Inputfeld Fokus
   const { inputFocus, setInputFocus } = useContext(searchInputContext)
@@ -65,10 +59,10 @@ export const Home = () => {
             setInputFocus={setInputFocus}
           />
           <CategoryMenu />
-          <main>
+          <main className={styles.main}>
             <ListMenuHome
               currentSearch={
-                currentLocation === "/home/"
+                currentLocation === "/home"
                   ? "SuperCode"
                   : category
                       .split("-")
@@ -78,7 +72,7 @@ export const Home = () => {
                       .join("-")
               }
             />
-            {fetchDone && currentLocation !== "/home/" ? (
+            {fetchDone && currentLocation !== "/home" ? (
               <AutoFlex>
                 {productList.products.map((entry) => (
                   <ProductItem

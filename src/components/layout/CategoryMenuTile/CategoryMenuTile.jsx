@@ -5,7 +5,7 @@ export const CategoryMenuTile = ({ emoji, catDisplay, catLink }) => {
   return (
     <NavLink
       className={styles.link}
-      to={`/home/${catLink}`}>
+      to={`${catLink}`}>
       <article className={styles.container}>
         <div className={styles.bg_wrapper}>
           <div className={styles.emoji}>{emoji}</div>

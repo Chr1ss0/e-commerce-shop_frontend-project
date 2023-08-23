@@ -5,6 +5,7 @@ import { fetchList } from "../../../functions/fetchList.js"
 import { apiCategoriesLink } from "../../../utility/apiBaseLink.js"
 import { categoryIcons } from "../../../utility/categoryIcons.js"
 import { v4 as uuidv4 } from "uuid"
+import { Link } from "react-router-dom"
 
 export const CategoryMenu = () => {
   const [categorys, setCategorys] = useState([])
@@ -34,12 +35,12 @@ export const CategoryMenu = () => {
           <CategoryMenuTile
             emoji={"👻"}
             catDisplay={"SuperCode"}
-            catLink={""}
+            catLink={"/home"}
           />
           {categorys.map((category) => (
             <CategoryMenuTile
               key={uuidv4()}
-              catLink={category.name}
+              catLink={`/home/${category.name}`}
               catDisplay={category.name
                 .split("-")
                 .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
