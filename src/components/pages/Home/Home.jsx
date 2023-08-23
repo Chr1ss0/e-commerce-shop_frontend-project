@@ -4,18 +4,28 @@ import { Searchbar } from "../../shared/Searchbar/Searchbar.jsx"
 import { CategoryMenu } from "../../layout/CategoryMenu/CategoryMenu.jsx"
 import { ListMenuHome } from "../../layout/ListMenuHome/ListMenuHome.jsx"
 import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
-import { useContext, useEffect, useRef, useState } from "react"
-import { apiBaseLink } from "../../../utility/apiBaseLink.js"
+
+import { useContext, useEffect, useState, useRef } from "react"
+import {
+  apiBaseLink,
+  apiCategoriesLink,
+  apiCategoryLink,
+} from "../../../utility/apiBaseLink.js"
+
 import { fetchList } from "../../../functions/fetchList.js"
 import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
 import { ProductsContext } from "../../../context/productsContext.js"
 import { searchInputContext } from "../../../context/searchInputContext"
+import { superCode } from "../../../utility/superCodeArray.js"
+import { useLocation, useParams } from "react-router-dom"
+
 
 export const Home = () => {
   const [fetchDone, setFetchDone] = useState(false)
   const [filterMenu, setFilterMenu] = useState(false)
-  const { productList } = useContext(ProductsContext)
+  const { productList, setProductList } = useContext(ProductsContext)
+
 
   //State für Inputfeld Fokus
   const { inputFocus, setInputFocus } = useContext(searchInputContext)
@@ -26,8 +36,20 @@ export const Home = () => {
     inputRefHome.current.focus()
   }
 
-  //Fetch for refresh
+  const currentLocation = useLocation().pathname
+  const category = useParams().category
 
+  useEffect(() => {
+    if (currentLocation !== "/home/") {
+      fetchList(
+        `${apiCategoryLink}${category}?limit=100`,
+        setProductList,
+        setFetchDone,
+      )
+    }
+  }, [currentLocation])
+
+  console.log(productList)
   return (
     <>
       {filterMenu ? (
@@ -35,7 +57,7 @@ export const Home = () => {
       ) : (
         <>
           <header className={styles.header}>
-            <h1 className={styles.headline}>Find your favourite Product</h1>
+            <h1 className={styles.headline}>Find your favorite Product</h1>
           </header>
           <Searchbar
             onClickP={() => setFilterMenu((prevState) => true)}
@@ -44,15 +66,37 @@ export const Home = () => {
           />
           <CategoryMenu />
           <main>
-            <ListMenuHome currentSearch={"Popular"} />
-            <AutoFlex>
-              {productList.products.map((product) => (
-                <ProductItem
-                  product={product}
-                  key={product.id}
-                />
-              ))}
-            </AutoFlex>
+            <ListMenuHome
+              currentSearch={
+                currentLocation === "/home/"
+                  ? "SuperCode"
+                  : category
+                      .split("-")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1),
+                      )
+                      .join("-")
+              }
+            />
+            {fetchDone && currentLocation !== "/home/" ? (
+              <AutoFlex>
+                {productList.products.map((entry) => (
+                  <ProductItem
+                    product={entry}
+                    key={entry.id}
+                  />
+                ))}
+              </AutoFlex>
+            ) : (
+              <AutoFlex>
+                {superCode.map((entry) => (
+                  <ProductItem
+                    product={entry}
+                    key={entry.id}
+                  />
+                ))}
+              </AutoFlex>
+            )}
           </main>
           <Navbar handleSearchClick={handleSearchClick} />
         </>
