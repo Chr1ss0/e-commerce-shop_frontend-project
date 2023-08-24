@@ -1,5 +1,5 @@
 import "./App.scss"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import { FilterContext } from "./context/filterContext.js"
 import { ProductsContext } from "./context/productsContext.js"
@@ -8,7 +8,8 @@ import { OnboardingScreen } from "./components/pages/OnboardingScreen/Onboarding
 import { ProductList } from "./components/pages/ProductList/ProductList.jsx"
 import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails.jsx"
 import { Home } from "./components/pages/Home/Home.jsx"
-
+import { apiBaseLink } from "./utility/apiBaseLink"
+import { superCodeObject } from "./utility/superCodeData"
 
 function App() {
   const [gadgetFilter, setGadgetFilter] = useState(false)
@@ -42,6 +43,28 @@ function App() {
   const [displayedProducts, setDisplayedProducts] = useState([])
 
   const [inputFocus, setInputFocus] = useState(false)
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(`${apiBaseLink}?limit=100`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Fetch failed")
+        }
+        return response.json()
+      })
+      .then((products) => {
+        setProductList((prevProductList) => [
+          ...products.products,
+          ...superCodeObject.products,
+        ])
+        setIsLoading(false)
+      })
+      .catch((error) => console.log(error.message))
+  }, [])
+
+  console.log(productList)
 
   return (
     <>

@@ -62,27 +62,27 @@ export const ProductList = () => {
     }
   }
 
-  useEffect(() => {
-    fetch(`${apiBaseLink}?limit=100`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Fetch failed")
-        }
-        return response.json()
-      })
-      .then((products) => {
-        setProductList((prevProductList) => [
-          ...products.products,
-          ...superCodeObject.products,
-        ])
-        setIsLoading(false)
-      })
-      .catch((error) => console.log(error.message))
-  }, [])
+  // useEffect(() => {
+  //   fetch(`${apiBaseLink}?limit=100`)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Fetch failed")
+  //       }
+  //       return response.json()
+  //     })
+  //     .then((products) => {
+  //       setProductList((prevProductList) => [
+  //         ...products.products,
+  //         ...superCodeObject.products,
+  //       ])
+  //       setIsLoading(false)
+  //     })
+  //     .catch((error) => console.log(error.message))
+  // }, [])
 
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <section>
           <Box
             sx={{
@@ -94,49 +94,49 @@ export const ProductList = () => {
             <CircularProgress />
           </Box>
         </section>
-      ) : (
-        <section className={styles.wrapper}>
-          {filterMenu ? (
-            <FilterMenu onClickP={() => setFilterMenu(false)} />
-          ) : (
-            <>
-              <Searchbar
-                onClickP={() => setFilterMenu((prevState) => true)}
-                inputRefProductList={inputRefProductList}
-              />
-              <div>
-                <FormControl sx={{ m: 1, minWidth: 80 }}>
-                  <InputLabel id="demo-simple-select-autowidth-label">
-                    Sort:
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-autowidth-label"
-                    id="demo-simple-select-autowidth"
-                    value={selectedOption}
-                    onChange={handleChange}
-                    autoWidth
-                    label="Sort:">
-                    <MenuItem value={"lowest"}>Lowest Price</MenuItem>
-                    <MenuItem value={"highest"}>Highest Price</MenuItem>
-                    <MenuItem value={"discount"}>Biggest Discount</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-              <section>
-                <AutoFlex>
-                  {displayedProducts.map((product) => (
-                    <ProductItem
-                      key={product.id}
-                      product={product}
-                    />
-                  ))}
-                </AutoFlex>
-              </section>
-              <Navbar handleSearchClick={handleSearchClick} />
-            </>
-          )}
-        </section>
-      )}
+      ) : ( */}
+      <section className={styles.wrapper}>
+        {filterMenu ? (
+          <FilterMenu onClickP={() => setFilterMenu(false)} />
+        ) : (
+          <>
+            <Searchbar
+              onClickP={() => setFilterMenu((prevState) => true)}
+              inputRefProductList={inputRefProductList}
+            />
+            <div>
+              <FormControl sx={{ m: 1, minWidth: 80 }}>
+                <InputLabel id="demo-simple-select-autowidth-label">
+                  Sort:
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-autowidth-label"
+                  id="demo-simple-select-autowidth"
+                  value={selectedOption}
+                  onChange={handleChange}
+                  autoWidth
+                  label="Sort:">
+                  <MenuItem value={"lowest"}>Lowest Price</MenuItem>
+                  <MenuItem value={"highest"}>Highest Price</MenuItem>
+                  <MenuItem value={"discount"}>Biggest Discount</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <section>
+              <AutoFlex>
+                {displayedProducts.map((product) => (
+                  <ProductItem
+                    key={product.id}
+                    product={product}
+                  />
+                ))}
+              </AutoFlex>
+            </section>
+            <Navbar handleSearchClick={handleSearchClick} />
+          </>
+        )}
+      </section>
+      )
     </>
   )
 }

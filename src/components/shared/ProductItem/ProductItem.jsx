@@ -1,4 +1,3 @@
-import React, { useContext } from "react"
 import styles from "./ProductItem.module.scss"
 import ratingIcon from "../../../assets/images/rating.svg"
 import addItemIcon from "../../../assets/images/addItem.svg"
