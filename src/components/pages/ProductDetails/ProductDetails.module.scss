@@ -92,7 +92,27 @@
     border-style: none;
   }
 }
+.counter_button_bottom {
+  button {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    filter: grayscale(99);
+    border-style: none;
+  }
+}
 
+.counter_button_top {
+  button {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    filter: grayscale(1);
+    border-style: none;
+  }
+}
 .counter_button_plus {
   button {
     width: 24px;
