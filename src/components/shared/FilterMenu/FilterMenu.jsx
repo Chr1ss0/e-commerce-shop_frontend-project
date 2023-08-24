@@ -5,6 +5,7 @@ import { useContext, useEffect } from "react"
 import { FilterMenuTile } from "../FilterMenuTile/FilterMenuTile.jsx"
 import { ButtonBlue } from "../ButtonBlue/ButtonBlue.jsx"
 import { useLocation } from "react-router-dom"
+import { Button } from "@mui/material"
 
 export const FilterMenu = ({ onClickBack }) => {
   const {
@@ -55,6 +56,35 @@ export const FilterMenu = ({ onClickBack }) => {
   } = useContext(FilterContext)
 
   const filterMenuLocation = useLocation().pathname
+
+  const filterSetterFunctions = [
+    setElectronicsFilter,
+    setLifeStyleFilter,
+    setHomeFilter,
+    setClothesFilter,
+    setAccessoriesFilter,
+    setVehicleFilter,
+    setMenFilter,
+    setWomanFilter,
+    setPrice0_20Filter,
+    setPrice20_50Filter,
+    setPrice50_100Filter,
+    setPrice100Filter,
+    setAppleFilter,
+    setSamsungFilter,
+    setSuperCodeFilter,
+    setTopSweaterFilter,
+    setGhaziFilter,
+    setVintageFilter,
+    setWarehouseFilter,
+    setLoisWillFilter,
+    setSkmeiFilter,
+    setEasternWatchFilter,
+  ]
+
+  const clearAllFilters = () => {
+    filterSetterFunctions.forEach((setFilter) => setFilter(false))
+  }
 
   return (
     <aside className={styles.container}>
@@ -199,6 +229,7 @@ export const FilterMenu = ({ onClickBack }) => {
         onClickP={onClickBack}
         text={"Apply Filter"}
       />
+      <Button onClick={clearAllFilters}>Clear</Button>
     </aside>
   )
 }
