@@ -9,7 +9,7 @@ import { Plus } from "../../../assets/svg/Plus"
 import Navbar from "../../layout/Navbar/Navbar.jsx"
 import CircularProgress from "@mui/material/CircularProgress"
 import Box from "@mui/material/Box"
-import { superCode } from "../../../utility/superCodeArray"
+import { superCodeObject } from "../../../utility/superCodeArray"
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
@@ -17,7 +17,7 @@ export const ProductDetails = () => {
   const [productCounter, setProductCounter] = useState(1)
 
   const navigator = useNavigate()
-  const productId = useParams().id
+  const productId = Number(useParams().id)
 
   const discountedPrice = product.price * (1 - product.discountPercentage / 100)
 
@@ -40,11 +40,15 @@ export const ProductDetails = () => {
         })
         .catch((error) => console.log(error.message))
     } else {
-      setProduct(...superCode)
+      const rightItem = superCodeObject.products.find(
+        (item) => productId === item.id,
+      )
+      setProduct(rightItem)
       setIsLoading(false)
     }
   }, [])
 
+  console.log(product)
   if (productCounter < 1) {
     setProductCounter((prevProductCounter) => prevProductCounter + 1)
   } else if (productCounter > product.stock) {

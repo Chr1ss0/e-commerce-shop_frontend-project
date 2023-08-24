@@ -9,6 +9,8 @@ import { FilterContext } from "./context/filterContext.js"
 import { ProductsContext } from "./context/productsContext.js"
 import { searchInputContext } from "./context/searchInputContext"
 import { cartItemsContext } from "./context/cartItemsContext"
+import { superCode } from "./utility/superCodeArray.js"
+
 
 function App() {
   const [gadgetFilter, setGadgetFilter] = useState(false)
