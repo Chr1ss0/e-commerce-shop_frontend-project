@@ -39,6 +39,7 @@ function App() {
 
   const [productList, setProductList] = useState([])
   const [displayedProducts, setDisplayedProducts] = useState([])
+  const [displayedCategoryProducts, setDisplayedCategoryProducts] = useState([])
 
   const [inputFocus, setInputFocus] = useState(false)
 
@@ -119,6 +120,8 @@ function App() {
             setProductList,
             displayedProducts,
             setDisplayedProducts,
+            displayedCategoryProducts,
+            setDisplayedCategoryProducts,
           }}>
           <searchInputContext.Provider
             value={{

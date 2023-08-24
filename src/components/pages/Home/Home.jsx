@@ -15,10 +15,10 @@ import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
 import Navbar from "../../layout/Navbar/Navbar"
 
 export const Home = () => {
-  const [fetchDone, setFetchDone] = useState(false)
   const [filterMenu, setFilterMenu] = useState(false)
   const inputRefHome = useRef(null)
-  const { setProductList, displayedProducts } = useContext(ProductsContext)
+  const { displayedProducts, productList, setDisplayedCategoryProducts } =
+    useContext(ProductsContext)
   const { setInputFocus } = useContext(searchInputContext)
 
   const currentLocation = useLocation().pathname
@@ -29,18 +29,26 @@ export const Home = () => {
     inputRefHome.current.focus()
   }
 
-  // useEffect(() => {
-  //   if (currentLocation !== "/home") {
-  //     fetchList(`${apiCategoryLink}${category}`, setProductList, setFetchDone)
-  //   } else if (currentLocation === "/home") {
-  //     setProductList(superCodeObject.products)
-  //   }
-  // }, [currentLocation])
+  useEffect(() => {
+    if (currentLocation === "/home") {
+      const getCategoryProducts = productList.filter((product) =>
+        product.category.includes("supercode"),
+      )
+      setDisplayedCategoryProducts(getCategoryProducts)
+    } else {
+      const getCategories = currentLocation.split("/")
+      const getCategoryProducts = productList.filter((product) =>
+        product.category.includes(getCategories[2]),
+      )
+
+      setDisplayedCategoryProducts(getCategoryProducts)
+    }
+  }, [currentLocation, productList])
 
   return (
     <>
       {filterMenu ? (
-        <FilterMenu onClickP={() => setFilterMenu(false)} />
+        <FilterMenu onClickBack={() => setFilterMenu(false)} />
       ) : (
         <>
           <header className={styles.header}>
