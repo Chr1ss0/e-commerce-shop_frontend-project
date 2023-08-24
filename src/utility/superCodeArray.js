@@ -150,5 +150,5 @@ export const superCodeObject = {
       title: "Daniels broken glasses2",
     },
   ],
-  // total: 4
+  total: 4,
 }

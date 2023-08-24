@@ -9,7 +9,6 @@ import { Link, useLocation } from "react-router-dom"
 import CircularProgress from "@mui/material/CircularProgress"
 import Box from "@mui/material/Box"
 
-
 export const CategoryMenu = () => {
   const [categorys, setCategorys] = useState([])
   const [fetchDone, setFetchDone] = useState(false)
@@ -17,7 +16,21 @@ export const CategoryMenu = () => {
   const navLinkLocation = useLocation().pathname
 
   useEffect(() => {
-    fetchList(apiCategoriesLink, setCategorys, setFetchDone)
+    const fetchList = async () => {
+      try {
+        const response = await fetch(apiCategoriesLink)
+        if (!response.ok) {
+          throw new Error(`fetchProductList failed: ${response.status}`)
+        }
+        const data = await response.json()
+        //Changed from data.products
+        setCategorys(data)
+        setFetchDone(true)
+      } catch (error) {
+        console.error("Error:", error)
+      }
+    }
+    fetchList()
   }, [])
 
   useEffect(() => {

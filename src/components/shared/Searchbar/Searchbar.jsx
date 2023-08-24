@@ -9,34 +9,23 @@ import { superCode } from "../../../utility/superCodeArray.js"
 
 export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
   const [inputSearch, setInputSearch] = useState("")
-  const { inputFocus, setInputFocus } = useContext(searchInputContext)
-  const { productList, setDisplayedProducts, displayedProducts } =
-    useContext(ProductsContext)
+
   const inputRefLinks = inputRefHome ? inputRefHome : inputRefProductList
 
-  const searchValue = inputSearch.toLowerCase().trim()
+  const { setInputFocus } = useContext(searchInputContext)
+  const { productList, setDisplayedProducts, displayedProducts } =
+    useContext(ProductsContext)
 
-  const searchLocation = useLocation().pathname
-
-  //Doent work for SuperCode Array yet
   useEffect(() => {
-    if (Object.keys(productList).length > 0 && productList.total > 0) {
-      const getDisplayedProducts = productList.products.filter((product) => {
+    if (Object.keys(productList).length > 0) {
+      const searchValue = inputSearch.toLowerCase().trim()
+      const getDisplayedProducts = productList.filter((product) => {
         const searchFor = ["title", "brand", "category"]
         return searchFor.some((key) =>
           product[key].toLowerCase().includes(searchValue),
         )
       })
       setDisplayedProducts(getDisplayedProducts)
-    } else {
-      const getDisplayedProducts = superCode.filter((product) =>
-        product.title.toLowerCase().includes(inputSearch.toLowerCase().trim()),
-      )
-      setDisplayedProducts([...getDisplayedProducts])
-
-      // if (searchLocation === "/products") {
-      //   set([...productList.products, ...superCode])
-      // }
     }
   }, [inputSearch, productList])
 

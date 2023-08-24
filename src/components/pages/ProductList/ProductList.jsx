@@ -80,16 +80,21 @@ export const ProductList = () => {
         return response.json()
       })
       .then((products) => {
-        setProductList(products)
+        setProductList((prevProductList) => [
+          ...products.products,
+          ...superCodeObject.products,
+        ])
         setIsLoading(false)
       })
       .catch((error) => console.log(error.message))
   }, [])
 
+  console.log(productList)
+
   // useEffect(() => {
   //   fetchList(
   //     `${apiBaseLink}?limit=100`,
-  //     setProductList([...productList.products, ...superCode]),
+  //     setProductList([...productList.products, ...superCodeObject.products]),
   //     setFetchDone,
   //   )
   // }, [])

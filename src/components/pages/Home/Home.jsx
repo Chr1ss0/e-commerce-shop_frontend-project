@@ -13,7 +13,7 @@ import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
 import { ProductsContext } from "../../../context/productsContext.js"
 import { searchInputContext } from "../../../context/searchInputContext"
-import { superCode } from "../../../utility/superCodeArray.js"
+import { superCode, superCodeObject } from "../../../utility/superCodeArray.js"
 import { useLocation, useParams } from "react-router-dom"
 
 export const Home = () => {
@@ -26,8 +26,9 @@ export const Home = () => {
   const currentLocation = useLocation().pathname
   const category = useParams().category
 
-  console.log(productList)
-
+  // console.log(currentLocation)
+  // console.log(superCodeObject)
+  // console.log(productList)
   //State für Inputfeld Fokus
 
   const handleSearchClick = () => {
@@ -36,12 +37,10 @@ export const Home = () => {
   }
 
   useEffect(() => {
-    if (currentLocation !== "/home/") {
-      fetchList(
-        `${apiCategoryLink}${category}?limit=100`,
-        setProductList,
-        setFetchDone,
-      )
+    if (currentLocation !== "/home") {
+      fetchList(`${apiCategoryLink}${category}`, setProductList, setFetchDone)
+    } else if (currentLocation === "/home") {
+      setProductList(superCodeObject.products)
     }
   }, [currentLocation])
 
