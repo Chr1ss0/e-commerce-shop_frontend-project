@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import styles from "./Navbar.module.scss"
 import homeIcon from "../../../assets/images/home.svg"
 import searchIcon from "../../../assets/images/search.svg"

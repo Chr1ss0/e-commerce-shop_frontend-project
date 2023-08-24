@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
 import styles from "../ProductDetails/ProductDetails.module.scss"
+import Box from "@mui/material/Box"
+import CircularProgress from "@mui/material/CircularProgress"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import { apiBaseLink } from "../../../utility/apiBaseLink"
+import { superCodeObject } from "../../../utility/superCodeData.js"
 import { Rating } from "../../../assets/svg/Rating"
 import { LeftArrow } from "../../../assets/svg/LeftArrow"
 import { Minus } from "../../../assets/svg/Minus"
 import { Plus } from "../../../assets/svg/Plus"
 import Navbar from "../../layout/Navbar/Navbar.jsx"
-import CircularProgress from "@mui/material/CircularProgress"
-import Box from "@mui/material/Box"
-import { superCodeObject } from "../../../utility/superCodeArray"
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
@@ -19,11 +19,14 @@ export const ProductDetails = () => {
   const navigator = useNavigate()
   const productId = Number(useParams().id)
 
-  const discountedPrice = product.price * (1 - product.discountPercentage / 100)
-
   const handleSearchClick = () => {
     navigator("/products")
   }
+
+  const discountedPrice = (
+    product.price *
+    (1 - product.discountPercentage / 100)
+  ).toFixed(2)
 
   useEffect(() => {
     if (productId <= 100) {
@@ -53,8 +56,6 @@ export const ProductDetails = () => {
   } else if (productCounter > product.stock) {
     setProductCounter((prevProductCounter) => prevProductCounter - 1)
   }
-
-  // const navigator = useNavigate()
 
   return (
     <>
@@ -123,7 +124,7 @@ export const ProductDetails = () => {
                   <p className={styles.rating}>
                     <Rating /> {product.rating.toFixed(1)}
                   </p>
-                  <h4>${discountedPrice.toFixed(2)}</h4>
+                  <h4>${discountedPrice}</h4>
                 </div>
                 <div className={styles.stock}>
                   <p>{product.stock} pieces in Stock</p>
