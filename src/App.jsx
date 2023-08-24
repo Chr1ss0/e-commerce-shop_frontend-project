@@ -8,6 +8,7 @@ import { useState } from "react"
 import { FilterContext } from "./context/filterContext.js"
 import { ProductsContext } from "./context/productsContext.js"
 import { searchInputContext } from "./context/searchInputContext"
+import { cartItemsContext } from "./context/cartItemsContext"
 
 function App() {
   const [gadgetFilter, setGadgetFilter] = useState(false)
@@ -41,6 +42,8 @@ function App() {
   const [displayedProducts, setDisplayedProducts] = useState([])
 
   const [inputFocus, setInputFocus] = useState(false)
+
+  const [cartItems, setCartItems] = useState()
 
   return (
     <>
@@ -111,28 +114,30 @@ function App() {
               inputFocus,
               setInputFocus,
             }}>
-            <Routes>
-              <Route
-                path={"/"}
-                element={<OnboardingScreen />}
-              />
-              <Route
-                path={"/home"}
-                element={<Home />}
-              />
-              <Route
-                path={"/home/:category"}
-                element={<Home />}
-            />
-              <Route
-                path={"/products"}
-                element={<ProductList />}
-              />
-              <Route
-                path={"/products/:id"}
-                element={<ProductDetails />}
-              />
-            </Routes>
+            <cartItemsContext.Provider value={{ cartItems, setCartItems }}>
+              <Routes>
+                <Route
+                  path={"/"}
+                  element={<OnboardingScreen />}
+                />
+                <Route
+                  path={"/home"}
+                  element={<Home />}
+                />
+                <Route
+                  path={"/home/:category"}
+                  element={<Home />}
+                />
+                <Route
+                  path={"/products"}
+                  element={<ProductList />}
+                />
+                <Route
+                  path={"/products/:id"}
+                  element={<ProductDetails />}
+                />
+              </Routes>
+            </cartItemsContext.Provider>
           </searchInputContext.Provider>
         </ProductsContext.Provider>
       </FilterContext.Provider>

@@ -13,6 +13,7 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import CircularProgress from "@mui/material/CircularProgress"
 import Box from "@mui/material/Box"
+import { superCode } from "../../../utility/superCodeArray"
 
 export const ProductList = () => {
   const [products, setProducts] = useState([])
@@ -69,11 +70,13 @@ export const ProductList = () => {
         return response.json()
       })
       .then((products) => {
-        setProducts(products.products)
+        setProducts([...products.products])
         setIsLoading(false)
       })
       .catch((error) => console.log(error.message))
   }, [])
+
+  console.log(products)
 
   return (
     <>

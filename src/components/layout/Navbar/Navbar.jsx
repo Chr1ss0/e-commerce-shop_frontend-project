@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import styles from "./Navbar.module.scss"
 import homeIcon from "../../../assets/images/home.svg"
 import searchIcon from "../../../assets/images/search.svg"
+import bagIcon from "../../../assets/images/bag.svg"
 import { Link } from "react-router-dom"
 
 const Navbar = ({ handleSearchClick }) => {
@@ -12,9 +13,15 @@ const Navbar = ({ handleSearchClick }) => {
           <Link to={"/home"}>
             <img
               src={homeIcon}
-              alt=""
+              alt="Home Icon"
             />
           </Link>
+        </li>
+        <li>
+          <img
+            src={bagIcon}
+            alt="Bag Icon"
+          />
         </li>
         <li>
           <img
