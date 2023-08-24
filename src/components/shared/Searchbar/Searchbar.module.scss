@@ -16,8 +16,20 @@
   border-radius: 12px;
 }
 
-.button {
+.button_notFilterSet {
   background-color: $color-main_catch;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  &_image {
+    width: 24px;
+  }
+}
+
+.button_filterSet {
+  background-color: #7036d4;
   border-radius: 12px;
   display: flex;
   justify-content: center;
