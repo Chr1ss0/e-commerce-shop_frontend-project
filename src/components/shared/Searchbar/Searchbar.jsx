@@ -3,6 +3,7 @@ import filterSvg from "../../../assets/images/filter.svg"
 import { useContext, useEffect, useState } from "react"
 import { searchInputContext } from "../../../context/searchInputContext"
 import { ProductsContext } from "../../../context/productsContext.js"
+import { FilterContext } from "../../../context/filterContext.js"
 
 export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
   const [inputSearch, setInputSearch] = useState("")
@@ -24,6 +25,77 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
       setDisplayedProducts(getDisplayedProducts)
     }
   }, [inputSearch, productList])
+
+  const {
+    electronicsFilter,
+    setElectronicsFilter,
+    lifeStyleFilter,
+    setLifeStyleFilter,
+    homeFilter,
+    setHomeFilter,
+    clothesFilter,
+    setClothesFilter,
+    accessoriesFilter,
+    setAccessoriesFilter,
+    vehicleFilter,
+    setVehicleFilter,
+    menFilter,
+    setMenFilter,
+    womenFilter,
+    setWomanFilter,
+    price0_20Filter,
+    setPrice0_20Filter,
+    price20_50Filter,
+    setPrice20_50Filter,
+    price50_100Filter,
+    setPrice50_100Filter,
+    price100Filter,
+    setPrice100Filter,
+    appleFilter,
+    setAppleFilter,
+    samsungFilter,
+    setSamsungFilter,
+    superCodeFilter,
+    setSuperCodeFilter,
+    topSweaterFilter,
+    setTopSweaterFilter,
+    ghaziFilter,
+    setGhaziFilter,
+    vintageFilter,
+    setVintageFilter,
+    warehouseFilter,
+    setWarehouseFilter,
+    louisWillFilter,
+    setLoisWillFilter,
+    skmeiFilter,
+    setSkmeiFilter,
+    easternWatchFilter,
+    setEasternWatchFilter,
+  } = useContext(FilterContext)
+
+  useEffect(() => {
+    if (appleFilter) {
+      const getDisplayedProducts = productList.filter((item) => {
+        return item.brand.includes("Apple")
+      })
+
+      setDisplayedProducts(getDisplayedProducts)
+    }
+    if (samsungFilter) {
+      const getDisplayedProducts = productList.filter((item) => {
+        return item.brand.includes("Samsung")
+      })
+
+      setDisplayedProducts(getDisplayedProducts)
+    }
+    if (topSweaterFilter) {
+      const getDisplayedProducts = productList.filter((item) => {
+        return item.brand.includes("Top Sweater")
+      })
+
+      setDisplayedProducts(getDisplayedProducts)
+    }
+  }, [appleFilter, samsungFilter, productList])
 
   return (
     <div className={styles.flex_wrapper}>
