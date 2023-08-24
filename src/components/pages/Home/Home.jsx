@@ -29,13 +29,13 @@ export const Home = () => {
     inputRefHome.current.focus()
   }
 
-  useEffect(() => {
-    if (currentLocation !== "/home") {
-      fetchList(`${apiCategoryLink}${category}`, setProductList, setFetchDone)
-    } else if (currentLocation === "/home") {
-      setProductList(superCodeObject.products)
-    }
-  }, [currentLocation])
+  // useEffect(() => {
+  //   if (currentLocation !== "/home") {
+  //     fetchList(`${apiCategoryLink}${category}`, setProductList, setFetchDone)
+  //   } else if (currentLocation === "/home") {
+  //     setProductList(superCodeObject.products)
+  //   }
+  // }, [currentLocation])
 
   return (
     <>
@@ -65,25 +65,25 @@ export const Home = () => {
                       .join("-")
               }
             />
-            {fetchDone && currentLocation !== "/home" ? (
-              <AutoFlex>
-                {displayedProducts.map((entry) => (
-                  <ProductItem
-                    product={entry}
-                    key={entry.id}
-                  />
-                ))}
-              </AutoFlex>
-            ) : (
-              <AutoFlex>
-                {displayedProducts.map((entry) => (
-                  <ProductItem
-                    product={entry}
-                    key={entry.id}
-                  />
-                ))}
-              </AutoFlex>
-            )}
+            {/*{fetchDone && currentLocation !== "/home" ? (*/}
+            {/*  <AutoFlex>*/}
+            {/*    {displayedProducts.map((entry) => (*/}
+            {/*      <ProductItem*/}
+            {/*        product={entry}*/}
+            {/*        key={entry.id}*/}
+            {/*      />*/}
+            {/*    ))}*/}
+            {/*  </AutoFlex>*/}
+            {/*) : (*/}
+            <AutoFlex>
+              {displayedProducts.map((entry) => (
+                <ProductItem
+                  product={entry}
+                  key={entry.id}
+                />
+              ))}
+            </AutoFlex>
+            {/*)}*/}
           </main>
           <Navbar handleSearchClick={handleSearchClick} />
         </>
