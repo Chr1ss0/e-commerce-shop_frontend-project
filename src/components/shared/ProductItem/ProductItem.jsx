@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./ProductItem.module.scss"
 import ratingIcon from "../../../assets/images/rating.svg"
 import addItemIcon from "../../../assets/images/addItem.svg"
@@ -6,6 +5,7 @@ import { Link } from "react-router-dom"
 
 const ProductItem = ({ product }) => {
   const imageLink = product.images[2] ? product.images[2] : product.images[0]
+
   const discountedPrice = (
     product.price *
     (1 - product.discountPercentage / 100)

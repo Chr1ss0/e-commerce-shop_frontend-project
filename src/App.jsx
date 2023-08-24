@@ -1,14 +1,15 @@
 import "./App.scss"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import { FilterContext } from "./context/filterContext.js"
 import { ProductsContext } from "./context/productsContext.js"
 import { searchInputContext } from "./context/searchInputContext"
-import { cartItemsContext } from "./context/cartItemsContext"
 import { OnboardingScreen } from "./components/pages/OnboardingScreen/OnboardingScreen.jsx"
 import { ProductList } from "./components/pages/ProductList/ProductList.jsx"
 import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails.jsx"
 import { Home } from "./components/pages/Home/Home.jsx"
+import { apiBaseLink } from "./utility/apiBaseLink"
+import { superCodeObject } from "./utility/superCodeData"
 
 function App() {
   const [electronicsFilter, setElectronicsFilter] = useState(false)
@@ -41,7 +42,27 @@ function App() {
 
   const [inputFocus, setInputFocus] = useState(false)
 
-  const [cartItems, setCartItems] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(`${apiBaseLink}?limit=100`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Fetch failed")
+        }
+        return response.json()
+      })
+      .then((products) => {
+        setProductList((prevProductList) => [
+          ...products.products,
+          ...superCodeObject.products,
+        ])
+        setIsLoading(false)
+      })
+      .catch((error) => console.log(error.message))
+  }, [])
+
+  console.log(productList)
 
   return (
     <>
@@ -104,30 +125,28 @@ function App() {
               inputFocus,
               setInputFocus,
             }}>
-            <cartItemsContext.Provider value={{ cartItems, setCartItems }}>
-              <Routes>
-                <Route
-                  path={"/"}
-                  element={<OnboardingScreen />}
-                />
-                <Route
-                  path={"/home"}
-                  element={<Home />}
-                />
-                <Route
-                  path={"/home/:category"}
-                  element={<Home />}
-                />
-                <Route
-                  path={"/products"}
-                  element={<ProductList />}
-                />
-                <Route
-                  path={"/products/:id"}
-                  element={<ProductDetails />}
-                />
-              </Routes>
-            </cartItemsContext.Provider>
+            <Routes>
+              <Route
+                path={"/"}
+                element={<OnboardingScreen />}
+              />
+              <Route
+                path={"/home"}
+                element={<Home />}
+              />
+              <Route
+                path={"/home/:category"}
+                element={<Home />}
+              />
+              <Route
+                path={"/products"}
+                element={<ProductList />}
+              />
+              <Route
+                path={"/products/:id"}
+                element={<ProductDetails />}
+              />
+            </Routes>
           </searchInputContext.Provider>
         </ProductsContext.Provider>
       </FilterContext.Provider>
