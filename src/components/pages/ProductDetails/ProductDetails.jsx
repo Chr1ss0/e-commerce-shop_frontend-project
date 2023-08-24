@@ -1,8 +1,6 @@
-import styles from "../ProductDetails/ProductDetails.module.scss"
-import Box from "@mui/material/Box"
-import CircularProgress from "@mui/material/CircularProgress"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import styles from "../ProductDetails/ProductDetails.module.scss"
 import { apiBaseLink } from "../../../utility/apiBaseLink"
 import { superCodeObject } from "../../../utility/superCodeData.js"
 import { Rating } from "../../../assets/svg/Rating"
@@ -10,6 +8,9 @@ import { LeftArrow } from "../../../assets/svg/LeftArrow"
 import { Minus } from "../../../assets/svg/Minus"
 import { Plus } from "../../../assets/svg/Plus"
 import Navbar from "../../layout/Navbar/Navbar.jsx"
+import CircularProgress from "@mui/material/CircularProgress"
+import Box from "@mui/material/Box"
+// import { superCode } from "../../../utility/superCodeArray"
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
@@ -93,7 +94,12 @@ export const ProductDetails = () => {
                   <h3>{product.title}</h3>
                 </div>
                 <div className={styles.counter}>
-                  <div className={styles.counter_button_minus}>
+                  <div
+                    className={
+                      productCounter != 1
+                        ? styles.counter_button_minus
+                        : styles.counter_button_bottom
+                    }>
                     <button
                       className={styles.test}
                       onClick={() =>
@@ -106,7 +112,12 @@ export const ProductDetails = () => {
                     </button>
                   </div>
                   <p>{productCounter}</p>
-                  <div className={styles.counter_button_plus}>
+                  <div
+                    className={
+                      productCounter < product.stock
+                        ? styles.counter_button_plus
+                        : styles.counter_button_top
+                    }>
                     <button
                       onClick={() =>
                         setProductCounter(

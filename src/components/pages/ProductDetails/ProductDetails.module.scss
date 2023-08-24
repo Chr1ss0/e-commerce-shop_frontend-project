@@ -88,11 +88,31 @@
     height: 24px;
     flex-shrink: 0;
     border-radius: 3px;
+    background-color: #828b9a;
+    border-style: none;
+  }
+}
+.counter_button_bottom {
+  button {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 3px;
     background-color: #cad1d9;
     border-style: none;
   }
 }
 
+.counter_button_top {
+  button {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    background-color: #cad1d9;
+    border-style: none;
+  }
+}
 .counter_button_plus {
   button {
     width: 24px;
