@@ -1,34 +1,28 @@
-import Navbar from "../../layout/Navbar/Navbar"
 import styles from "../Home/Home.module.scss"
-import { Searchbar } from "../../shared/Searchbar/Searchbar.jsx"
 import { CategoryMenu } from "../../layout/CategoryMenu/CategoryMenu.jsx"
-import { ListMenuHome } from "../../layout/ListMenuHome/ListMenuHome.jsx"
-import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
-
 import { useContext, useEffect, useState, useRef } from "react"
+import { useLocation, useParams } from "react-router-dom"
 import { apiCategoryLink } from "../../../utility/apiBaseLink.js"
-
+import { ProductsContext } from "../../../context/productsContext.js"
+import { searchInputContext } from "../../../context/searchInputContext"
+import { superCodeObject } from "../../../utility/superCodeData.js"
+import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
+import { ListMenuHome } from "../../layout/ListMenuHome/ListMenuHome.jsx"
+import { Searchbar } from "../../shared/Searchbar/Searchbar.jsx"
 import { fetchList } from "../../../functions/fetchList.js"
 import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
-import { ProductsContext } from "../../../context/productsContext.js"
-import { searchInputContext } from "../../../context/searchInputContext"
-import { superCode } from "../../../utility/superCodeArray.js"
-import { useLocation, useParams } from "react-router-dom"
+import Navbar from "../../layout/Navbar/Navbar"
 
 export const Home = () => {
   const [fetchDone, setFetchDone] = useState(false)
-  const [filterMenu, setFilterMenu] = useState(false) // context
+  const [filterMenu, setFilterMenu] = useState(false)
   const inputRefHome = useRef(null)
-  const { productList, setProductList, displayedProducts } =
-    useContext(ProductsContext)
-  const { inputFocus, setInputFocus } = useContext(searchInputContext)
+  const { setProductList, displayedProducts } = useContext(ProductsContext)
+  const { setInputFocus } = useContext(searchInputContext)
+
   const currentLocation = useLocation().pathname
   const category = useParams().category
-
-  console.log(productList)
-
-  //State für Inputfeld Fokus
 
   const handleSearchClick = () => {
     setInputFocus(true)
@@ -36,12 +30,10 @@ export const Home = () => {
   }
 
   useEffect(() => {
-    if (currentLocation !== "/home/") {
-      fetchList(
-        `${apiCategoryLink}${category}?limit=100`,
-        setProductList,
-        setFetchDone,
-      )
+    if (currentLocation !== "/home") {
+      fetchList(`${apiCategoryLink}${category}`, setProductList, setFetchDone)
+    } else if (currentLocation === "/home") {
+      setProductList(superCodeObject.products)
     }
   }, [currentLocation])
 
