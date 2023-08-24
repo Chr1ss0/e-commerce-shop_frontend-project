@@ -2,9 +2,15 @@ import styles from "./ProductItem.module.scss"
 import ratingIcon from "../../../assets/images/rating.svg"
 import addItemIcon from "../../../assets/images/addItem.svg"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { useCart } from "../../../context/shoppingCartContext"
 
 const ProductItem = ({ product }) => {
   const imageLink = product.images[2] ? product.images[2] : product.images[0]
+
+  const { addToCart, cartItems } = useCart()
+
+  console.log(cartItems)
 
   const discountedPrice = (
     product.price *
@@ -20,8 +26,8 @@ const ProductItem = ({ product }) => {
   }
 
   return (
-    <Link to={`/products/${product.id}`}>
-      <article className={styles.product}>
+    <article className={styles.product}>
+      <Link to={`/products/${product.id}`}>
         <div
           className={styles.image}
           style={imageStyle}></div>
@@ -36,15 +42,16 @@ const ProductItem = ({ product }) => {
           <h3>{product.title}</h3>
         </div>
         <p className={styles.discount}>${discountedPrice}</p>
-        <div className={styles.add}>
-          <p>${product.price.toFixed(2)}</p>
-          <img
-            src={addItemIcon}
-            alt="Plus Icon"
-          />
-        </div>
-      </article>
-    </Link>
+      </Link>
+      <div className={styles.add}>
+        <p>${product.price.toFixed(2)}</p>
+        <img
+          src={addItemIcon}
+          alt="Plus Icon"
+          onClick={() => addToCart(product.id)}
+        />
+      </div>
+    </article>
   )
 }
 

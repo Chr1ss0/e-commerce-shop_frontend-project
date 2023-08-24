@@ -13,6 +13,8 @@ import { fetchList } from "../../../functions/fetchList.js"
 import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
 import Navbar from "../../layout/Navbar/Navbar"
+import { useCart } from "../../../context/shoppingCartContext"
+import ShoppingCart from "../../shared/ShoppingCart/ShoppingCart"
 
 export const Home = () => {
   const [fetchDone, setFetchDone] = useState(false)
@@ -20,6 +22,10 @@ export const Home = () => {
   const inputRefHome = useRef(null)
   const { setProductList, displayedProducts } = useContext(ProductsContext)
   const { setInputFocus } = useContext(searchInputContext)
+
+  const { cartItems, shoppingCart } = useCart()
+
+  console.log(cartItems)
 
   const currentLocation = useLocation().pathname
   const category = useParams().category
@@ -39,53 +45,60 @@ export const Home = () => {
 
   return (
     <>
-      {filterMenu ? (
-        <FilterMenu onClickP={() => setFilterMenu(false)} />
+      {shoppingCart ? (
+        <ShoppingCart />
       ) : (
         <>
-          <header className={styles.header}>
-            <h1 className={styles.headline}>Find your favorite Product</h1>
-          </header>
-          <Searchbar
-            onClickP={() => setFilterMenu((prevState) => true)}
-            inputRefHome={inputRefHome}
-            setInputFocus={setInputFocus}
-          />
-          <CategoryMenu />
-          <main className={styles.main}>
-            <ListMenuHome
-              currentSearch={
-                currentLocation === "/home"
-                  ? "SuperCode"
-                  : category
-                      .split("-")
-                      .map(
-                        (word) => word.charAt(0).toUpperCase() + word.slice(1),
-                      )
-                      .join("-")
-              }
-            />
-            {/*{fetchDone && currentLocation !== "/home" ? (*/}
-            {/*  <AutoFlex>*/}
-            {/*    {displayedProducts.map((entry) => (*/}
-            {/*      <ProductItem*/}
-            {/*        product={entry}*/}
-            {/*        key={entry.id}*/}
-            {/*      />*/}
-            {/*    ))}*/}
-            {/*  </AutoFlex>*/}
-            {/*) : (*/}
-            <AutoFlex>
-              {displayedProducts.map((entry) => (
-                <ProductItem
-                  product={entry}
-                  key={entry.id}
+          {filterMenu ? (
+            <FilterMenu onClickP={() => setFilterMenu(false)} />
+          ) : (
+            <>
+              <header className={styles.header}>
+                <h1 className={styles.headline}>Find your favorite Product</h1>
+              </header>
+              <Searchbar
+                onClickP={() => setFilterMenu((prevState) => true)}
+                inputRefHome={inputRefHome}
+                setInputFocus={setInputFocus}
+              />
+              <CategoryMenu />
+              <main className={styles.main}>
+                <ListMenuHome
+                  currentSearch={
+                    currentLocation === "/home"
+                      ? "SuperCode"
+                      : category
+                          .split("-")
+                          .map(
+                            (word) =>
+                              word.charAt(0).toUpperCase() + word.slice(1),
+                          )
+                          .join("-")
+                  }
                 />
-              ))}
-            </AutoFlex>
-            {/*)}*/}
-          </main>
-          <Navbar handleSearchClick={handleSearchClick} />
+                {/*{fetchDone && currentLocation !== "/home" ? (*/}
+                {/*  <AutoFlex>*/}
+                {/*    {displayedProducts.map((entry) => (*/}
+                {/*      <ProductItem*/}
+                {/*        product={entry}*/}
+                {/*        key={entry.id}*/}
+                {/*      />*/}
+                {/*    ))}*/}
+                {/*  </AutoFlex>*/}
+                {/*) : (*/}
+                <AutoFlex>
+                  {displayedProducts.map((entry) => (
+                    <ProductItem
+                      product={entry}
+                      key={entry.id}
+                    />
+                  ))}
+                </AutoFlex>
+                {/*)}*/}
+              </main>
+              <Navbar handleSearchClick={handleSearchClick} />
+            </>
+          )}
         </>
       )}
     </>
