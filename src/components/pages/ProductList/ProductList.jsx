@@ -13,15 +13,26 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import CircularProgress from "@mui/material/CircularProgress"
 import Box from "@mui/material/Box"
+import { ProductsContext } from "../../../context/productsContext.js"
+import { fetchList } from "../../../functions/fetchList.js"
+import { superCode, superCodeObject } from "../../../utility/superCodeArray.js"
 
 export const ProductList = () => {
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  // const [fetchDone, setFetchDone] = useState(false)
   const [filterMenu, setFilterMenu] = useState(false)
   const [selectedOption, setSelectedOption] = useState("")
 
   const inputRefProductList = useRef(null)
   const { inputFocus, setInputFocus } = useContext(searchInputContext)
+
+  const {
+    displayedProducts,
+    setProductList,
+    setDisplayedProducts,
+    productList,
+  } = useContext(ProductsContext)
 
   const handleSearchClick = () => {
     setInputFocus(true)
@@ -29,19 +40,19 @@ export const ProductList = () => {
   }
 
   const handleSortLowestPrice = () => {
-    setProducts((prevProducts) =>
+    setDisplayedProducts((prevProducts) =>
       [...prevProducts].sort((a, b) => a.price - b.price),
     )
   }
 
   const handleSortHighestPrice = () => {
-    setProducts((prevProducts) =>
+    setDisplayedProducts((prevProducts) =>
       [...prevProducts].sort((a, b) => b.price - a.price),
     )
   }
 
   const handleSortHighestDiscount = () => {
-    setProducts((prevProducts) =>
+    setDisplayedProducts((prevProducts) =>
       [...prevProducts].sort(
         (a, b) => b.discountPercentage - a.discountPercentage,
       ),
@@ -69,12 +80,32 @@ export const ProductList = () => {
         return response.json()
       })
       .then((products) => {
-        setProducts(products.products)
+        setProductList(products)
         setIsLoading(false)
       })
       .catch((error) => console.log(error.message))
   }, [])
 
+  // useEffect(() => {
+  //   fetchList(
+  //     `${apiBaseLink}?limit=100`,
+  //     setProductList([...productList.products, ...superCode]),
+  //     setFetchDone,
+  //   )
+  // }, [])
+
+  // useEffect(() => {
+  //   fetchList(`${apiBaseLink}?limit=100`, (data) => {
+  //     // Update productList with the fetched data
+  //     setProductList({
+  //       ...productList,
+  //       products: [...productList, ...superCode],
+  //     })
+  //     setFetchDone(true)
+  //   })
+  // }, [])
+
+  // refactor LoadingState
   return (
     <>
       {isLoading ? (
@@ -119,7 +150,7 @@ export const ProductList = () => {
               </div>
               <section>
                 <AutoFlex>
-                  {products.map((product) => (
+                  {displayedProducts.map((product) => (
                     <ProductItem
                       key={product.id}
                       product={product}

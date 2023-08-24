@@ -20,10 +20,13 @@ export const Home = () => {
   const [fetchDone, setFetchDone] = useState(false)
   const [filterMenu, setFilterMenu] = useState(false) // context
   const inputRefHome = useRef(null)
-  const { productList, setProductList } = useContext(ProductsContext)
+  const { productList, setProductList, displayedProducts } =
+    useContext(ProductsContext)
   const { inputFocus, setInputFocus } = useContext(searchInputContext)
   const currentLocation = useLocation().pathname
   const category = useParams().category
+
+  console.log(productList)
 
   //State für Inputfeld Fokus
 
@@ -41,10 +44,6 @@ export const Home = () => {
       )
     }
   }, [currentLocation])
-
-
-  console.log(productList)
-
 
   return (
     <>
@@ -76,7 +75,7 @@ export const Home = () => {
             />
             {fetchDone && currentLocation !== "/home" ? (
               <AutoFlex>
-                {productList.products.map((entry) => (
+                {displayedProducts.map((entry) => (
                   <ProductItem
                     product={entry}
                     key={entry.id}
@@ -85,7 +84,7 @@ export const Home = () => {
               </AutoFlex>
             ) : (
               <AutoFlex>
-                {superCode.map((entry) => (
+                {displayedProducts.map((entry) => (
                   <ProductItem
                     product={entry}
                     key={entry.id}
