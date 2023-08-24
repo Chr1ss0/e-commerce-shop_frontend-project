@@ -11,32 +11,30 @@ import { Home } from "./components/pages/Home/Home.jsx"
 
 
 function App() {
-  const [gadgetFilter, setGadgetFilter] = useState(false)
   const [electronicsFilter, setElectronicsFilter] = useState(false)
-  const [mobileFilter, setMobileFilter] = useState(false)
-  const [clothFilter, setClothFilter] = useState(false)
-  const [computerFilter, setComputerFilter] = useState(false)
-  const [foodFilter, setFoodFilter] = useState(false)
-  const [dragFilter, setDragFilter] = useState(false)
-  const [furnitureFilter, setFurnitureFilter] = useState(false)
-  const [babyFilter, setBabyFilter] = useState(false)
-  const [cosmeticsFilter, setCosmeticsFilter] = useState(false)
-  const [gymFilter, setGymFilter] = useState(false)
+  const [lifeStyleFilter, setLifeStyleFilter] = useState(false)
+  const [homeFilter, setHomeFilter] = useState(false)
+  const [clothesFilter, setClothesFilter] = useState(false)
+  const [accessoriesFilter, setAccessoriesFilter] = useState(false)
+  const [vehicleFilter, setVehicleFilter] = useState(false)
+  const [menFilter, setMenFilter] = useState(false)
+  const [womenFilter, setWomanFilter] = useState(false)
+
   const [price0_20Filter, setPrice0_20Filter] = useState(false)
   const [price20_50Filter, setPrice20_50Filter] = useState(false)
   const [price50_100Filter, setPrice50_100Filter] = useState(false)
-  const [price100Filter, setprice100Filter] = useState(false)
+  const [price100Filter, setPrice100Filter] = useState(false)
+
   const [appleFilter, setAppleFilter] = useState(false)
-  const [nikeFilter, setNikeFilter] = useState(false)
-  const [adidasFilter, setAdidasFilter] = useState(false)
-  const [lenovoFilter, setLenovoFilter] = useState(false)
-  const [sonyFilter, setSonyFilter] = useState(false)
-  const [nescafeFilter, setNescafeFilter] = useState(false)
-  const [diorFilter, setDiorFilter] = useState(false)
-  const [legoFilter, setLegoFilter] = useState(false)
-  const [braunFilter, setBraunFilter] = useState(false)
-  const [lorealFilter, setLorealFilter] = useState(false)
-  const [zaraFilter, setZaraFilter] = useState(false)
+  const [samsungFilter, setSamsungFilter] = useState(false)
+  const [superCodeFilter, setSuperCodeFilter] = useState(false)
+  const [topSweaterFilter, setTopSweaterFilter] = useState(false)
+  const [ghaziFilter, setGhaziFilter] = useState(false)
+  const [vintageFilter, setVintageFilter] = useState(false)
+  const [warehouseFilter, setWarehouseFilter] = useState(false)
+  const [louisWillFilter, setLoisWillFilter] = useState(false)
+  const [skmeiFilter, setSkmeiFilter] = useState(false)
+  const [easternWatchFilter, setEasternWatchFilter] = useState(false)
 
   const [productList, setProductList] = useState([])
   const [displayedProducts, setDisplayedProducts] = useState([])
@@ -47,28 +45,22 @@ function App() {
     <>
       <FilterContext.Provider
         value={{
-          gadgetFilter,
-          setGadgetFilter,
           electronicsFilter,
           setElectronicsFilter,
-          mobileFilter,
-          setMobileFilter,
-          clothFilter,
-          setClothFilter,
-          computerFilter,
-          setComputerFilter,
-          foodFilter,
-          setFoodFilter,
-          dragFilter,
-          setDragFilter,
-          furnitureFilter,
-          setFurnitureFilter,
-          babyFilter,
-          setBabyFilter,
-          cosmeticsFilter,
-          setCosmeticsFilter,
-          gymFilter,
-          setGymFilter,
+          lifeStyleFilter,
+          setLifeStyleFilter,
+          homeFilter,
+          setHomeFilter,
+          clothesFilter,
+          setClothesFilter,
+          accessoriesFilter,
+          setAccessoriesFilter,
+          vehicleFilter,
+          setVehicleFilter,
+          menFilter,
+          setMenFilter,
+          womenFilter,
+          setWomanFilter,
           price0_20Filter,
           setPrice0_20Filter,
           price20_50Filter,
@@ -76,29 +68,27 @@ function App() {
           price50_100Filter,
           setPrice50_100Filter,
           price100Filter,
-          setprice100Filter,
+          setPrice100Filter,
           appleFilter,
           setAppleFilter,
-          nikeFilter,
-          setNikeFilter,
-          adidasFilter,
-          setAdidasFilter,
-          lenovoFilter,
-          setLenovoFilter,
-          sonyFilter,
-          setSonyFilter,
-          nescafeFilter,
-          setNescafeFilter,
-          diorFilter,
-          setDiorFilter,
-          legoFilter,
-          setLegoFilter,
-          braunFilter,
-          setBraunFilter,
-          lorealFilter,
-          setLorealFilter,
-          zaraFilter,
-          setZaraFilter,
+          samsungFilter,
+          setSamsungFilter,
+          superCodeFilter,
+          setSuperCodeFilter,
+          topSweaterFilter,
+          setTopSweaterFilter,
+          ghaziFilter,
+          setGhaziFilter,
+          vintageFilter,
+          setVintageFilter,
+          warehouseFilter,
+          setWarehouseFilter,
+          louisWillFilter,
+          setLoisWillFilter,
+          skmeiFilter,
+          setSkmeiFilter,
+          easternWatchFilter,
+          setEasternWatchFilter,
         }}>
         <ProductsContext.Provider
           value={{
