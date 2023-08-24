@@ -1,17 +1,13 @@
-import React from "react"
+import React, { useContext } from "react"
 import styles from "./ProductItem.module.scss"
 import ratingIcon from "../../../assets/images/rating.svg"
 import addItemIcon from "../../../assets/images/addItem.svg"
 import { Link } from "react-router-dom"
 
 const ProductItem = ({ product }) => {
-  // console.log(product)
-
   const imageLink = product.images[2] ? product.images[2] : product.images[0]
 
   const discountedPrice = product.price * (1 - product.discountPercentage / 100)
-
-  // console.log(discountedPrice.toFixed(0))
 
   const imageStyle = {
     backgroundImage: `url(${imageLink})`,

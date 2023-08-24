@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import styles from "../ProductDetails/ProductDetails.module.scss"
 import { apiBaseLink } from "../../../utility/apiBaseLink"
@@ -48,7 +48,6 @@ export const ProductDetails = () => {
     }
   }, [])
 
-  console.log(product)
   if (productCounter < 1) {
     setProductCounter((prevProductCounter) => prevProductCounter + 1)
   } else if (productCounter > product.stock) {

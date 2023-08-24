@@ -26,8 +26,6 @@ export const Home = () => {
   const currentLocation = useLocation().pathname
   const category = useParams().category
 
-  console.log(productList)
-
   //State für Inputfeld Fokus
 
   const handleSearchClick = () => {
