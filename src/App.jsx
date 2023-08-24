@@ -4,11 +4,11 @@ import { Route, Routes } from "react-router-dom"
 import { FilterContext } from "./context/filterContext.js"
 import { ProductsContext } from "./context/productsContext.js"
 import { searchInputContext } from "./context/searchInputContext"
-import { cartItemsContext } from "./context/cartItemsContext"
 import { OnboardingScreen } from "./components/pages/OnboardingScreen/OnboardingScreen.jsx"
 import { ProductList } from "./components/pages/ProductList/ProductList.jsx"
 import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails.jsx"
 import { Home } from "./components/pages/Home/Home.jsx"
+
 
 function App() {
   const [gadgetFilter, setGadgetFilter] = useState(false)
@@ -42,8 +42,6 @@ function App() {
   const [displayedProducts, setDisplayedProducts] = useState([])
 
   const [inputFocus, setInputFocus] = useState(false)
-
-  const [cartItems, setCartItems] = useState()
 
   return (
     <>
@@ -114,30 +112,28 @@ function App() {
               inputFocus,
               setInputFocus,
             }}>
-            <cartItemsContext.Provider value={{ cartItems, setCartItems }}>
-              <Routes>
-                <Route
-                  path={"/"}
-                  element={<OnboardingScreen />}
-                />
-                <Route
-                  path={"/home"}
-                  element={<Home />}
-                />
-                <Route
-                  path={"/home/:category"}
-                  element={<Home />}
-                />
-                <Route
-                  path={"/products"}
-                  element={<ProductList />}
-                />
-                <Route
-                  path={"/products/:id"}
-                  element={<ProductDetails />}
-                />
-              </Routes>
-            </cartItemsContext.Provider>
+            <Routes>
+              <Route
+                path={"/"}
+                element={<OnboardingScreen />}
+              />
+              <Route
+                path={"/home"}
+                element={<Home />}
+              />
+              <Route
+                path={"/home/:category"}
+                element={<Home />}
+              />
+              <Route
+                path={"/products"}
+                element={<ProductList />}
+              />
+              <Route
+                path={"/products/:id"}
+                element={<ProductDetails />}
+              />
+            </Routes>
           </searchInputContext.Provider>
         </ProductsContext.Provider>
       </FilterContext.Provider>
