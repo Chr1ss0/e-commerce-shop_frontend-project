@@ -5,13 +5,11 @@ import addItemIcon from "../../../assets/images/addItem.svg"
 import { Link } from "react-router-dom"
 
 const ProductItem = ({ product }) => {
-  // console.log(product)
-
   const imageLink = product.images[2] ? product.images[2] : product.images[0]
-
-  const discountedPrice = product.price * (1 - product.discountPercentage / 100)
-
-  // console.log(discountedPrice.toFixed(0))
+  const discountedPrice = (
+    product.price *
+    (1 - product.discountPercentage / 100)
+  ).toFixed(2)
 
   const imageStyle = {
     backgroundImage: `url(${imageLink})`,
@@ -37,7 +35,7 @@ const ProductItem = ({ product }) => {
         <div className={styles.title}>
           <h3>{product.title}</h3>
         </div>
-        <p className={styles.discount}>${discountedPrice.toFixed(2)}</p>
+        <p className={styles.discount}>${discountedPrice}</p>
         <div className={styles.add}>
           <p>${product.price.toFixed(2)}</p>
           <img

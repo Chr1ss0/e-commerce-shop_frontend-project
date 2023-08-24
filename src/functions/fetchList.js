@@ -5,7 +5,6 @@ export const fetchList = async (apiLink, setData, setFetch) => {
       throw new Error(`fetchProductList failed: ${response.status}`)
     }
     const data = await response.json()
-    //Changed from data.products
     setData(data.products)
     setFetch(true)
   } catch (error) {

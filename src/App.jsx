@@ -1,16 +1,14 @@
 import "./App.scss"
-import { Route, Routes } from "react-router-dom"
-import { OnboardingScreen } from "./components/pages/OnboardingScreen/OnboardingScreen.jsx"
-import { Home } from "./components/pages/Home/Home.jsx"
-import { ProductList } from "./components/pages/ProductList/ProductList.jsx"
-import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails.jsx"
 import { useState } from "react"
+import { Route, Routes } from "react-router-dom"
 import { FilterContext } from "./context/filterContext.js"
 import { ProductsContext } from "./context/productsContext.js"
 import { searchInputContext } from "./context/searchInputContext"
 import { cartItemsContext } from "./context/cartItemsContext"
-import { superCode } from "./utility/superCodeArray.js"
-
+import { OnboardingScreen } from "./components/pages/OnboardingScreen/OnboardingScreen.jsx"
+import { ProductList } from "./components/pages/ProductList/ProductList.jsx"
+import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails.jsx"
+import { Home } from "./components/pages/Home/Home.jsx"
 
 function App() {
   const [gadgetFilter, setGadgetFilter] = useState(false)

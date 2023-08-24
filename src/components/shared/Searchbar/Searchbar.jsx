@@ -1,11 +1,8 @@
 import styles from "./Searchbar.module.scss"
-import { Link, useLocation } from "react-router-dom"
-import searchSvg from "../../../assets/images/search.svg"
 import filterSvg from "../../../assets/images/filter.svg"
-import { searchInputContext } from "../../../context/searchInputContext"
 import { useContext, useEffect, useState } from "react"
+import { searchInputContext } from "../../../context/searchInputContext"
 import { ProductsContext } from "../../../context/productsContext.js"
-import { superCode } from "../../../utility/superCodeArray.js"
 
 export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
   const [inputSearch, setInputSearch] = useState("")
@@ -13,8 +10,7 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
   const inputRefLinks = inputRefHome ? inputRefHome : inputRefProductList
 
   const { setInputFocus } = useContext(searchInputContext)
-  const { productList, setDisplayedProducts, displayedProducts } =
-    useContext(ProductsContext)
+  const { productList, setDisplayedProducts } = useContext(ProductsContext)
 
   useEffect(() => {
     if (Object.keys(productList).length > 0) {

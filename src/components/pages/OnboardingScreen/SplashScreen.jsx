@@ -2,7 +2,7 @@ import React from "react"
 import styles from "../OnboardingScreen/SplashScreen.module.scss"
 import splashScreenIcon from "../../../assets/images/splash-screen-icon.svg"
 import eShopIcon from "../../../assets/images/e-shop-icon.svg"
-import test from "../../../assets/images/Slice1.png"
+import weshIcon from "../../../assets/images/Slice1.png"
 const SplashScreen = () => {
   return (
     <section className={styles.container}>
@@ -17,7 +17,7 @@ const SplashScreen = () => {
         <img
           //chris added classname
           className={styles.png}
-          src={test}
+          src={weshIcon}
           alt="E-Shop Logo"
         />
       </div>

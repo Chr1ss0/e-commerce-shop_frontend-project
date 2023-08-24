@@ -1,38 +1,29 @@
 import styles from "./ProductList.module.scss"
-import { apiBaseLink } from "../../../utility/apiBaseLink.js"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import Box from "@mui/material/Box"
+import Select from "@mui/material/Select"
+import FormControl from "@mui/material/FormControl"
+import CircularProgress from "@mui/material/CircularProgress"
 import { useEffect, useState, useRef, useContext } from "react"
+import { searchInputContext } from "../../../context/searchInputContext"
+import { ProductsContext } from "../../../context/productsContext.js"
+import { superCodeObject } from "../../../utility/superCodeData.js"
+import { apiBaseLink } from "../../../utility/apiBaseLink.js"
 import ProductItem from "../../shared/ProductItem/ProductItem"
 import Navbar from "../../layout/Navbar/Navbar"
 import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
 import { Searchbar } from "../../shared/Searchbar/Searchbar"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu"
-import { searchInputContext } from "../../../context/searchInputContext"
-import InputLabel from "@mui/material/InputLabel"
-import MenuItem from "@mui/material/MenuItem"
-import FormControl from "@mui/material/FormControl"
-import Select from "@mui/material/Select"
-import CircularProgress from "@mui/material/CircularProgress"
-import Box from "@mui/material/Box"
-import { ProductsContext } from "../../../context/productsContext.js"
-import { fetchList } from "../../../functions/fetchList.js"
-import { superCode, superCodeObject } from "../../../utility/superCodeArray.js"
 
 export const ProductList = () => {
-  // const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  // const [fetchDone, setFetchDone] = useState(false)
   const [filterMenu, setFilterMenu] = useState(false)
   const [selectedOption, setSelectedOption] = useState("")
-
+  const { setInputFocus } = useContext(searchInputContext)
+  const { displayedProducts, setProductList, setDisplayedProducts } =
+    useContext(ProductsContext)
   const inputRefProductList = useRef(null)
-  const { inputFocus, setInputFocus } = useContext(searchInputContext)
-
-  const {
-    displayedProducts,
-    setProductList,
-    setDisplayedProducts,
-    productList,
-  } = useContext(ProductsContext)
 
   const handleSearchClick = () => {
     setInputFocus(true)
@@ -88,29 +79,6 @@ export const ProductList = () => {
       })
       .catch((error) => console.log(error.message))
   }, [])
-
-  console.log(productList)
-
-  // useEffect(() => {
-  //   fetchList(
-  //     `${apiBaseLink}?limit=100`,
-  //     setProductList([...productList.products, ...superCodeObject.products]),
-  //     setFetchDone,
-  //   )
-  // }, [])
-
-  // useEffect(() => {
-  //   fetchList(`${apiBaseLink}?limit=100`, (data) => {
-  //     // Update productList with the fetched data
-  //     setProductList({
-  //       ...productList,
-  //       products: [...productList, ...superCode],
-  //     })
-  //     setFetchDone(true)
-  //   })
-  // }, [])
-
-  // refactor LoadingState
 
   return (
     <>
