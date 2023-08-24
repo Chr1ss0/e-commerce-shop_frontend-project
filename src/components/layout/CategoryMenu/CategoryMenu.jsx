@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom"
 import { CategoryMenuTile } from "../CategoryMenuTile/CategoryMenuTile.jsx"
 import { apiCategoriesLink } from "../../../utility/apiBaseLink.js"
 import { categoryIcons } from "../../../utility/categoryIcons.js"
-
+// Hallo Micha
 export const CategoryMenu = () => {
   const [categories, setCategories] = useState([])
   const [fetchDone, setFetchDone] = useState(false)
