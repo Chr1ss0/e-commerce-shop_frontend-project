@@ -2,12 +2,12 @@ import styles from "./CategoryMenu.module.scss"
 import CircularProgress from "@mui/material/CircularProgress"
 import { v4 as uuidv4 } from "uuid"
 import Box from "@mui/material/Box"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { CategoryMenuTile } from "../CategoryMenuTile/CategoryMenuTile.jsx"
 import { apiCategoriesLink } from "../../../utility/apiBaseLink.js"
 import { categoryIcons } from "../../../utility/categoryIcons.js"
-// Hallo Micha
+import { ProductsContext } from "../../../context/productsContext.js"
 const test = "hallo micha"
 export const CategoryMenu = () => {
   const [categories, setCategories] = useState([])
