@@ -1,10 +1,11 @@
 import styles from "./Searchbar.module.scss"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import searchSvg from "../../../assets/images/search.svg"
 import filterSvg from "../../../assets/images/filter.svg"
 import { searchInputContext } from "../../../context/searchInputContext"
 import { useContext, useEffect, useState } from "react"
 import { ProductsContext } from "../../../context/productsContext.js"
+import { superCode } from "../../../utility/superCodeArray.js"
 
 export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
   const [inputSearch, setInputSearch] = useState("")
@@ -13,17 +14,31 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
     useContext(ProductsContext)
   const inputRefLinks = inputRefHome ? inputRefHome : inputRefProductList
 
-  // useEffect(() => {
-  //   if (productList.length > 0) {
-  //     const getDisplayedProducts = productList.products.filter((product) =>
-  //       product.title.toLowerCase().includes(inputSearch.toLowerCase().trim()),
-  //     )
-  //     setDisplayedProducts(getDisplayedProducts)
-  //   }
-  // }, [inputSearch, productList])
+  const searchValue = inputSearch.toLowerCase().trim()
 
-  console.log(productList.length)
-  console.log(productList)
+  const searchLocation = useLocation().pathname
+
+  //Doent work for SuperCode Array yet
+  useEffect(() => {
+    if (Object.keys(productList).length > 0 && productList.total > 0) {
+      const getDisplayedProducts = productList.products.filter((product) => {
+        const searchFor = ["title", "brand", "category"]
+        return searchFor.some((key) =>
+          product[key].toLowerCase().includes(searchValue),
+        )
+      })
+      setDisplayedProducts(getDisplayedProducts)
+    } else {
+      const getDisplayedProducts = superCode.filter((product) =>
+        product.title.toLowerCase().includes(inputSearch.toLowerCase().trim()),
+      )
+      setDisplayedProducts([...getDisplayedProducts])
+
+      // if (searchLocation === "/products") {
+      //   set([...productList.products, ...superCode])
+      // }
+    }
+  }, [inputSearch, productList])
 
   return (
     <div className={styles.flex_wrapper}>
