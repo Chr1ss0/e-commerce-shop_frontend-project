@@ -1,4 +1,10 @@
 import styles from "./ButtonBlue.module.scss"
-export const ButtonBlue = ({ text }) => {
-  return <button className={styles.button}>{text}</button>
+export const ButtonBlue = ({ text, onClickP }) => {
+  return (
+    <button
+      onClick={onClickP}
+      className={styles.button}>
+      {text}
+    </button>
+  )
 }
