@@ -11,3 +11,9 @@
 .headline {
   font: $font-size_xl $main-font-bold;
 }
+
+.notFound{
+  font-family: $main-font-medium;
+  padding: 20px 0 0 30px;
+  color: $font-color_onboard;
+}

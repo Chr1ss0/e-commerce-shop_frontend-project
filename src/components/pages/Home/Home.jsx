@@ -2,14 +2,11 @@ import styles from "../Home/Home.module.scss"
 import { CategoryMenu } from "../../layout/CategoryMenu/CategoryMenu.jsx"
 import { useContext, useEffect, useState, useRef } from "react"
 import { useLocation, useParams } from "react-router-dom"
-import { apiCategoryLink } from "../../../utility/apiBaseLink.js"
 import { ProductsContext } from "../../../context/productsContext.js"
 import { searchInputContext } from "../../../context/searchInputContext"
-import { superCodeObject } from "../../../utility/superCodeData.js"
 import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
 import { ListMenuHome } from "../../layout/ListMenuHome/ListMenuHome.jsx"
 import { Searchbar } from "../../shared/Searchbar/Searchbar.jsx"
-import { fetchList } from "../../../functions/fetchList.js"
 import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
 import Navbar from "../../layout/Navbar/Navbar"
@@ -23,9 +20,7 @@ export const Home = () => {
     useContext(ProductsContext)
   const { setInputFocus } = useContext(searchInputContext)
 
-  const { cartItems, shoppingCart } = useCart()
-
-  console.log(cartItems)
+  const { shoppingCart } = useCart()
 
   const currentLocation = useLocation().pathname
   const category = useParams().category
@@ -58,7 +53,7 @@ export const Home = () => {
       ) : (
         <>
           {filterMenu ? (
-        <FilterMenu onClickBack={() => setFilterMenu(false)} />
+            <FilterMenu onClickBack={() => setFilterMenu(false)} />
           ) : (
             <>
               <header className={styles.header}>
@@ -83,26 +78,19 @@ export const Home = () => {
                           )
                           .join("-")
                   }
-                />
-                {/*{fetchDone && currentLocation !== "/home" ? (*/}
-                {/*  <AutoFlex>*/}
-                {/*    {displayedProducts.map((entry) => (*/}
-                {/*      <ProductItem*/}
-                {/*        product={entry}*/}
-                {/*        key={entry.id}*/}
-                {/*      />*/}
-                {/*    ))}*/}
-                {/*  </AutoFlex>*/}
-                {/*) : (*/}
-                <AutoFlex>
-                  {displayedProducts.map((entry) => (
-                    <ProductItem
-                      product={entry}
-                      key={entry.id}
-                    />
-                  ))}
-                </AutoFlex>
-                {/*)}*/}
+                />{" "}
+                {displayedProducts.length !== 0 ? (
+                  <AutoFlex>
+                    {displayedProducts.map((entry) => (
+                      <ProductItem
+                        product={entry}
+                        key={entry.id}
+                      />
+                    ))}
+                  </AutoFlex>
+                ) : (
+                  <p className={styles.notFound}>No Products found...</p>
+                )}
               </main>
               <Navbar handleSearchClick={handleSearchClick} />
             </>

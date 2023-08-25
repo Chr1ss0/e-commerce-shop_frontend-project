@@ -3,7 +3,8 @@ export const superCodeObject = {
     {
       brand: "SuperCode",
       category: "supercode",
-      description: "Broken Glasses",
+      description:
+        "The founders-glasses that bring Daniel to his destiny for creating his own E-Shop ",
       discountPercentage: 1,
       id: 1337,
       images: [
