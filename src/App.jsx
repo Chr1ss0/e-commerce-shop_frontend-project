@@ -1,5 +1,5 @@
 import "./App.scss"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import { FilterContext } from "./context/filterContext.js"
 import { ProductsContext } from "./context/productsContext.js"
@@ -8,7 +8,10 @@ import { OnboardingScreen } from "./components/pages/OnboardingScreen/Onboarding
 import { ProductList } from "./components/pages/ProductList/ProductList.jsx"
 import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails.jsx"
 import { Home } from "./components/pages/Home/Home.jsx"
-
+import { apiBaseLink } from "./utility/apiBaseLink"
+import { superCodeObject } from "./utility/superCodeData"
+import { ShoppingCartProvider } from "./context/shoppingCartContext"
+import Checkout from "./components/pages/Checkout/Checkout"
 
 function App() {
   const [electronicsFilter, setElectronicsFilter] = useState(false)
@@ -38,8 +41,32 @@ function App() {
 
   const [productList, setProductList] = useState([])
   const [displayedProducts, setDisplayedProducts] = useState([])
+  const [displayedCategoryProducts, setDisplayedCategoryProducts] = useState([])
 
   const [inputFocus, setInputFocus] = useState(false)
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(`${apiBaseLink}?limit=100`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Fetch failed")
+        }
+        return response.json()
+      })
+      .then((products) => {
+        setProductList((prevProductList) => [
+          ...products.products,
+          ...superCodeObject.products,
+        ])
+        setIsLoading(false)
+      })
+      .catch((error) => console.log(error.message))
+  }, [])
+
+  console.log(productList)
+  console.log(displayedProducts)
 
   return (
     <>
@@ -96,34 +123,42 @@ function App() {
             setProductList,
             displayedProducts,
             setDisplayedProducts,
+            displayedCategoryProducts,
+            setDisplayedCategoryProducts,
           }}>
           <searchInputContext.Provider
             value={{
               inputFocus,
               setInputFocus,
             }}>
-            <Routes>
-              <Route
-                path={"/"}
-                element={<OnboardingScreen />}
-              />
-              <Route
-                path={"/home"}
-                element={<Home />}
-              />
-              <Route
-                path={"/home/:category"}
-                element={<Home />}
-              />
-              <Route
-                path={"/products"}
-                element={<ProductList />}
-              />
-              <Route
-                path={"/products/:id"}
-                element={<ProductDetails />}
-              />
-            </Routes>
+            <ShoppingCartProvider displayedProducts={displayedProducts}>
+              <Routes>
+                <Route
+                  path={"/"}
+                  element={<OnboardingScreen />}
+                />
+                <Route
+                  path={"/home"}
+                  element={<Home />}
+                />
+                <Route
+                  path={"/home/:category"}
+                  element={<Home />}
+                />
+                <Route
+                  path={"/products"}
+                  element={<ProductList />}
+                />
+                <Route
+                  path={"/products/:id"}
+                  element={<ProductDetails />}
+                />
+                <Route
+                  path={"/checkout"}
+                  element={<Checkout />}
+                />
+              </Routes>
+            </ShoppingCartProvider>
           </searchInputContext.Provider>
         </ProductsContext.Provider>
       </FilterContext.Provider>

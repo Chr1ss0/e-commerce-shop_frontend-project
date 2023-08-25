@@ -1,19 +1,13 @@
 import styles from "./FilterMenu.module.scss"
 import backArrowSvg from "../../../assets/images/leftarrow.svg"
 import { FilterContext } from "../../../context/filterContext.js"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { FilterMenuTile } from "../FilterMenuTile/FilterMenuTile.jsx"
 import { ButtonBlue } from "../ButtonBlue/ButtonBlue.jsx"
-import { ProductsContext } from "../../../context/productsContext.js"
+import { useLocation } from "react-router-dom"
+import { Button } from "@mui/material"
 
-export const FilterMenu = ({ onClickP }) => {
-  const {
-    productList,
-    setProductList,
-    displayedProducts,
-    setDisplayedProducts,
-  } = useContext(ProductsContext)
-
+export const FilterMenu = ({ onClickBack }) => {
   const {
     electronicsFilter,
     setElectronicsFilter,
@@ -61,62 +55,95 @@ export const FilterMenu = ({ onClickP }) => {
     setEasternWatchFilter,
   } = useContext(FilterContext)
 
+  const filterMenuLocation = useLocation().pathname
+
+  const filterSetterFunctions = [
+    setElectronicsFilter,
+    setLifeStyleFilter,
+    setHomeFilter,
+    setClothesFilter,
+    setAccessoriesFilter,
+    setVehicleFilter,
+    setMenFilter,
+    setWomanFilter,
+    setPrice0_20Filter,
+    setPrice20_50Filter,
+    setPrice50_100Filter,
+    setPrice100Filter,
+    setAppleFilter,
+    setSamsungFilter,
+    setSuperCodeFilter,
+    setTopSweaterFilter,
+    setGhaziFilter,
+    setVintageFilter,
+    setWarehouseFilter,
+    setLoisWillFilter,
+    setSkmeiFilter,
+    setEasternWatchFilter,
+  ]
+
+  const clearAllFilters = () => {
+    filterSetterFunctions.forEach((setFilter) => setFilter(false))
+  }
+
   return (
     <aside className={styles.container}>
       <header className={styles.header}>
         <img
-          onClick={onClickP}
+          onClick={onClickBack}
           className={styles.back}
           src={backArrowSvg}
           alt="back"
         />
         <h2 className={styles.headline}>Filters</h2>
       </header>
-      <article className={styles.options_card}>
-        <h2 className={styles.options_headline}>Categories</h2>
-        <div className={styles.card_flex_wrapper}>
-          <FilterMenuTile
-            content={"Electronics"}
-            classNameTeneray={electronicsFilter}
-            onClickP={() => setElectronicsFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Lifestyle"}
-            classNameTeneray={lifeStyleFilter}
-            onClickP={() => setLifeStyleFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Clothes"}
-            classNameTeneray={clothesFilter}
-            onClickP={() => setClothesFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Home"}
-            classNameTeneray={homeFilter}
-            onClickP={() => setHomeFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Moto Vehicle"}
-            classNameTeneray={vehicleFilter}
-            onClickP={() => setVehicleFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Accessories"}
-            classNameTeneray={accessoriesFilter}
-            onClickP={() => setAccessoriesFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Men"}
-            classNameTeneray={menFilter}
-            onClickP={() => setMenFilter((prevState) => !prevState)}
-          />{" "}
-          <FilterMenuTile
-            content={"Woman"}
-            classNameTeneray={womenFilter}
-            onClickP={() => setWomanFilter((prevState) => !prevState)}
-          />
-        </div>
-      </article>
+      {filterMenuLocation === "/products" && (
+        <article className={styles.options_card}>
+          <h2 className={styles.options_headline}>Categories</h2>
+          <div className={styles.card_flex_wrapper}>
+            <FilterMenuTile
+              content={"Electronics"}
+              classNameTeneray={electronicsFilter}
+              onClickP={() => setElectronicsFilter((prevState) => !prevState)}
+            />
+            <FilterMenuTile
+              content={"Lifestyle"}
+              classNameTeneray={lifeStyleFilter}
+              onClickP={() => setLifeStyleFilter((prevState) => !prevState)}
+            />{" "}
+            <FilterMenuTile
+              content={"Clothes"}
+              classNameTeneray={clothesFilter}
+              onClickP={() => setClothesFilter((prevState) => !prevState)}
+            />{" "}
+            <FilterMenuTile
+              content={"Home"}
+              classNameTeneray={homeFilter}
+              onClickP={() => setHomeFilter((prevState) => !prevState)}
+            />{" "}
+            <FilterMenuTile
+              content={"Moto Vehicle"}
+              classNameTeneray={vehicleFilter}
+              onClickP={() => setVehicleFilter((prevState) => !prevState)}
+            />{" "}
+            <FilterMenuTile
+              content={"Accessories"}
+              classNameTeneray={accessoriesFilter}
+              onClickP={() => setAccessoriesFilter((prevState) => !prevState)}
+            />{" "}
+            <FilterMenuTile
+              content={"Men"}
+              classNameTeneray={menFilter}
+              onClickP={() => setMenFilter((prevState) => !prevState)}
+            />{" "}
+            <FilterMenuTile
+              content={"Woman"}
+              classNameTeneray={womenFilter}
+              onClickP={() => setWomanFilter((prevState) => !prevState)}
+            />
+          </div>
+        </article>
+      )}
       <article className={styles.options_card}>
         <h2 className={styles.options_headline}>Price</h2>
         <div className={styles.card_flex_wrapper}>
@@ -198,7 +225,11 @@ export const FilterMenu = ({ onClickP }) => {
           />
         </div>
       </article>
-      <ButtonBlue text={"Apply Filter"} />
+      <ButtonBlue
+        onClickP={onClickBack}
+        text={"Apply Filter"}
+      />
+      <Button onClick={clearAllFilters}>Clear</Button>
     </aside>
   )
 }

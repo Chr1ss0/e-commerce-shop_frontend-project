@@ -13,13 +13,19 @@ import { fetchList } from "../../../functions/fetchList.js"
 import ProductItem from "../../shared/ProductItem/ProductItem.jsx"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu.jsx"
 import Navbar from "../../layout/Navbar/Navbar"
+import { useCart } from "../../../context/shoppingCartContext"
+import ShoppingCart from "../../shared/ShoppingCart/ShoppingCart"
 
 export const Home = () => {
-  const [fetchDone, setFetchDone] = useState(false)
   const [filterMenu, setFilterMenu] = useState(false)
   const inputRefHome = useRef(null)
-  const { setProductList, displayedProducts } = useContext(ProductsContext)
+  const { displayedProducts, productList, setDisplayedCategoryProducts } =
+    useContext(ProductsContext)
   const { setInputFocus } = useContext(searchInputContext)
+
+  const { cartItems, shoppingCart } = useCart()
+
+  console.log(cartItems)
 
   const currentLocation = useLocation().pathname
   const category = useParams().category
@@ -30,62 +36,77 @@ export const Home = () => {
   }
 
   useEffect(() => {
-    if (currentLocation !== "/home") {
-      fetchList(`${apiCategoryLink}${category}`, setProductList, setFetchDone)
-    } else if (currentLocation === "/home") {
-      setProductList(superCodeObject.products)
+    if (currentLocation === "/home") {
+      const getCategoryProducts = productList.filter((product) =>
+        product.category.includes("supercode"),
+      )
+      setDisplayedCategoryProducts(getCategoryProducts)
+    } else {
+      const getCategories = currentLocation.split("/")
+      const getCategoryProducts = productList.filter((product) =>
+        product.category.includes(getCategories[2]),
+      )
+
+      setDisplayedCategoryProducts(getCategoryProducts)
     }
-  }, [currentLocation])
+  }, [currentLocation, productList])
 
   return (
     <>
-      {filterMenu ? (
-        <FilterMenu onClickP={() => setFilterMenu(false)} />
+      {shoppingCart ? (
+        <ShoppingCart />
       ) : (
         <>
-          <header className={styles.header}>
-            <h1 className={styles.headline}>Find your favorite Product</h1>
-          </header>
-          <Searchbar
-            onClickP={() => setFilterMenu((prevState) => true)}
-            inputRefHome={inputRefHome}
-            setInputFocus={setInputFocus}
-          />
-          <CategoryMenu />
-          <main className={styles.main}>
-            <ListMenuHome
-              currentSearch={
-                currentLocation === "/home"
-                  ? "SuperCode"
-                  : category
-                      .split("-")
-                      .map(
-                        (word) => word.charAt(0).toUpperCase() + word.slice(1),
-                      )
-                      .join("-")
-              }
-            />
-            {fetchDone && currentLocation !== "/home" ? (
-              <AutoFlex>
-                {displayedProducts.map((entry) => (
-                  <ProductItem
-                    product={entry}
-                    key={entry.id}
-                  />
-                ))}
-              </AutoFlex>
-            ) : (
-              <AutoFlex>
-                {displayedProducts.map((entry) => (
-                  <ProductItem
-                    product={entry}
-                    key={entry.id}
-                  />
-                ))}
-              </AutoFlex>
-            )}
-          </main>
-          <Navbar handleSearchClick={handleSearchClick} />
+          {filterMenu ? (
+        <FilterMenu onClickBack={() => setFilterMenu(false)} />
+          ) : (
+            <>
+              <header className={styles.header}>
+                <h1 className={styles.headline}>Find your favorite Product</h1>
+              </header>
+              <Searchbar
+                onClickP={() => setFilterMenu((prevState) => true)}
+                inputRefHome={inputRefHome}
+                setInputFocus={setInputFocus}
+              />
+              <CategoryMenu />
+              <main className={styles.main}>
+                <ListMenuHome
+                  currentSearch={
+                    currentLocation === "/home"
+                      ? "SuperCode"
+                      : category
+                          .split("-")
+                          .map(
+                            (word) =>
+                              word.charAt(0).toUpperCase() + word.slice(1),
+                          )
+                          .join("-")
+                  }
+                />
+                {/*{fetchDone && currentLocation !== "/home" ? (*/}
+                {/*  <AutoFlex>*/}
+                {/*    {displayedProducts.map((entry) => (*/}
+                {/*      <ProductItem*/}
+                {/*        product={entry}*/}
+                {/*        key={entry.id}*/}
+                {/*      />*/}
+                {/*    ))}*/}
+                {/*  </AutoFlex>*/}
+                {/*) : (*/}
+                <AutoFlex>
+                  {displayedProducts.map((entry) => (
+                    <ProductItem
+                      product={entry}
+                      key={entry.id}
+                    />
+                  ))}
+                </AutoFlex>
+                {/*)}*/}
+              </main>
+              <Navbar handleSearchClick={handleSearchClick} />
+            </>
+          )}
         </>
       )}
     </>

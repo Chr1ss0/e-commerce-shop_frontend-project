@@ -1,0 +1,117 @@
+@use "../../../App.scss" as *;
+
+.wrapper {
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.image {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+  padding-left: 50px;
+}
+
+.header {
+  padding-top: 12px;
+}
+
+.select {
+  display: flex;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  h3 {
+    font-family: $main-font-semibold;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0.2px;
+    color: #1e2126;
+    width: 190px;
+  }
+}
+
+.stock {
+  display: flex;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  h4 {
+    margin-left: auto;
+    font-family: $main-font-bold;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0.2px;
+    color: #364fd4;
+    text-align: right;
+    padding-bottom: 15px;
+    text-decoration: line-through;
+  }
+
+  p {
+    font-family: $main-font-regular;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #b9c1cc;
+    padding-bottom: 20px;
+    margin-top: auto;
+  }
+}
+
+.discount {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 10px;
+
+  h4 {
+    color: red;
+    font-family: $main-font-bold;
+    font-size: 30px;
+  }
+}
+
+.counter {
+  display: flex;
+  gap: 5px;
+  padding-top: 20px;
+
+  p {
+    font-family: $main-font-regular;
+    font-size: 16px;
+  }
+}
+
+.rating {
+  font-size: 12px;
+  font-family: $main-font-regular;
+  color: $font-color_onboard;
+  line-height: 20px;
+}
+
+.counter_button_minus {
+  button {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    background-color: #828b9a;
+    border-style: none;
+  }
+}
+
+.counter_button_plus {
+  button {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    background-color: #828b9a;
+    border-style: none;
+  }
+}
