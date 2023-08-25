@@ -3,7 +3,7 @@ import styles from "./ShoppingCart.module.scss"
 import Navbar from "../../layout/Navbar/Navbar"
 import { useCart } from "../../../context/shoppingCartContext"
 import { ProductsContext } from "../../../context/productsContext"
-import ShoppingCartItem from "../ShoppingCartItem/ShoppingCartitem"
+import ShoppingCartItem from "../../../components/shared/ShoppingCartItem/ShoppingCartItem"
 import { Link } from "react-router-dom"
 
 const ShoppingCart = () => {
