@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 
 const ShoppingCart = () => {
   const { cartItems, setCartItems, setShoppingCart } = useCart()
-  const { displayedProducts } = useContext(ProductsContext)
+  const { displayedProducts, productList } = useContext(ProductsContext)
 
   console.log(displayedProducts)
 
@@ -20,7 +20,8 @@ const ShoppingCart = () => {
   return (
     <>
       <section className={styles.cart}>
-        {displayedProducts.map((product) => {
+        <h1 className={styles.header}>Shopping Cart</h1>
+        {productList.map((product) => {
           if (cartItems[product.id] > 0) {
             return (
               <ShoppingCartItem
@@ -30,10 +31,14 @@ const ShoppingCart = () => {
             )
           }
         })}
+        <Link to={"/checkout"}>
+          <button
+            className={styles.checkout}
+            onClick={clearShoppingCart}>
+            Checkout
+          </button>
+        </Link>
       </section>
-      <Link to={"/checkout"}>
-        <button onClick={clearShoppingCart}>Checkout</button>
-      </Link>
       <Navbar />
     </>
   )

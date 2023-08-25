@@ -1,0 +1,24 @@
+@use "../../../App.scss" as *;
+
+.checkout {
+  padding: 20px;
+  padding-top: 100px;
+  width: 327px;
+  height: 600px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 12px;
+
+  h1 {
+    font-family: $main-font-medium;
+    line-height: 50px;
+    text-align: center;
+    color: $color-main_catch;
+  }
+}
+
+.image_container {
+  display: flex;
+  justify-content: center;
+  padding-top: 70px;
+}
