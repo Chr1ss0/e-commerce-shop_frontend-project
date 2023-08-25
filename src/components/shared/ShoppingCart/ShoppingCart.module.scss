@@ -1,1 +1,30 @@
 @use "../../../App.scss" as *;
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 100px;
+}
+
+.header {
+  text-align: center;
+  font-family: $main-font-medium;
+}
+
+a {
+  margin: 0 auto;
+}
+
+.checkout {
+  width: 167px;
+  height: 36px;
+  border-radius: 9px;
+  background-color: $color-main_catch;
+  color: #fff;
+  font-family: $main-font-semibold;
+  line-height: 24px;
+  font-size: 16px;
+  border: solid #fff;
+}

@@ -106,7 +106,7 @@ export const ProductList = () => {
       ) : (
         <section className={styles.wrapper}>
           {filterMenu ? (
-            <FilterMenu onClickP={() => setFilterMenu(false)} />
+            <FilterMenu onClickBack={() => setFilterMenu(false)} />
           ) : (
             <>
               <Searchbar

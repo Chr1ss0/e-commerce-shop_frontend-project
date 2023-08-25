@@ -8,14 +8,10 @@ import { LeftArrow } from "../../../assets/svg/LeftArrow"
 import { Minus } from "../../../assets/svg/Minus"
 import { Plus } from "../../../assets/svg/Plus"
 import Navbar from "../../layout/Navbar/Navbar.jsx"
-<<<<<<< HEAD
 import { useCart } from "../../../context/shoppingCartContext"
 import ShoppingCart from "../../shared/ShoppingCart/ShoppingCart"
-=======
-import CircularProgress from "@mui/material/CircularProgress"
-import Box from "@mui/material/Box"
-// import { superCode } from "../../../utility/superCodeArray"
->>>>>>> 45c5bd391cb6ac6d7c2440c73c345434e4d7c29b
+import { Box } from "@mui/material"
+import { CircularProgress } from "@mui/material"
 
 export const ProductDetails = () => {
   const [product, setProduct] = useState([])
@@ -94,7 +90,6 @@ export const ProductDetails = () => {
                   </button>
                   <h2>{product.title}</h2>
                 </div>
-<<<<<<< HEAD
                 <article className={styles.middle}>
                   <div>
                     <img
@@ -108,7 +103,12 @@ export const ProductDetails = () => {
                       <h3>{product.title}</h3>
                     </div>
                     <div className={styles.counter}>
-                      <div className={styles.counter_button_minus}>
+                      <div
+                        className={
+                          productCounter != 1
+                            ? styles.counter_button_minus
+                            : styles.counter_button_bottom
+                        }>
                         <button
                           className={styles.test}
                           onClick={() =>
@@ -121,7 +121,12 @@ export const ProductDetails = () => {
                         </button>
                       </div>
                       <p>{productCounter}</p>
-                      <div className={styles.counter_button_plus}>
+                      <div
+                        className={
+                          productCounter < product.stock
+                            ? styles.counter_button_plus
+                            : styles.counter_button_top
+                        }>
                         <button
                           onClick={() =>
                             setProductCounter(
@@ -133,42 +138,6 @@ export const ProductDetails = () => {
                         </button>
                       </div>
                     </div>
-=======
-                <div className={styles.counter}>
-                  <div
-                    className={
-                      productCounter != 1
-                        ? styles.counter_button_minus
-                        : styles.counter_button_bottom
-                    }>
-                    <button
-                      className={styles.test}
-                      onClick={() =>
-                        setProductCounter(
-                          (prevProductCounter) => prevProductCounter - 1,
-                        )
-                      }
-                      type="button">
-                      <Minus />
-                    </button>
-                  </div>
-                  <p>{productCounter}</p>
-                  <div
-                    className={
-                      productCounter < product.stock
-                        ? styles.counter_button_plus
-                        : styles.counter_button_top
-                    }>
-                    <button
-                      onClick={() =>
-                        setProductCounter(
-                          (prevProductCounter) => prevProductCounter + 1,
-                        )
-                      }
-                      type="button">
-                      <Plus />
-                    </button>
->>>>>>> 45c5bd391cb6ac6d7c2440c73c345434e4d7c29b
                   </div>
                   <div>
                     <div className={styles.discount}>
