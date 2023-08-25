@@ -22,9 +22,7 @@ export const ProductList = () => {
     useContext(ProductsContext)
   const inputRefProductList = useRef(null)
 
-  const { cartItems, shoppingCart } = useCart()
-
-  console.log(cartItems)
+  const { shoppingCart } = useCart()
 
   const handleSearchClick = () => {
     setInputFocus(true)
@@ -65,19 +63,6 @@ export const ProductList = () => {
 
   return (
     <>
-      {/* {isLoading ? (
-        <section>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100vh",
-            }}>
-            <CircularProgress />
-          </Box>
-        </section>
-      ) : ( */}
       {shoppingCart ? (
         <ShoppingCart />
       ) : (
@@ -109,14 +94,18 @@ export const ProductList = () => {
                 </FormControl>
               </div>
               <section>
-                <AutoFlex>
-                  {displayedProducts.map((product) => (
-                    <ProductItem
-                      key={product.id}
-                      product={product}
-                    />
-                  ))}
-                </AutoFlex>
+                {displayedProducts.length !== 0 ? (
+                  <AutoFlex>
+                    {displayedProducts.map((product) => (
+                      <ProductItem
+                        key={product.id}
+                        product={product}
+                      />
+                    ))}
+                  </AutoFlex>
+                ) : (
+                  <p className={styles.notFound}>No products found... </p>
+                )}
               </section>
               <Navbar handleSearchClick={handleSearchClick} />
             </>

@@ -65,9 +65,6 @@ function App() {
       .catch((error) => console.log(error.message))
   }, [])
 
-  console.log(productList)
-  console.log(displayedProducts)
-
   return (
     <>
       <FilterContext.Provider

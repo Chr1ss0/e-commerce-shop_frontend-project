@@ -1,21 +1,25 @@
 @use "../../../App.scss" as *;
 .container {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  //align-items: baseline;
+  //justify-content: space-between;
   padding: 0 26px 16px 22px;
+}
 
-  a {
-    text-decoration: none;
-  }
+// Why does the link doesnt go to the right
+
+.link{
+  text-decoration: none;
+  color: $font-color_sec;
+  font: $font-size_xs $main-font-semibold;
+  display: inline-block;
+  width: 50px;
+  margin: 0;
 }
 
 .current_search {
   font: $font-size_s $main-font-semibold;
   color: $font-color_main;
+    margin-right:  auto;
 }
 
-.clear_search {
-  color: $font-color_sec;
-  font: $font-size_xs $main-font-semibold;
-}

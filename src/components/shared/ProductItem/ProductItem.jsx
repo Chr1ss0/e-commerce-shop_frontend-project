@@ -2,15 +2,12 @@ import styles from "./ProductItem.module.scss"
 import ratingIcon from "../../../assets/images/rating.svg"
 import addItemIcon from "../../../assets/images/addItem.svg"
 import { Link } from "react-router-dom"
-import { useContext } from "react"
 import { useCart } from "../../../context/shoppingCartContext"
 
 const ProductItem = ({ product }) => {
   const imageLink = product.images[2] ? product.images[2] : product.images[0]
 
   const { addToCart, cartItems } = useCart()
-
-  console.log(cartItems)
 
   const discountedPrice = (
     product.price *

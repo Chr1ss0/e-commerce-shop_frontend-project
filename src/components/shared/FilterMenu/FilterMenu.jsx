@@ -81,6 +81,34 @@ export const FilterMenu = ({ onClickBack }) => {
     setSkmeiFilter,
     setEasternWatchFilter,
   ]
+  const resetPriceFilters = () => {
+    setPrice100Filter(false)
+    setPrice50_100Filter(false)
+    setPrice20_50Filter(false)
+    setPrice0_20Filter(false)
+  }
+  const resetBrandFilters = () => {
+    setAppleFilter(false)
+    setSamsungFilter(false)
+    setSuperCodeFilter(false)
+    setTopSweaterFilter(false)
+    setGhaziFilter(false)
+    setVintageFilter(false)
+    setWarehouseFilter(false)
+    setLoisWillFilter(false)
+    setSkmeiFilter(false)
+    setEasternWatchFilter(false)
+  }
+  const resetCategorieFilters = () => {
+    setElectronicsFilter(false)
+    setLifeStyleFilter(false)
+    setHomeFilter(false)
+    setClothesFilter(false)
+    setAccessoriesFilter(false)
+    setVehicleFilter(false)
+    setMenFilter(false)
+    setWomanFilter(false)
+  }
 
   const clearAllFilters = () => {
     filterSetterFunctions.forEach((setFilter) => setFilter(false))
@@ -104,42 +132,66 @@ export const FilterMenu = ({ onClickBack }) => {
             <FilterMenuTile
               content={"Electronics"}
               classNameTeneray={electronicsFilter}
-              onClickP={() => setElectronicsFilter((prevState) => !prevState)}
+              onClickP={() => {
+                resetCategorieFilters()
+                setElectronicsFilter((prev) => !prev)
+              }}
             />
             <FilterMenuTile
               content={"Lifestyle"}
               classNameTeneray={lifeStyleFilter}
-              onClickP={() => setLifeStyleFilter((prevState) => !prevState)}
+              onClickP={() => {
+                resetCategorieFilters()
+                setLifeStyleFilter((prev) => !prev)
+              }}
             />{" "}
             <FilterMenuTile
               content={"Clothes"}
               classNameTeneray={clothesFilter}
-              onClickP={() => setClothesFilter((prevState) => !prevState)}
+              onClickP={() => {
+                resetCategorieFilters()
+                setClothesFilter((prev) => !prev)
+              }}
             />{" "}
             <FilterMenuTile
               content={"Home"}
               classNameTeneray={homeFilter}
-              onClickP={() => setHomeFilter((prevState) => !prevState)}
+              onClickP={() => {
+                resetCategorieFilters()
+                setHomeFilter((prev) => !prev)
+              }}
             />{" "}
             <FilterMenuTile
               content={"Moto Vehicle"}
               classNameTeneray={vehicleFilter}
-              onClickP={() => setVehicleFilter((prevState) => !prevState)}
+              onClickP={() => {
+                resetCategorieFilters()
+                setVehicleFilter((prev) => !prev)
+              }}
             />{" "}
             <FilterMenuTile
               content={"Accessories"}
               classNameTeneray={accessoriesFilter}
-              onClickP={() => setAccessoriesFilter((prevState) => !prevState)}
+              onClickP={() => {
+                resetCategorieFilters()
+                setAccessoriesFilter((prev) => !prev)
+              }}
             />{" "}
             <FilterMenuTile
               content={"Men"}
               classNameTeneray={menFilter}
-              onClickP={() => setMenFilter((prevState) => !prevState)}
+              onClickP={() => {
+                resetCategorieFilters()
+                setMenFilter((prev) => !prev)
+              }}
             />{" "}
             <FilterMenuTile
               content={"Woman"}
               classNameTeneray={womenFilter}
-              onClickP={() => setWomanFilter((prevState) => !prevState)}
+              onClickP={() => {
+                resetCategorieFilters()
+                setWomanFilter((prev) => !prev)
+              }}
             />
           </div>
         </article>
@@ -150,22 +202,34 @@ export const FilterMenu = ({ onClickBack }) => {
           <FilterMenuTile
             content={"0 -20$"}
             classNameTeneray={price0_20Filter}
-            onClickP={() => setPrice0_20Filter((prevState) => !prevState)}
-          />{" "}
+            onClickP={() => {
+              resetPriceFilters()
+              setPrice0_20Filter((prev) => !prev)
+            }}
+          />
           <FilterMenuTile
             content={"20 -50$"}
             classNameTeneray={price20_50Filter}
-            onClickP={() => setPrice20_50Filter((prevState) => !prevState)}
+            onClickP={() => {
+              resetPriceFilters()
+              setPrice20_50Filter((prev) => !prev)
+            }}
           />{" "}
           <FilterMenuTile
             content={"50 -100$"}
             classNameTeneray={price50_100Filter}
-            onClickP={() => setPrice50_100Filter((prevState) => !prevState)}
+            onClickP={() => {
+              resetPriceFilters()
+              setPrice50_100Filter((prev) => !prev)
+            }}
           />{" "}
           <FilterMenuTile
             content={"over 100$"}
             classNameTeneray={price100Filter}
-            onClickP={() => setPrice100Filter((prevState) => !prevState)}
+            onClickP={() => {
+              resetPriceFilters()
+              setPrice100Filter((prev) => !prev)
+            }}
           />
         </div>
       </article>
@@ -176,52 +240,82 @@ export const FilterMenu = ({ onClickBack }) => {
           <FilterMenuTile
             content={"Apple"}
             classNameTeneray={appleFilter}
-            onClickP={() => setAppleFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setAppleFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"Samsung"}
             classNameTeneray={samsungFilter}
-            onClickP={() => setSamsungFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setSamsungFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"Powered by SuperCode"}
             classNameTeneray={superCodeFilter}
-            onClickP={() => setSuperCodeFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setSuperCodeFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"Top Sweater"}
             classNameTeneray={topSweaterFilter}
-            onClickP={() => setTopSweaterFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setTopSweaterFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"Ghazi Fabric"}
             classNameTeneray={ghaziFilter}
-            onClickP={() => setGhaziFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setGhaziFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"Vintage Apparel"}
             classNameTeneray={vintageFilter}
-            onClickP={() => setVintageFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setVintageFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"The Warehouse"}
             classNameTeneray={warehouseFilter}
-            onClickP={() => setWarehouseFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setWarehouseFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"Eastern Watches"}
             classNameTeneray={easternWatchFilter}
-            onClickP={() => setEasternWatchFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setEasternWatchFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"Louis Will"}
             classNameTeneray={louisWillFilter}
-            onClickP={() => setLoisWillFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setLoisWillFilter((prev) => !prev)
+            }}
           />
           <FilterMenuTile
             content={"SKMEI 9117"}
             classNameTeneray={skmeiFilter}
-            onClickP={() => setSkmeiFilter((prevState) => !prevState)}
+            onClickP={() => {
+              resetBrandFilters()
+              setSkmeiFilter((prev) => !prev)
+            }}
           />
         </div>
       </article>

@@ -10,8 +10,6 @@ const ShoppingCart = () => {
   const { cartItems, setCartItems, setShoppingCart } = useCart()
   const { displayedProducts, productList } = useContext(ProductsContext)
 
-  console.log(displayedProducts)
-
   const clearShoppingCart = () => {
     setShoppingCart(false)
     setCartItems({})
@@ -21,6 +19,7 @@ const ShoppingCart = () => {
     <>
       <section className={styles.cart}>
         <h1 className={styles.header}>Shopping Cart</h1>
+
         {productList.map((product) => {
           if (cartItems[product.id] > 0) {
             return (
@@ -31,6 +30,7 @@ const ShoppingCart = () => {
             )
           }
         })}
+
         <Link to={"/checkout"}>
           <button
             className={styles.checkout}

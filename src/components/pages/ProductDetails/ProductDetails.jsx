@@ -21,9 +21,7 @@ export const ProductDetails = () => {
   const navigator = useNavigate()
   const productId = Number(useParams().id)
 
-  const { addToCart, addToCartDetails, cartItems, shoppingCart } = useCart()
-
-  console.log(cartItems)
+  const { addToCartDetails, shoppingCart } = useCart()
 
   const handleSearchClick = () => {
     navigator("/products")
