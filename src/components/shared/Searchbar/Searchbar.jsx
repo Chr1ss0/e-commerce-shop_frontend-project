@@ -37,6 +37,14 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
     louisWillFilter,
     skmeiFilter,
     easternWatchFilter,
+    setElectronicsFilter,
+    setLifeStyleFilter,
+    setHomeFilter,
+    setClothesFilter,
+    setAccessoriesFilter,
+    setVehicleFilter,
+    setMenFilter,
+    setWomanFilter,
   } = useContext(FilterContext)
 
   const categoriesFilters = [
@@ -148,278 +156,6 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
     },
   ]
 
-  // useEffect(() => {
-  //   const filterProducts = () => {
-  //     const searchValue = inputSearch.toLowerCase().trim()
-  //     return productList.filter((product) => {
-  //       const brandMatches = activeBrandFilters.every(
-  //         (activeFilter) =>
-  //           !activeFilter.filter || product.brand.includes(activeFilter.brand),
-  //       )
-  //
-  //       const categoryMatches = activeCategoryFilters.every(
-  //         (activeFilter) =>
-  //           !activeFilter.filter ||
-  //           activeFilter.category.includes(product.category),
-  //       )
-  //
-  //       const priceMatches = activePriceFilters.every(
-  //         (activeFilter) =>
-  //           !activeFilter.filter ||
-  //           (product.price >= activeFilter.priceRange[0] &&
-  //             product.price <= activeFilter.priceRange[1]),
-  //       )
-  //
-  //       const searchMatches = ["title", "brand", "category"].some((key) =>
-  //         product[key].toLowerCase().includes(searchValue),
-  //       )
-  //
-  //       return brandMatches && categoryMatches && priceMatches && searchMatches
-  //     })
-  //   }
-  //
-  //   if (searchLocation === "/products") {
-  //     if (isBrandFilterSet || isPriceFilterSet || isCategoriesFilterSet) {
-  //       const displayedProducts = filterProducts()
-  //       setDisplayedProducts(displayedProducts)
-  //     } else {
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const displayedProducts = productList.filter((product) => {
-  //         const searchFor = ["title", "brand"]
-  //         return searchFor.some((key) =>
-  //           product[key].toLowerCase().includes(searchValue),
-  //         )
-  //       })
-  //       setDisplayedProducts(displayedProducts)
-  //     }
-  //   } else {
-  //     // Handle other cases here
-  //   }
-  // }, [
-  //   searchLocation,
-  //   inputSearch,
-  //   productList,
-  //   activeBrandFilters,
-  //   activeCategoryFilters,
-  //   activePriceFilters,
-  // ])
-
-  // useEffect(() => {
-  //   if (searchLocation === "/products") {
-  //     if (isBrandFilterSet || isPriceFilterSet || isCategoriesFilterSet) {
-  //       const filteredProducts = productList.filter((item) => {
-  //         return (
-  //           activeBrandFilters.some((activeFilter) => {
-  //             return (
-  //               activeFilter.filter && item.brand.includes(activeFilter.brand)
-  //             )
-  //           }) &&
-  //           activeCategoryFilters.some((activeFilter) => {
-  //             return (
-  //               activeFilter.filter &&
-  //               activeFilter.category.includes(item.category)
-  //             )
-  //           }) &&
-  //           activePriceFilters.some((activeFilter) => {
-  //             return (
-  //               activeFilter.filter &&
-  //               item.price >= activeFilter.priceRange[0] &&
-  //               item.price <= activeFilter.priceRange[1]
-  //             )
-  //           })
-  //         )
-  //       })
-  //
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = filteredProducts.filter((product) => {
-  //         const searchFor = ["title", "brand", "category"]
-  //         return searchFor.some((key) =>
-  //           product[key].toLowerCase().includes(searchValue),
-  //         )
-  //       })
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     } else {
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = productList.filter((product) => {
-  //         const searchFor = ["title", "brand"]
-  //         return searchFor.some((key) =>
-  //           product[key].toLowerCase().includes(searchValue),
-  //         )
-  //       })
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     }
-  //   } else {
-  //     if (isBrandFilterSet) {
-  //       const filteredBrandProducts = displayedCategoryProducts.filter(
-  //         (item) => {
-  //           return activeBrandFilters.some((activeFilter) => {
-  //             return (
-  //               activeFilter.filter && item.brand.includes(activeFilter.brand)
-  //             )
-  //           })
-  //         },
-  //       )
-  //       console.log(filteredBrandProducts)
-  //
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = filteredBrandProducts.filter((product) => {
-  //         const searchFor = ["title", "brand"]
-  //         return searchFor.some((key) =>
-  //           product[key].toLowerCase().includes(searchValue),
-  //         )
-  //       })
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     } else if (isPriceFilterSet) {
-  //       const filteredPriceProducts = displayedCategoryProducts.filter(
-  //         (item) => {
-  //           activePriceFilters.some((activeFilter) => {
-  //             return (
-  //               activeFilter.filter &&
-  //               item.price >= activeFilter.priceRange[0] &&
-  //               item.price <= activeFilter.priceRange[1]
-  //             )
-  //           })
-  //         },
-  //       )
-  //       console.log(filteredPriceProducts)
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = filteredPriceProducts.filter((product) => {
-  //         const searchFor = ["title", "brand"]
-  //         return searchFor.some((key) =>
-  //           product[key].toLowerCase().includes(searchValue),
-  //         )
-  //       })
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     } else {
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = displayedCategoryProducts.filter(
-  //         (product) => {
-  //           const searchFor = ["title", "brand"]
-  //           return searchFor.some((key) =>
-  //             product[key].toLowerCase().includes(searchValue),
-  //           )
-  //         },
-  //       )
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     }
-  //   }
-  // }, [
-  //   searchLocation,
-  //   inputSearch,
-  //   productList,
-  //   displayedCategoryProducts,
-  //   appleFilter,
-  //   samsungFilter,
-  //   superCodeFilter,
-  //   topSweaterFilter,
-  //   ghaziFilter,
-  //   vintageFilter,
-  //   warehouseFilter,
-  //   easternWatchFilter,
-  //   louisWillFilter,
-  //   skmeiFilter,
-  //   price100Filter,
-  //   price0_20Filter,
-  //   price50_100Filter,
-  //   price0_20Filter,
-  // ])
-
-  // useEffect(() => {
-  //   if (searchLocation === "/products") {
-  //     if (isFilterSet) {
-  //       const filteredProducts = productList.filter((item) => {
-  //         return (
-  //           activeBrandFilters.some((activeFilter) => {
-  //             return (
-  //               activeFilter.filter && item.brand.includes(activeFilter.brand)
-  //             )
-  //           }) &&
-  //           activeCategoryFilters.some((activeFilter) => {
-  //             return (
-  //               activeFilter.filter &&
-  //               activeFilter.category.includes(item.category)
-  //             )
-  //           }) &&
-  //           activePriceFilters.some((activeFilter) => {
-  //             return (
-  //               activeFilter.filter &&
-  //               item.price >= activeFilter.priceRange[0] &&
-  //               item.price <= activeFilter.priceRange[1]
-  //             )
-  //           })
-  //         )
-  //       })
-  //
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = filteredProducts.filter((product) => {
-  //         const searchFor = ["title", "brand", "category"]
-  //         return searchFor.some((key) =>
-  //           product[key].toLowerCase().includes(searchValue),
-  //         )
-  //       })
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     } else {
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = productList.filter((product) => {
-  //         const searchFor = ["title", "brand"]
-  //         return searchFor.some((key) =>
-  //           product[key].toLowerCase().includes(searchValue),
-  //         )
-  //       })
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     }
-  //   } else {
-  //     if (isFilterSet) {
-  //       const filteredProducts = displayedCategoryProducts.filter((item) => {
-  //         return activeBrandFilters.some((activeFilter) => {
-  //           return (
-  //             activeFilter.filter && item.brand.includes(activeFilter.brand)
-  //           )
-  //         })
-  //       })
-  //
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = filteredProducts.filter((product) => {
-  //         const searchFor = ["title", "brand"]
-  //         return searchFor.some((key) =>
-  //           product[key].toLowerCase().includes(searchValue),
-  //         )
-  //       })
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     } else {
-  //       const searchValue = inputSearch.toLowerCase().trim()
-  //       const getDisplayedProducts = displayedCategoryProducts.filter(
-  //         (product) => {
-  //           const searchFor = ["title", "brand"]
-  //           return searchFor.some((key) =>
-  //             product[key].toLowerCase().includes(searchValue),
-  //           )
-  //         },
-  //       )
-  //       setDisplayedProducts(getDisplayedProducts)
-  //     }
-  //   }
-  // }, [
-  //   searchLocation,
-  //   inputSearch,
-  //   productList,
-  //   displayedCategoryProducts,
-  //   appleFilter,
-  //   samsungFilter,
-  //   superCodeFilter,
-  //   topSweaterFilter,
-  //   ghaziFilter,
-  //   vintageFilter,
-  //   warehouseFilter,
-  //   easternWatchFilter,
-  //   louisWillFilter,
-  //   skmeiFilter,
-  //   price100Filter,
-  //   price0_20Filter,
-  //   price50_100Filter,
-  //   price0_20Filter,
-  // ])
-
   useEffect(() => {
     if (searchLocation === "/products") {
       if (isPriceFilterSet || isCategoriesFilterSet || isBrandFilterSet) {
@@ -524,6 +260,19 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
     price50_100Filter,
     price0_20Filter,
   ])
+
+  useEffect(() => {
+    if (searchLocation === "/home") {
+      setElectronicsFilter(false)
+      setLifeStyleFilter(false)
+      setHomeFilter(false)
+      setClothesFilter(false)
+      setAccessoriesFilter(false)
+      setVehicleFilter(false)
+      setMenFilter(false)
+      setWomanFilter(false)
+    }
+  }, [searchLocation])
 
   return (
     <div className={styles.flex_wrapper}>

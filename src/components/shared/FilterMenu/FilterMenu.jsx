@@ -1,7 +1,7 @@
 import styles from "./FilterMenu.module.scss"
 import backArrowSvg from "../../../assets/images/leftarrow.svg"
 import { FilterContext } from "../../../context/filterContext.js"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { FilterMenuTile } from "../FilterMenuTile/FilterMenuTile.jsx"
 import { ButtonBlue } from "../ButtonBlue/ButtonBlue.jsx"
 import { useLocation } from "react-router-dom"
