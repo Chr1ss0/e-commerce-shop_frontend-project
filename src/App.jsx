@@ -10,6 +10,8 @@ import { ProductDetails } from "./components/pages/ProductDetails/ProductDetails
 import { Home } from "./components/pages/Home/Home.jsx"
 import { apiBaseLink } from "./utility/apiBaseLink"
 import { superCodeObject } from "./utility/superCodeData"
+import { ShoppingCartProvider } from "./context/shoppingCartContext"
+import Checkout from "./components/pages/Checkout/Checkout"
 
 function App() {
   const [electronicsFilter, setElectronicsFilter] = useState(false)
@@ -63,7 +65,7 @@ function App() {
       .catch((error) => console.log(error.message))
   }, [])
 
-  console.log(productList)
+  console.log(displayedProducts)
 
   return (
     <>
@@ -128,28 +130,34 @@ function App() {
               inputFocus,
               setInputFocus,
             }}>
-            <Routes>
-              <Route
-                path={"/"}
-                element={<OnboardingScreen />}
-              />
-              <Route
-                path={"/home"}
-                element={<Home />}
-              />
-              <Route
-                path={"/home/:category"}
-                element={<Home />}
-              />
-              <Route
-                path={"/products"}
-                element={<ProductList />}
-              />
-              <Route
-                path={"/products/:id"}
-                element={<ProductDetails />}
-              />
-            </Routes>
+            <ShoppingCartProvider displayedProducts={displayedProducts}>
+              <Routes>
+                <Route
+                  path={"/"}
+                  element={<OnboardingScreen />}
+                />
+                <Route
+                  path={"/home"}
+                  element={<Home />}
+                />
+                <Route
+                  path={"/home/:category"}
+                  element={<Home />}
+                />
+                <Route
+                  path={"/products"}
+                  element={<ProductList />}
+                />
+                <Route
+                  path={"/products/:id"}
+                  element={<ProductDetails />}
+                />
+                <Route
+                  path={"/checkout"}
+                  element={<Checkout />}
+                />
+              </Routes>
+            </ShoppingCartProvider>
           </searchInputContext.Provider>
         </ProductsContext.Provider>
       </FilterContext.Provider>

@@ -11,6 +11,8 @@ import Navbar from "../../layout/Navbar/Navbar"
 import { AutoFlex } from "../../shared/AutoFlex/AutoFlex.jsx"
 import { Searchbar } from "../../shared/Searchbar/Searchbar"
 import { FilterMenu } from "../../shared/FilterMenu/FilterMenu"
+import { useCart } from "../../../context/shoppingCartContext"
+import ShoppingCart from "../../shared/ShoppingCart/ShoppingCart"
 
 export const ProductList = () => {
   const [filterMenu, setFilterMenu] = useState(false)
@@ -19,6 +21,10 @@ export const ProductList = () => {
   const { displayedProducts, setProductList, setDisplayedProducts } =
     useContext(ProductsContext)
   const inputRefProductList = useRef(null)
+
+  const { cartItems, shoppingCart } = useCart()
+
+  console.log(cartItems)
 
   const handleSearchClick = () => {
     setInputFocus(true)
@@ -59,47 +65,64 @@ export const ProductList = () => {
 
   return (
     <>
-      <section className={styles.wrapper}>
-        {filterMenu ? (
-          <FilterMenu onClickBack={() => setFilterMenu(false)} />
-        ) : (
-          <>
-            <Searchbar
-              onClickP={() => setFilterMenu((prevState) => true)}
-              inputRefProductList={inputRefProductList}
-            />
-            <div>
-              <FormControl sx={{ m: 1, minWidth: 80 }}>
-                <InputLabel id="demo-simple-select-autowidth-label">
-                  Sort:
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-autowidth-label"
-                  id="demo-simple-select-autowidth"
-                  value={selectedOption}
-                  onChange={handleChange}
-                  autoWidth
-                  label="Sort:">
-                  <MenuItem value={"lowest"}>Lowest Price</MenuItem>
-                  <MenuItem value={"highest"}>Highest Price</MenuItem>
-                  <MenuItem value={"discount"}>Biggest Discount</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-            <section>
-              <AutoFlex>
-                {displayedProducts.map((product) => (
-                  <ProductItem
-                    key={product.id}
-                    product={product}
-                  />
-                ))}
-              </AutoFlex>
-            </section>
-            <Navbar handleSearchClick={handleSearchClick} />
-          </>
-        )}
-      </section>
+      {/* {isLoading ? (
+        <section>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}>
+            <CircularProgress />
+          </Box>
+        </section>
+      ) : ( */}
+      {shoppingCart ? (
+        <ShoppingCart />
+      ) : (
+        <section className={styles.wrapper}>
+          {filterMenu ? (
+            <FilterMenu onClickP={() => setFilterMenu(false)} />
+          ) : (
+            <>
+              <Searchbar
+                onClickP={() => setFilterMenu((prevState) => true)}
+                inputRefProductList={inputRefProductList}
+              />
+              <div>
+                <FormControl sx={{ m: 1, minWidth: 80 }}>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Sort:
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={selectedOption}
+                    onChange={handleChange}
+                    autoWidth
+                    label="Sort:">
+                    <MenuItem value={"lowest"}>Lowest Price</MenuItem>
+                    <MenuItem value={"highest"}>Highest Price</MenuItem>
+                    <MenuItem value={"discount"}>Biggest Discount</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              <section>
+                <AutoFlex>
+                  {displayedProducts.map((product) => (
+                    <ProductItem
+                      key={product.id}
+                      product={product}
+                    />
+                  ))}
+                </AutoFlex>
+              </section>
+              <Navbar handleSearchClick={handleSearchClick} />
+            </>
+          )}
+        </section>
+      )}
     </>
   )
 }
