@@ -8,7 +8,6 @@ import { CategoryMenuTile } from "../CategoryMenuTile/CategoryMenuTile.jsx"
 import { apiCategoriesLink } from "../../../utility/apiBaseLink.js"
 import { categoryIcons } from "../../../utility/categoryIcons.js"
 import { ProductsContext } from "../../../context/productsContext.js"
-const test = "hallo micha"
 export const CategoryMenu = () => {
   const [categories, setCategories] = useState([])
   const [fetchDone, setFetchDone] = useState(false)

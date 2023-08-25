@@ -12,6 +12,8 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
   const { setInputFocus } = useContext(searchInputContext)
   const { productList, setDisplayedProducts, displayedCategoryProducts } =
     useContext(ProductsContext)
+  const searchLocation = useLocation().pathname
+
   const {
     electronicsFilter,
     lifeStyleFilter,
@@ -35,11 +37,31 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
     louisWillFilter,
     skmeiFilter,
     easternWatchFilter,
+    setElectronicsFilter,
+    setLifeStyleFilter,
+    setHomeFilter,
+    setClothesFilter,
+    setAccessoriesFilter,
+    setVehicleFilter,
+    setMenFilter,
+    setWomanFilter,
   } = useContext(FilterContext)
 
-  const searchLocation = useLocation().pathname
+  const categoriesFilters = [
+    electronicsFilter,
+    lifeStyleFilter,
+    clothesFilter,
+    homeFilter,
+    vehicleFilter,
+    accessoriesFilter,
+    menFilter,
+    womenFilter,
+  ]
+  const isCategoriesFilterSet = categoriesFilters.some(
+    (filter) => filter === true,
+  )
 
-  const filters = [
+  const brandFilters = [
     appleFilter,
     samsungFilter,
     superCodeFilter,
@@ -50,20 +72,16 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
     easternWatchFilter,
     louisWillFilter,
     skmeiFilter,
+  ]
+  const isBrandFilterSet = brandFilters.some((filter) => filter === true)
+
+  const priceFilters = [
     price0_20Filter,
     price20_50Filter,
     price50_100Filter,
     price100Filter,
-    electronicsFilter,
-    lifeStyleFilter,
-    clothesFilter,
-    homeFilter,
-    vehicleFilter,
-    accessoriesFilter,
-    menFilter,
-    womenFilter,
   ]
-  const isFilterSet = filters.some((filter) => filter === true)
+  const isPriceFilterSet = priceFilters.some((filter) => filter === true)
 
   const activeBrandFilters = [
     { filter: appleFilter, brand: "Apple" },
@@ -83,7 +101,7 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
     { filter: price50_100Filter, priceRange: [50, 100] },
     { filter: price100Filter, priceRange: [100, Infinity] },
   ]
-  const activeCateGoryFilters = [
+  const activeCategoryFilters = [
     {
       filter: electronicsFilter,
       category: ["smartphones", "laptops", "lighting"],
@@ -140,22 +158,39 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
 
   useEffect(() => {
     if (searchLocation === "/products") {
-      if (isFilterSet) {
-        const filteredProducts = productList.filter((item) => {
-          return activeBrandFilters.some((activeFilter) => {
+      if (isPriceFilterSet || isCategoriesFilterSet || isBrandFilterSet) {
+        const filterProducts = () => {
+          const searchValue = inputSearch.toLowerCase().trim()
+          return productList.filter((product) => {
+            const brandMatches = activeBrandFilters.every(
+              (activeFilter) =>
+                !activeFilter.filter ||
+                product.brand.includes(activeFilter.brand),
+            )
+
+            const categoryMatches = activeCategoryFilters.every(
+              (activeFilter) =>
+                !activeFilter.filter ||
+                activeFilter.category.includes(product.category),
+            )
+
+            const priceMatches = activePriceFilters.every(
+              (activeFilter) =>
+                !activeFilter.filter ||
+                (product.price >= activeFilter.priceRange[0] &&
+                  product.price <= activeFilter.priceRange[1]),
+            )
+
+            const searchMatches = ["title", "brand", "category"].some((key) =>
+              product[key].toLowerCase().includes(searchValue),
+            )
+
             return (
-              activeFilter.filter && item.brand.includes(activeFilter.brand)
+              brandMatches && categoryMatches && priceMatches && searchMatches
             )
           })
-        })
-        const searchValue = inputSearch.toLowerCase().trim()
-        const getDisplayedProducts = filteredProducts.filter((product) => {
-          const searchFor = ["title", "brand", "category"]
-          return searchFor.some((key) =>
-            product[key].toLowerCase().includes(searchValue),
-          )
-        })
-        setDisplayedProducts(getDisplayedProducts)
+        }
+        setDisplayedProducts(filterProducts)
       } else {
         const searchValue = inputSearch.toLowerCase().trim()
         const getDisplayedProducts = productList.filter((product) => {
@@ -167,23 +202,31 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
         setDisplayedProducts(getDisplayedProducts)
       }
     } else {
-      if (isFilterSet) {
-        const filteredProducts = displayedCategoryProducts.filter((item) => {
-          return activeBrandFilters.some((activeFilter) => {
-            return (
-              activeFilter.filter && item.brand.includes(activeFilter.brand)
+      if (isPriceFilterSet || isBrandFilterSet) {
+        const filterProducts = () => {
+          const searchValue = inputSearch.toLowerCase().trim()
+          return displayedCategoryProducts.filter((product) => {
+            const brandMatches = activeBrandFilters.every(
+              (activeFilter) =>
+                !activeFilter.filter ||
+                product.brand.includes(activeFilter.brand),
             )
-          })
-        })
 
-        const searchValue = inputSearch.toLowerCase().trim()
-        const getDisplayedProducts = filteredProducts.filter((product) => {
-          const searchFor = ["title", "brand"]
-          return searchFor.some((key) =>
-            product[key].toLowerCase().includes(searchValue),
-          )
-        })
-        setDisplayedProducts(getDisplayedProducts)
+            const priceMatches = activePriceFilters.every(
+              (activeFilter) =>
+                !activeFilter.filter ||
+                (product.price >= activeFilter.priceRange[0] &&
+                  product.price <= activeFilter.priceRange[1]),
+            )
+
+            const searchMatches = ["title", "brand"].some((key) =>
+              product[key].toLowerCase().includes(searchValue),
+            )
+
+            return brandMatches && priceMatches && searchMatches
+          })
+        }
+        setDisplayedProducts(filterProducts)
       } else {
         const searchValue = inputSearch.toLowerCase().trim()
         const getDisplayedProducts = displayedCategoryProducts.filter(
@@ -212,7 +255,24 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
     easternWatchFilter,
     louisWillFilter,
     skmeiFilter,
+    price100Filter,
+    price0_20Filter,
+    price50_100Filter,
+    price0_20Filter,
   ])
+
+  useEffect(() => {
+    if (searchLocation === "/home") {
+      setElectronicsFilter(false)
+      setLifeStyleFilter(false)
+      setHomeFilter(false)
+      setClothesFilter(false)
+      setAccessoriesFilter(false)
+      setVehicleFilter(false)
+      setMenFilter(false)
+      setWomanFilter(false)
+    }
+  }, [searchLocation])
 
   return (
     <div className={styles.flex_wrapper}>
@@ -234,7 +294,9 @@ export const Searchbar = ({ onClickP, inputRefHome, inputRefProductList }) => {
 
       <div
         className={
-          isFilterSet ? styles.button_filterSet : styles.button_notFilterSet
+          isBrandFilterSet || isPriceFilterSet || isCategoriesFilterSet
+            ? styles.button_filterSet
+            : styles.button_notFilterSet
         }
         onClick={onClickP}>
         <img
